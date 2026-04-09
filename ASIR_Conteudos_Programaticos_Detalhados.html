@@ -1,0 +1,730 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+<style>
+* { margin: 0; padding: 0; box-sizing: border-box; }
+
+body {
+  background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+  font-family: 'Inter', sans-serif;
+  min-height: 100vh;
+  padding: 20px;
+  overflow-y: scroll;
+}
+
+.container { max-width: 900px; margin: 0 auto; }
+
+/* ── HEADER ─────────────────────────────────────── */
+.header {
+  text-align: center;
+  margin-bottom: 30px;
+  padding: 40px 20px;
+  background: linear-gradient(135deg, #e67e22 0%, #d35400 100%);
+  border-radius: 15px;
+  box-shadow: 0 10px 30px rgba(230,126,34,0.3);
+  color: white;
+  position: relative;
+  overflow: hidden;
+}
+.header::before {
+  content: '';
+  position: absolute;
+  top: -50%; right: -10%;
+  width: 500px; height: 500px;
+  background: radial-gradient(circle, rgba(255,255,255,0.08) 0%, transparent 70%);
+  border-radius: 50%;
+}
+.header h1 {
+  font-family: 'Poppins', sans-serif;
+  font-size: 2.5em;
+  font-weight: 700;
+  margin-bottom: 10px;
+  text-shadow: 2px 2px 4px rgba(0,0,0,0.15);
+  position: relative;
+}
+.header p {
+  font-size: 1.1em;
+  opacity: 0.95;
+  font-weight: 300;
+  position: relative;
+}
+
+/* ── STATS ───────────────────────────────────────── */
+.stats-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 16px;
+  margin-bottom: 24px;
+}
+.stat-card {
+  background: white;
+  border-radius: 14px;
+  padding: 28px 20px;
+  text-align: center;
+  box-shadow: 0 6px 20px rgba(0,0,0,0.07);
+  border-top: 4px solid #e67e22;
+  transition: all 0.3s ease;
+}
+.stat-card:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 14px 35px rgba(230,126,34,0.18);
+}
+.stat-icon { font-size: 1.6em; color: #e67e22; margin-bottom: 12px; }
+.stat-number {
+  font-size: 2.4em;
+  font-weight: 800;
+  color: #e67e22;
+  font-family: 'Poppins', sans-serif;
+  line-height: 1;
+  margin-bottom: 8px;
+}
+.stat-text { font-size: 1.8em; }
+.stat-label { font-size: 13px; color: #666; font-weight: 500; }
+
+/* ── INTRO CARD ──────────────────────────────────── */
+.intro-card {
+  background: white;
+  border-radius: 12px;
+  padding: 28px 30px;
+  margin-bottom: 18px;
+  box-shadow: 0 6px 20px rgba(0,0,0,0.07);
+  border-left: 5px solid #e67e22;
+  position: relative;
+  overflow: hidden;
+}
+.intro-card::before {
+  content: '';
+  position: absolute;
+  top: -30px; right: -30px;
+  width: 120px; height: 120px;
+  background: radial-gradient(circle, rgba(230,126,34,0.07) 0%, transparent 70%);
+  border-radius: 50%;
+}
+.intro-label {
+  font-size: 11px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 1.2px;
+  color: #e67e22;
+  margin-bottom: 12px;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 7px;
+}
+.intro-text { font-size: 15px; line-height: 1.85; color: #444; }
+.intro-text strong { color: #2c3e50; font-weight: 700; }
+
+/* ── CONTROLS BAR ────────────────────────────────── */
+.controls-bar {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: flex-end;
+  margin-bottom: 12px;
+}
+.btn-toggle-all {
+  background: white;
+  border: 2px solid #e67e22;
+  color: #e67e22;
+  font-family: 'Poppins', sans-serif;
+  font-size: 13px;
+  font-weight: 600;
+  padding: 8px 18px;
+  border-radius: 8px;
+  cursor: pointer;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 7px;
+  transition: all 0.25s ease;
+}
+.btn-toggle-all:hover {
+  background: #e67e22;
+  color: white;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 14px rgba(230,126,34,0.3);
+}
+
+/* ── ACCORDION ───────────────────────────────────── */
+.module-wrapper { margin-bottom: 10px; }
+
+.accordion {
+  background: linear-gradient(135deg, #e67e22 0%, #d35400 100%);
+  color: #fff;
+  cursor: pointer;
+  padding: 15px 20px;
+  width: 100%;
+  border: none;
+  border-radius: 8px;
+  text-align: left;
+  outline: none;
+  font-size: 15px;
+  font-weight: 600;
+  font-family: 'Poppins', sans-serif;
+  transition: all 0.25s ease;
+  box-shadow: 0 4px 12px rgba(230,126,34,0.2);
+  position: relative;
+  overflow: hidden;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+}
+.accordion::before {
+  content: '';
+  position: absolute;
+  top: 0; left: -100%;
+  width: 100%; height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255,255,255,0.22), transparent);
+  transition: left 0.45s;
+}
+.accordion:hover::before { left: 100%; }
+.accordion:hover {
+  background: linear-gradient(135deg, #d35400 0%, #e67e22 100%);
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(230,126,34,0.3);
+}
+.accordion.active {
+  background: linear-gradient(135deg, #d35400 0%, #e67e22 100%);
+  border-radius: 8px 8px 0 0;
+  box-shadow: 0 4px 12px rgba(230,126,34,0.25);
+}
+
+.accordion-left {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 10px;
+  flex: 1;
+  min-width: 0;
+}
+.accordion h2 {
+  font-weight: 600;
+  font-size: 15px;
+  margin: 0;
+  line-height: 1.3;
+}
+.accordion-right {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 8px;
+  flex-shrink: 0;
+}
+.badge {
+  font-size: 11px;
+  font-weight: 700;
+  padding: 3px 9px;
+  border-radius: 20px;
+  white-space: nowrap;
+}
+.badge-pratica {
+  background: rgba(39,174,96,0.22);
+  color: #d5f5e3;
+  border: 1px solid rgba(39,174,96,0.4);
+}
+.badge-caso {
+  background: rgba(41,128,185,0.22);
+  color: #aed6f1;
+  border: 1px solid rgba(41,128,185,0.4);
+}
+.accordion-chevron {
+  font-size: 13px;
+  transition: transform 0.3s ease;
+  opacity: 0.85;
+}
+.accordion.active .accordion-chevron { transform: rotate(180deg); }
+
+/* ── PANEL — grid animation, fast ───────────────── */
+.panel {
+  display: grid;
+  grid-template-rows: 0fr;
+  transition: grid-template-rows 0.38s ease, opacity 0.3s ease;
+  background: linear-gradient(135deg, #ffffff 0%, #f8f9fa 100%);
+  border-radius: 0 0 8px 8px;
+  border-left: 4px solid #e67e22;
+  border-right: 1px solid rgba(230,126,34,0.1);
+  border-bottom: 1px solid rgba(230,126,34,0.1);
+  box-shadow: 0 6px 16px rgba(0,0,0,0.07);
+  opacity: 0;
+}
+.panel.open {
+  grid-template-rows: 1fr;
+  opacity: 1;
+}
+.panel-inner {
+  overflow: hidden;
+  padding: 0 25px;
+  transition: padding 0.38s ease;
+}
+.panel.open .panel-inner { padding: 22px 25px; }
+
+/* ── PANEL CONTENT ───────────────────────────────── */
+.panel p {
+  margin: 8px 0;
+  line-height: 1.8;
+  color: #333;
+  transition: color 0.2s ease, padding-left 0.2s ease;
+}
+.panel p:hover { color: #e67e22; padding-left: 4px; }
+
+.text {
+  font-size: 15px;
+  font-weight: 600;
+  font-family: 'Poppins', sans-serif;
+  color: #2c3e50;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 8px;
+}
+.text::before { content: '◆'; color: #e67e22; font-size: 11px; flex-shrink: 0; }
+
+.pratica {
+  font-size: 14px;
+  font-weight: 600;
+  color: #1e8449;
+  border-left: 3px solid #27ae60;
+  padding: 9px 0 9px 14px;
+  margin: 10px 0;
+  background: rgba(39,174,96,0.07);
+  border-radius: 4px;
+}
+.pratica::before { content: '⚙️ '; margin-right: 4px; }
+
+.caso {
+  font-size: 14px;
+  font-weight: 700;
+  color: #1a5276;
+  border-left: 3px solid #2980b9;
+  padding: 9px 0 9px 14px;
+  margin: 10px 0;
+  background: rgba(41,128,185,0.08);
+  border-radius: 4px;
+}
+.caso::before { content: '📋 '; margin-right: 4px; }
+
+.detalhe {
+  font-size: 13px;
+  padding-left: 26px;
+  color: #555;
+  position: relative;
+}
+.detalhe::before { content: '➭'; color: #e67e22; margin-right: 7px; font-weight: bold; }
+
+/* ── RESPONSIVE ──────────────────────────────────── */
+@media (max-width: 600px) {
+  .stats-grid { grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); }
+  .badge { display: none; }
+}
+@media (max-width: 768px) {
+  .header h1 { font-size: 1.8em; }
+  .accordion { padding: 13px 14px; font-size: 13px; }
+  .accordion h2 { font-size: 13px; }
+  .panel-inner { padding: 0 16px; }
+  .panel.open .panel-inner { padding: 16px; }
+}
+
+/* ═══════════════════════════════════════════════════════════
+   RESPONSIVE GLOBAL PATCH — garante compatibilidade total
+   ═══════════════════════════════════════════════════════════ */
+
+img, video, iframe {
+  max-width: 100%;
+  height: auto;
+}
+
+/* Breakpoint tablet grande (769px – 1024px) */
+@media (max-width: 1024px) and (min-width: 769px) {
+  .container { padding: 0 28px; }
+  [class*="-grid"], .stats-bar { gap: 16px; }
+}
+
+/* ── TABLET (≤ 768px) — reforço global ── */
+@media (max-width: 768px) {
+  .stats-bar,
+  [class$="-grid"],
+  .controls-bar {
+    grid-template-columns: repeat(auto-fit, minmax(140px, 1fr)) !important;
+    gap: 14px;
+  }
+
+  .controls-bar {
+    flex-wrap: wrap !important;
+    gap: 10px;
+  }
+
+  .accordion,
+  .accordion-left,
+  .accordion-right {
+    flex-wrap: wrap !important;
+  }
+
+  .accordion-right {
+    margin-top: 6px;
+  }
+}
+
+/* ── MOBILE (≤ 480px) — reforço global ── */
+@media (max-width: 480px) {
+  .stats-bar,
+  [class$="-grid"] {
+    grid-template-columns: 1fr 1fr !important;
+    gap: 12px;
+  }
+
+  .controls-bar {
+    flex-direction: column !important;
+    align-items: stretch;
+    gap: 8px;
+  }
+
+  .btn-toggle-all {
+    width: 100%;
+    justify-content: center;
+  }
+
+  .accordion {
+    flex-wrap: wrap !important;
+    padding: 14px 16px !important;
+  }
+
+  .accordion-left {
+    flex: 1 1 auto;
+    min-width: 0;
+  }
+
+  .accordion-right {
+    flex-shrink: 0;
+  }
+
+  * { max-width: 100%; word-break: break-word; }
+  .container { padding: 0 14px; }
+
+  .hero h1, h1 { font-size: clamp(1.4em, 6vw, 2em) !important; }
+  .stat-number { font-size: clamp(1.6em, 7vw, 2.5em) !important; }
+}
+
+/* ── MOBILE PEQUENO (≤ 360px) ── */
+@media (max-width: 360px) {
+  .stats-bar,
+  [class$="-grid"] {
+    grid-template-columns: 1fr !important;
+  }
+
+  .hero h1, h1 { font-size: 1.3em !important; }
+  .hero-badge, .intro-label { font-size: 10px !important; padding: 6px 12px !important; }
+  .container { padding: 0 10px; }
+}
+
+</style>
+</head>
+<body>
+<div class="container">
+
+<!-- HEADER -->
+<div class="header">
+  <h1><i class="fas fa-server"></i> ASIR - Administrador de Sistemas Informáticos e Redes</h1>
+  <p>Conteúdos Programáticos Detalhados</p>
+</div>
+
+<!-- STATS -->
+<div class="stats-grid">
+  <div class="stat-card">
+    <div class="stat-icon"><i class="fas fa-flask"></i></div>
+    <div class="stat-number">47</div>
+    <div class="stat-label">Sessões Práticas</div>
+  </div>
+  <div class="stat-card">
+    <div class="stat-icon"><i class="fas fa-layer-group"></i></div>
+    <div class="stat-number">6</div>
+    <div class="stat-label">Módulos</div>
+  </div>
+  <div class="stat-card">
+    <div class="stat-icon"><i class="fas fa-clipboard-check"></i></div>
+    <div class="stat-number">2</div>
+    <div class="stat-label">Casos Práticos</div>
+  </div>
+  <div class="stat-card">
+    <div class="stat-icon"><i class="fas fa-server"></i></div>
+    <div class="stat-number stat-text">ASIR</div>
+    <div class="stat-label">Sistemas Informáticos e Redes</div>
+  </div>
+</div>
+
+<!-- INTRO -->
+<div class="intro-card">
+  <div class="intro-label"><i class="fas fa-bookmark"></i> PROGRAMA FORMATIVO</div>
+  <div class="intro-text">
+    O curso <strong>ASIR — Administrador de Sistemas Informáticos e Redes</strong> abrange desde a arquitetura de hardware até à administração de redes e servidores. A formação combina <strong>unidades didáticas teóricas</strong> com <strong>práticas laboratoriais</strong> e casos práticos reais, preparando os formandos para os desafios profissionais da área de IT.
+  </div>
+</div>
+
+<!-- CONTROLS -->
+<div class="controls-bar">
+  <button class="btn-toggle-all" id="btnToggleAll" onclick="toggleAll()">
+    <i class="fas fa-expand-alt" id="toggleIcon"></i>
+    <span id="toggleLabel">Expandir tudo</span>
+  </button>
+</div>
+
+<!-- MÓDULO I -->
+<div class="module-wrapper">
+<button class="accordion" onclick="togglePanel(this)">
+  <div class="accordion-left"><h2>&#9776; MÓDULO I — ARQUITETURA DE COMPUTADORES I</h2></div>
+  <div class="accordion-right">
+    <span class="badge badge-pratica">⚙️ 6 práticas</span>
+    <i class="fas fa-chevron-down accordion-chevron"></i>
+  </div>
+</button>
+<div class="panel"><div class="panel-inner">
+  <p><span class="text">Unidade Didática 1.</span> Sistemas de numeração e arquitetura de computadores.</p>
+  <p class="detalhe">Sistemas de Numeração</p>
+  <p class="detalhe">Estrutura de um computador</p>
+  <p class="detalhe">Componentes</p>
+  <p><span class="text">Unidade Didática 2.</span> Placa principal.</p>
+  <p class="detalhe">Motherboard</p>
+  <p class="detalhe">Componentes da motherboard</p>
+  <p class="detalhe">BIOS</p>
+  <p class="detalhe">Montagem e manutenção</p>
+  <p><span class="text">Unidade Didática 3.</span> Processadores.</p>
+  <p class="detalhe">Operações</p>
+  <p class="detalhe">Intel</p>
+  <p class="detalhe">AMD</p>
+  <p class="detalhe">Montagem e manutenção</p>
+  <p><span class="pratica">Prática 1.</span> Conversões.</p>
+  <p><span class="pratica">Prática 2.</span> Identificação de componentes de hardware.</p>
+  <p><span class="pratica">Prática 3.</span> Elementos da placa principal motherboard.</p>
+  <p><span class="pratica">Prática 4.</span> A BIOS.</p>
+  <p><span class="pratica">Prática 5.</span> Instalação do CPU e Cooler.</p>
+  <p><span class="pratica">Prática 6.</span> Benchmark do CPU.</p>
+</div></div>
+</div>
+
+<!-- MÓDULO II -->
+<div class="module-wrapper">
+<button class="accordion" onclick="togglePanel(this)">
+  <div class="accordion-left"><h2>&#9776; MÓDULO II — ARQUITETURA DE COMPUTADORES II</h2></div>
+  <div class="accordion-right">
+    <span class="badge badge-pratica">⚙️ 3 práticas</span>
+    <i class="fas fa-chevron-down accordion-chevron"></i>
+  </div>
+</button>
+<div class="panel"><div class="panel-inner">
+  <p><span class="text">Unidade Didática 1.</span> Memória.</p>
+  <p class="detalhe">Tipos de memórias</p>
+  <p class="detalhe">RAM</p>
+  <p class="detalhe">ROM</p>
+  <p class="detalhe">Montagem e manutenção</p>
+  <p><span class="text">Unidade Didática 2.</span> Sistemas de armazenamento.</p>
+  <p class="detalhe">Unidades de armazenamento</p>
+  <p class="detalhe">Sistemas de ficheiros</p>
+  <p class="detalhe">Montagem e manutenção</p>
+  <p><span class="text">Unidade Didática 3.</span> Placas de vídeo e monitores.</p>
+  <p class="detalhe">Placas gráficas</p>
+  <p class="detalhe">Monitores</p>
+  <p class="detalhe">Montagem e manutenção da GPU</p>
+  <p><span class="pratica">Prática 7.</span> Benchmark da RAM.</p>
+  <p><span class="pratica">Prática 8.</span> Instalação e particionamento do disco.</p>
+  <p><span class="pratica">Prática 9.</span> Criação de um clone de um disco rígido.</p>
+</div></div>
+</div>
+
+<!-- MÓDULO III -->
+<div class="module-wrapper">
+<button class="accordion" onclick="togglePanel(this)">
+  <div class="accordion-left"><h2>&#9776; MÓDULO III — ARQUITETURA DE COMPUTADORES III</h2></div>
+  <div class="accordion-right">
+    <span class="badge badge-pratica">⚙️ 4 práticas</span>
+    <i class="fas fa-chevron-down accordion-chevron"></i>
+  </div>
+</button>
+<div class="panel"><div class="panel-inner">
+  <p><span class="text">Unidade Didática 1.</span> Impressoras e Periféricos.</p>
+  <p class="detalhe">Impressoras</p>
+  <p class="detalhe">Tecnologias de impressão</p>
+  <p class="detalhe">Periféricos de armazenamento</p>
+  <p class="detalhe">Periféricos de entrada e saída</p>
+  <p class="detalhe">Montagem e manutenção</p>
+  <p><span class="text">Unidade Didática 2.</span> Alimentação elétrica.</p>
+  <p class="detalhe">Fontes de alimentação</p>
+  <p class="detalhe">Polarização direta e inversa</p>
+  <p class="detalhe">Montagem e manutenção</p>
+  <p><span class="pratica">Prática 10.</span> Instalação da placa gráfica e placa de som.</p>
+  <p><span class="pratica">Prática 11.</span> Benchmark da placa gráfica.</p>
+  <p><span class="pratica">Prática 12.</span> Instalação e configuração de uma impressora.</p>
+  <p><span class="pratica">Prática 13.</span> Fonte de alimentação.</p>
+</div></div>
+</div>
+
+<!-- MÓDULO IV -->
+<div class="module-wrapper">
+<button class="accordion" onclick="togglePanel(this)">
+  <div class="accordion-left"><h2>&#9776; MÓDULO IV — SISTEMAS OPERATIVOS, MANUTENÇÃO E SEGURANÇA</h2></div>
+  <div class="accordion-right">
+    <span class="badge badge-pratica">⚙️ 18 práticas</span>
+    <span class="badge badge-caso">📋 Caso 1</span>
+    <i class="fas fa-chevron-down accordion-chevron"></i>
+  </div>
+</button>
+<div class="panel"><div class="panel-inner">
+  <p><span class="text">Unidade Didática 1.</span> Sistemas operativos.</p>
+  <p class="detalhe">Windows 10</p>
+  <p class="detalhe">Windows 11</p>
+  <p class="detalhe">Linux</p>
+  <p class="detalhe">Instalação de sistemas operativos</p>
+  <p><span class="text">Unidade Didática 2.</span> Montagem e manutenção.</p>
+  <p class="detalhe">Montagem de desktop</p>
+  <p class="detalhe">Manutenção preventiva</p>
+  <p class="detalhe">Resolução de problemas</p>
+  <p><span class="text">Unidade Didática 3.</span> Segurança.</p>
+  <p class="detalhe">Técnicas de segurança</p>
+  <p class="detalhe">Políticas de segurança</p>
+  <p class="detalhe">Firewall</p>
+  <p class="detalhe">Proteção contra software malicioso</p>
+  <p><span class="pratica">Prática 14.</span> Criação e configuração de uma máquina em ambiente Virtualbox.</p>
+  <p><span class="pratica">Prática 15.</span> Criação e configuração de uma máquina em ambiente Vmware.</p>
+  <p><span class="pratica">Prática 16.</span> Criação de uma pen de arranque em Windows.</p>
+  <p><span class="pratica">Prática 17.</span> Instalação do Windows 8 e drivers.</p>
+  <p><span class="pratica">Prática 18.</span> Instalação do Windows 10 e drivers.</p>
+  <p><span class="pratica">Prática 19.</span> Instalação do Linux Ubuntu.</p>
+  <p><span class="pratica">Prática 20.</span> Montagem de um computador.</p>
+  <p><span class="pratica">Prática 21.</span> Instalação do software de segurança.</p>
+  <p><span class="pratica">Prática 22.</span> Manutenção do software.</p>
+  <p><span class="pratica">Prática 23.</span> Manutenção do hardware.</p>
+  <p><span class="pratica">Prática 24.</span> Recuperação de ficheiros.</p>
+  <p><span class="pratica">Prática 25.</span> Partições.</p>
+  <p><span class="pratica">Prática 26.</span> Máquina virtual Windows e partições.</p>
+  <p><span class="pratica">Prática 27.</span> Hyper-V.</p>
+  <p><span class="pratica">Prática 28.</span> Comandos Windows.</p>
+  <p><span class="pratica">Prática 29.</span> Painel de controlo.</p>
+  <p><span class="pratica">Prática 30.</span> Ferramentas administrativas.</p>
+  <p><span class="pratica">Prática 31.</span> Criação de uma máquina virtual e instalação do Windows 10 em Virtual box. Host-only Interfaces.</p>
+  <p><span class="caso">Caso Prático 1</span></p>
+</div></div>
+</div>
+
+<!-- MÓDULO V -->
+<div class="module-wrapper">
+<button class="accordion" onclick="togglePanel(this)">
+  <div class="accordion-left"><h2>&#9776; MÓDULO V — COMPUTADORES DE ELEVADO DESEMPENHO, PORTÁTEIS E REDES</h2></div>
+  <div class="accordion-right">
+    <span class="badge badge-pratica">⚙️ 8 práticas</span>
+    <i class="fas fa-chevron-down accordion-chevron"></i>
+  </div>
+</button>
+<div class="panel"><div class="panel-inner">
+  <p><span class="text">Unidade Didática 1.</span> Computadores de elevado desempenho e portáteis.</p>
+  <p class="detalhe">Servidores</p>
+  <p class="detalhe">Computadores multiprocessador</p>
+  <p class="detalhe">Clusters</p>
+  <p class="detalhe">Portáteis</p>
+  <p class="detalhe">Montagem e manutenção de portáteis</p>
+  <p><span class="text">Unidade Didática 2.</span> Redes de Computadores I.</p>
+  <p class="detalhe">Tipos de redes</p>
+  <p class="detalhe">Tipologia de rede</p>
+  <p class="detalhe">Tecnologias de redes</p>
+  <p><span class="pratica">Prática 32.</span> Identificação de portas e componentes de um portátil.</p>
+  <p><span class="pratica">Prática 33.</span> Diagnosticar disco rígido.</p>
+  <p><span class="pratica">Prática 34.</span> Diagnosticar memória RAM.</p>
+  <p><span class="pratica">Prática 35.</span> RAID e instalação do Windows 10.</p>
+  <p><span class="pratica">Prática 36.</span> Revisão – montagem e instalação de um computador.</p>
+  <p><span class="pratica">Prática 37.</span> Criação de um Batch script.</p>
+  <p><span class="pratica">Prática 38.</span> Instalação de um sistema operativo Linux numa pen.</p>
+  <p><span class="pratica">Prática 39.</span> Simulação de avarias.</p>
+</div></div>
+</div>
+
+<!-- MÓDULO VI -->
+<div class="module-wrapper">
+<button class="accordion" onclick="togglePanel(this)">
+  <div class="accordion-left"><h2>&#9776; MÓDULO VI — REDES INFORMÁTICAS</h2></div>
+  <div class="accordion-right">
+    <span class="badge badge-pratica">⚙️ 8 práticas</span>
+    <span class="badge badge-caso">📋 Caso 2</span>
+    <i class="fas fa-chevron-down accordion-chevron"></i>
+  </div>
+</button>
+<div class="panel"><div class="panel-inner">
+  <p><span class="text">Unidade Didática 1.</span> Redes de Computadores II.</p>
+  <p class="detalhe">Modelo OSI</p>
+  <p class="detalhe">Modelo TCP/IP</p>
+  <p class="detalhe">Endereçamento de IP</p>
+  <p class="detalhe">Redes e sub-redes</p>
+  <p><span class="pratica">Prática 40.</span> Criação e teste do cabo UTP.</p>
+  <p><span class="pratica">Prática 41.</span> Montagem e configuração de uma rede em estrela.</p>
+  <p><span class="pratica">Prática 42.</span> Administração remota de equipamentos.</p>
+  <p><span class="pratica">Prática 43.</span> Configuração do router.</p>
+  <p><span class="pratica">Prática 44.</span> Criação de um clone de máquina virtual. Comandos de rede.</p>
+  <p><span class="pratica">Prática 45.</span> Criação de uma máquina virtual e instalação do Windows Server.</p>
+  <p><span class="pratica">Prática 46.</span> DHCP.</p>
+  <p><span class="pratica">Prática 47.</span> DNS.</p>
+  <p><span class="caso">Caso Prático 2</span></p>
+</div></div>
+</div>
+
+<!-- MÓDULO MDPP -->
+<div class="module-wrapper">
+<button class="accordion" onclick="togglePanel(this)">
+  <div class="accordion-left"><h2>&#9776; MÓDULO DE DESENVOLVIMENTO PESSOAL E PROFISSIONAL (MDPP)</h2></div>
+  <div class="accordion-right">
+    <span class="badge badge-pratica">7 unidades</span>
+    <i class="fas fa-chevron-down accordion-chevron"></i>
+  </div>
+</button>
+<div class="panel"><div class="panel-inner">
+  <p><span class="text">Unidade Didática 1.</span> Comportamentos e atitudes.</p>
+  <p><span class="text">Unidade Didática 2.</span> Técnicas de comunicação.</p>
+  <p><span class="text">Unidade Didática 3.</span> Mercado laboral.</p>
+  <p><span class="text">Unidade Didática 4.</span> Ferramentas para procura de emprego.</p>
+  <p><span class="text">Unidade Didática 5.</span> Redes sociais.</p>
+  <p><span class="text">Unidade Didática 6.</span> Empreendedorismo e marca pessoal.</p>
+  <p><span class="text">Unidade Didática 7.</span> Estágio - Autogestão.</p>
+</div></div>
+</div>
+
+</div><!-- /container -->
+
+<script>
+  function togglePanel(btn) {
+    var panel = btn.nextElementSibling;
+    var isOpen = panel.classList.contains('open');
+
+    btn.classList.toggle('active');
+    panel.classList.toggle('open');
+
+    // Smooth scroll to keep module header visible when opening
+    if (!isOpen) {
+      setTimeout(function() {
+        var top = btn.getBoundingClientRect().top + window.scrollY - 14;
+        window.scrollTo({ top: top, behavior: 'smooth' });
+      }, 60);
+    }
+  }
+
+  var allExpanded = false;
+
+  function toggleAll() {
+    allExpanded = !allExpanded;
+    document.querySelectorAll('.accordion').forEach(function(acc) {
+      allExpanded ? acc.classList.add('active') : acc.classList.remove('active');
+    });
+    document.querySelectorAll('.panel').forEach(function(p) {
+      allExpanded ? p.classList.add('open') : p.classList.remove('open');
+    });
+    document.getElementById('toggleIcon').className = allExpanded ? 'fas fa-compress-alt' : 'fas fa-expand-alt';
+    document.getElementById('toggleLabel').textContent = allExpanded ? 'Recolher tudo' : 'Expandir tudo';
+  }
+
+  // Auto-open first module on load
+  window.addEventListener('load', function() {
+    var first = document.querySelector('.accordion');
+    if (first) togglePanel(first);
+  });
+</script>
+</body>
+</html>

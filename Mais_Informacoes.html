@@ -1,0 +1,788 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>MasterD – Mais Informações</title>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+<style>
+* { margin: 0; padding: 0; box-sizing: border-box; }
+
+:root {
+  --orange:      #e67e22;
+  --orange-dark: #d35400;
+  --dark:        #2c3e50;
+  --darker:      #1a252f;
+  --fb:          #1877f2;
+  --tw:          #1da1f2;
+  --yt:          #ff0000;
+  --ig-from:     #f09433;
+  --ig-to:       #c13584;
+  --li:          #0a66c2;
+  --text:        #444;
+  --text-light:  #666;
+  --white:       #ffffff;
+}
+
+html { scroll-behavior: smooth; }
+
+body {
+  background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+  font-family: 'Inter', sans-serif;
+  min-height: 100vh;
+  overflow-x: hidden;
+  color: var(--text);
+}
+
+/* ── FADE UP ─────────────────────────────────────── */
+.fade-up {
+  opacity: 0;
+  transform: translateY(24px);
+  transition: opacity 0.65s ease, transform 0.65s ease;
+}
+.fade-up.visible { opacity: 1; transform: translateY(0); }
+.delay-1 { transition-delay: 0.08s; }
+.delay-2 { transition-delay: 0.16s; }
+.delay-3 { transition-delay: 0.24s; }
+.delay-4 { transition-delay: 0.32s; }
+.delay-5 { transition-delay: 0.40s; }
+
+/* ── HERO ─────────────────────────────────────────── */
+.hero {
+  background: linear-gradient(135deg, var(--orange) 0%, var(--orange-dark) 100%);
+  color: #fff;
+  padding: 80px 20px 110px;
+  text-align: center;
+  position: relative;
+  overflow: hidden;
+  box-shadow: 0 20px 60px rgba(230,126,34,0.3);
+}
+
+.hero::before {
+  content: '';
+  position: absolute;
+  top: -50%; right: -10%;
+  width: 600px; height: 600px;
+  background: radial-gradient(circle, rgba(255,255,255,0.1) 0%, transparent 70%);
+  border-radius: 50%;
+  animation: float 8s ease-in-out infinite;
+}
+
+.hero::after {
+  content: '';
+  position: absolute;
+  bottom: -2px; left: 0;
+  width: 100%; height: 65px;
+  background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+  clip-path: ellipse(55% 100% at 50% 100%);
+}
+
+@keyframes float {
+  0%,100% { transform: translateY(0); }
+  50%      { transform: translateY(20px); }
+}
+
+.hero-content {
+  position: relative;
+  z-index: 2;
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+.hero-badge {
+  display: inline-block;
+  background: rgba(255,255,255,0.2);
+  padding: 10px 22px;
+  border-radius: 50px;
+  font-size: 13px;
+  font-weight: 600;
+  margin-bottom: 22px;
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(255,255,255,0.3);
+  letter-spacing: 0.5px;
+}
+
+.hero h1 {
+  font-family: 'Poppins', sans-serif;
+  font-size: 3.2em;
+  font-weight: 800;
+  margin-bottom: 18px;
+  text-shadow: 2px 2px 8px rgba(0,0,0,0.2);
+  line-height: 1.2;
+}
+
+.hero p {
+  font-size: 1.2em;
+  opacity: 0.95;
+  font-weight: 300;
+  line-height: 1.7;
+  max-width: 600px;
+  margin: 0 auto;
+}
+
+/* ── CONTAINER ────────────────────────────────────── */
+.container {
+  max-width: 1000px;
+  margin: 0 auto;
+  padding: 0 20px;
+}
+
+/* ── WEBSITE SECTION ─────────────────────────────── */
+.website-section { margin: 60px 0 50px; }
+
+.website-card {
+  background: var(--white);
+  border-radius: 16px;
+  overflow: hidden;
+  box-shadow: 0 10px 40px rgba(0,0,0,0.09);
+}
+
+.website-header {
+  background: linear-gradient(135deg, var(--orange), var(--orange-dark));
+  padding: 28px 36px;
+  color: #fff;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 16px;
+}
+
+.website-header i { font-size: 24px; opacity: 0.9; }
+
+.website-header h2 {
+  font-family: 'Poppins', sans-serif;
+  font-size: 1.2em;
+  font-weight: 700;
+}
+
+.website-header p {
+  font-size: 13px;
+  opacity: 0.85;
+  margin-top: 3px;
+}
+
+.website-image {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+
+.website-cta {
+  padding: 28px 36px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 20px;
+  flex-wrap: wrap;
+  background: #fafafa;
+  border-top: 1px solid rgba(0,0,0,0.06);
+}
+
+.website-cta p {
+  font-size: 15px;
+  color: var(--text);
+  line-height: 1.6;
+}
+
+.website-cta strong { color: var(--orange); font-weight: 600; }
+
+.btn-site {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  background: linear-gradient(135deg, var(--orange), var(--orange-dark));
+  color: #fff;
+  font-family: 'Poppins', sans-serif;
+  font-size: 14px;
+  font-weight: 600;
+  padding: 14px 28px;
+  border-radius: 10px;
+  text-decoration: none;
+  flex-shrink: 0;
+  box-shadow: 0 6px 20px rgba(230,126,34,0.35);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.btn-site:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 12px 32px rgba(230,126,34,0.45);
+}
+
+/* ── CURSOS CTA ──────────────────────────────────── */
+.cursos-section { margin: 0 0 50px; }
+
+.cursos-card {
+  background: linear-gradient(135deg, var(--dark) 0%, var(--darker) 100%);
+  border-radius: 16px;
+  padding: 46px 48px;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 36px;
+  box-shadow: 0 14px 50px rgba(0,0,0,0.15);
+  color: #fff;
+  position: relative;
+  overflow: hidden;
+}
+
+.cursos-card::before {
+  content: '';
+  position: absolute;
+  right: -60px; top: -60px;
+  width: 260px; height: 260px;
+  background: radial-gradient(circle, rgba(230,126,34,0.18) 0%, transparent 70%);
+  border-radius: 50%;
+}
+
+.cursos-icon {
+  flex-shrink: 0;
+  width: 80px; height: 80px;
+  background: linear-gradient(135deg, var(--orange), var(--orange-dark));
+  border-radius: 50%;
+  display: flex;
+  flex-wrap: wrap; align-items: center; justify-content: center;
+  font-size: 32px;
+  box-shadow: 0 8px 28px rgba(230,126,34,0.4);
+}
+
+.cursos-text h2 {
+  font-family: 'Poppins', sans-serif;
+  font-size: 1.4em;
+  font-weight: 700;
+  margin-bottom: 10px;
+}
+
+.cursos-text p {
+  font-size: 15px;
+  opacity: 0.85;
+  line-height: 1.7;
+  font-weight: 300;
+  margin-bottom: 20px;
+}
+
+.btn-cursos {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  background: var(--orange);
+  color: #fff;
+  font-family: 'Poppins', sans-serif;
+  font-size: 14px;
+  font-weight: 700;
+  padding: 14px 30px;
+  border-radius: 10px;
+  text-decoration: none;
+  box-shadow: 0 6px 20px rgba(230,126,34,0.4);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.btn-cursos:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 12px 32px rgba(230,126,34,0.5);
+}
+
+/* ── SOCIAL SECTION ──────────────────────────────── */
+.social-section { margin: 0 0 70px; }
+
+.section-label {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 14px;
+  margin-bottom: 28px;
+}
+
+.section-label-icon {
+  width: 44px; height: 44px;
+  background: linear-gradient(135deg, var(--orange), var(--orange-dark));
+  border-radius: 12px;
+  display: flex;
+  flex-wrap: wrap; align-items: center; justify-content: center;
+  color: #fff;
+  font-size: 18px;
+  flex-shrink: 0;
+}
+
+.section-label span {
+  font-family: 'Poppins', sans-serif;
+  font-size: 1.55em;
+  font-weight: 700;
+  color: var(--dark);
+}
+
+.social-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+  gap: 18px;
+}
+
+.social-card {
+  border-radius: 16px;
+  overflow: hidden;
+  box-shadow: 0 8px 28px rgba(0,0,0,0.09);
+  text-decoration: none;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 34px 16px;
+  background: var(--white);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  position: relative;
+  overflow: hidden;
+}
+
+.social-card::before {
+  content: '';
+  position: absolute;
+  bottom: 0; left: 0;
+  width: 100%; height: 4px;
+  transition: transform 0.4s ease;
+  transform: scaleX(0);
+  transform-origin: left;
+}
+
+.social-card:hover { transform: translateY(-6px); }
+.social-card:hover::before { transform: scaleX(1); }
+
+.social-card.fb::before  { background: var(--fb); }
+.social-card.tw::before  { background: var(--tw); }
+.social-card.yt::before  { background: var(--yt); }
+.social-card.ig::before  { background: linear-gradient(90deg, var(--ig-from), var(--ig-to)); }
+.social-card.li::before  { background: var(--li); }
+
+.social-card:hover { box-shadow: 0 18px 50px rgba(0,0,0,0.13); }
+
+.social-icon-wrap {
+  width: 60px; height: 60px;
+  border-radius: 50%;
+  display: flex;
+  flex-wrap: wrap; align-items: center; justify-content: center;
+  font-size: 26px;
+  margin-bottom: 14px;
+  transition: transform 0.3s ease;
+}
+
+.social-card:hover .social-icon-wrap { transform: scale(1.1); }
+
+.fb  .social-icon-wrap { background: rgba(24,119,242,0.1);  color: var(--fb); }
+.tw  .social-icon-wrap { background: rgba(29,161,242,0.1);  color: var(--tw); }
+.yt  .social-icon-wrap { background: rgba(255,0,0,0.1);     color: var(--yt); }
+.ig  .social-icon-wrap { background: rgba(193,53,132,0.1);  color: var(--ig-to); }
+.li  .social-icon-wrap { background: rgba(10,102,194,0.1);  color: var(--li); }
+
+.social-card:hover.fb  .social-icon-wrap { background: var(--fb); color: #fff; }
+.social-card:hover.tw  .social-icon-wrap { background: var(--tw); color: #fff; }
+.social-card:hover.yt  .social-icon-wrap { background: var(--yt); color: #fff; }
+.social-card:hover.ig  .social-icon-wrap { background: linear-gradient(135deg, var(--ig-from), var(--ig-to)); color: #fff; }
+.social-card:hover.li  .social-icon-wrap { background: var(--li); color: #fff; }
+
+.social-name {
+  font-family: 'Poppins', sans-serif;
+  font-size: 0.9em;
+  font-weight: 700;
+  color: var(--dark);
+  margin-bottom: 5px;
+  text-align: center;
+}
+
+.social-handle {
+  font-size: 12px;
+  color: var(--text-light);
+  text-align: center;
+}
+
+/* ── CONTACT STRIP ───────────────────────────────── */
+.contact-section { margin: 0 0 70px; }
+
+.contact-card {
+  background: linear-gradient(135deg, var(--orange) 0%, var(--orange-dark) 100%);
+  border-radius: 16px;
+  padding: 44px 48px;
+  text-align: center;
+  box-shadow: 0 14px 50px rgba(230,126,34,0.28);
+  color: #fff;
+  position: relative;
+  overflow: hidden;
+}
+
+.contact-card::before {
+  content: '';
+  position: absolute;
+  right: -60px; top: -60px;
+  width: 250px; height: 250px;
+  background: radial-gradient(circle, rgba(255,255,255,0.1) 0%, transparent 70%);
+  border-radius: 50%;
+}
+
+.contact-card::after {
+  content: '';
+  position: absolute;
+  left: -40px; bottom: -40px;
+  width: 180px; height: 180px;
+  background: radial-gradient(circle, rgba(255,255,255,0.07) 0%, transparent 70%);
+  border-radius: 50%;
+}
+
+.contact-card h2 {
+  font-family: 'Poppins', sans-serif;
+  font-size: 1.6em;
+  font-weight: 800;
+  margin-bottom: 12px;
+  position: relative;
+  z-index: 1;
+}
+
+.contact-card p {
+  font-size: 15px;
+  opacity: 0.92;
+  line-height: 1.7;
+  font-weight: 300;
+  max-width: 580px;
+  margin: 0 auto 28px;
+  position: relative;
+  z-index: 1;
+}
+
+.contact-links {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 16px;
+  flex-wrap: wrap;
+  position: relative;
+  z-index: 1;
+}
+
+.contact-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  background: rgba(255,255,255,0.15);
+  border: 2px solid rgba(255,255,255,0.4);
+  backdrop-filter: blur(8px);
+  color: #fff;
+  font-family: 'Poppins', sans-serif;
+  font-size: 14px;
+  font-weight: 600;
+  padding: 13px 26px;
+  border-radius: 10px;
+  text-decoration: none;
+  transition: background 0.3s ease, transform 0.3s ease;
+}
+
+.contact-btn.primary {
+  background: #fff;
+  color: var(--orange);
+  border-color: #fff;
+  box-shadow: 0 6px 20px rgba(0,0,0,0.15);
+}
+
+.contact-btn:hover {
+  background: rgba(255,255,255,0.25);
+  transform: translateY(-3px);
+}
+
+.contact-btn.primary:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 12px 32px rgba(0,0,0,0.2);
+}
+
+/* ── RESPONSIVE ──────────────────────────────────── */
+@media (max-width: 900px) {
+  .social-grid { grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); }
+}
+
+@media (max-width: 768px) {
+  .hero { padding: 55px 20px 90px; }
+  .hero h1 { font-size: 2em; }
+  .hero p  { font-size: 1em; }
+
+  .website-cta { flex-direction: column; align-items: flex-start; }
+  .cursos-card { flex-direction: column; padding: 36px 28px; text-align: center; }
+  .cursos-icon { margin: 0 auto; }
+  .social-grid { grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); }
+  .contact-card { padding: 36px 28px; }
+}
+
+@media (max-width: 480px) {
+  .hero { padding: 40px 16px 80px; }
+  .hero h1 { font-size: 1.6em; }
+  .hero-badge { font-size: 11px; padding: 8px 16px; }
+
+  .website-header { padding: 20px 22px; }
+  .website-cta { padding: 22px 22px; }
+  .cursos-card { padding: 28px 20px; }
+  .social-grid { grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 14px; }
+  .social-card { padding: 26px 12px; }
+  .contact-card { padding: 28px 20px; }
+  .contact-card h2 { font-size: 1.3em; }
+  .contact-links { flex-direction: column; }
+  .section-label span { font-size: 1.2em; }
+}
+
+/* ═══════════════════════════════════════════════════════════
+   RESPONSIVE GLOBAL PATCH — garante compatibilidade total
+   ═══════════════════════════════════════════════════════════ */
+
+/* Imagens e vídeos sempre fluidos */
+img, video, iframe {
+  max-width: 100%;
+  height: auto;
+}
+
+/* Todos os flex containers com wrap por defeito */
+[class*="card"]:not(.func-icon):not(.detail-icon):not(.stat-icon):not(.bottom-icon):not(.comptia-icon):not(.intro-icon):not(.section-label-icon):not(.format-header-icon):not(.modality-header-icon):not(.split-card-header),
+[class*="grid"]:not(.functions-grid):not(.functions-grid-bottom):not(.stats-grid):not(.detail-grid):not(.trust-grid):not(.footer-content) {
+  min-width: 0;
+}
+
+/* Breakpoint extra: tablet grande (769px – 1024px) */
+@media (max-width: 1024px) and (min-width: 769px) {
+  .container { padding: 0 28px; }
+  [class*="-grid"] { gap: 18px; }
+}
+
+/* ── TABLET (≤ 768px) — reforço global ── */
+@media (max-width: 768px) {
+  /* Grids: forçar 1 coluna ou 2 no máximo */
+  .functions-grid,
+  .detail-grid,
+  .trust-grid,
+  .footer-content,
+  .modulos-grid,
+  .main-grid,
+  .cert-layout,
+  .objectives-layout,
+  .social-grid,
+  .stats-grid,
+  [class$="-grid"] {
+    grid-template-columns: 1fr 1fr !important;
+    gap: 16px;
+  }
+
+  /* Flex containers: empilhar em coluna */
+  .intro-card,
+  .bottom-card,
+  .comptia-card,
+  .bolsa-card,
+  .access-card,
+  .cursos-card,
+  .commitment-card,
+  .iso-card,
+  .modality-body,
+  .format-body,
+  .split-card-body,
+  .campus-card,
+  .acesso-card {
+    flex-direction: column !important;
+    align-items: flex-start;
+  }
+
+  /* Ícones centralizados quando em coluna */
+  .intro-icon, .bottom-icon, .comptia-icon, .section-label-icon,
+  .intro-icon-wrap, .diploma-header-icon, .modality-header-icon,
+  .format-header-icon, .split-card-header {
+    margin: 0 auto;
+  }
+
+  /* Texto centrado nos banners */
+  .bottom-card, .comptia-card { text-align: center; }
+
+  /* Vídeos responsivos */
+  video { width: 100% !important; }
+}
+
+/* ── MOBILE (≤ 480px) — reforço global ── */
+@media (max-width: 480px) {
+  /* Todos os grids em 1 coluna */
+  .functions-grid,
+  .functions-grid-bottom,
+  .detail-grid,
+  .trust-grid,
+  .footer-content,
+  .modulos-grid,
+  .main-grid,
+  .cert-layout,
+  .objectives-layout,
+  .social-grid,
+  .stats-grid,
+  [class$="-grid"],
+  .certifications {
+    grid-template-columns: 1fr !important;
+    gap: 14px;
+  }
+
+  /* Stat cards em coluna */
+  .stat-card {
+    flex-direction: column;
+    text-align: center;
+    align-items: center;
+  }
+
+  /* Garantir que nenhum elemento transborde */
+  * { max-width: 100%; word-break: break-word; }
+
+  /* Padding seguro nos containers */
+  .container { padding: 0 14px; }
+
+  /* Tipografia escalada */
+  .hero h1 { font-size: clamp(1.4em, 6vw, 2em) !important; }
+  .stat-number { font-size: clamp(1.8em, 8vw, 2.8em) !important; }
+
+  /* Botões full-width em mobile */
+  .btn, .cta-btn, .hero-cta a, .hero-cta button {
+    width: 100%;
+    max-width: 320px;
+    display: block;
+    margin: 0 auto 10px;
+    text-align: center;
+  }
+
+  /* Hero CTA em coluna */
+  .hero-cta { flex-direction: column; align-items: center; }
+
+  /* Certificações em coluna */
+  .certifications { flex-direction: column; align-items: center; }
+  .cert-item { width: 100%; max-width: 280px; text-align: center; }
+
+  /* Vídeos */
+  video { width: 100% !important; height: auto !important; }
+
+  /* Cards de docentes */
+  .teacher-photo-wrap, .photo-ring { width: 120px !important; height: 120px !important; }
+}
+
+/* ── MOBILE PEQUENO (≤ 360px) ── */
+@media (max-width: 360px) {
+  .hero h1 { font-size: 1.3em !important; }
+  .hero-badge { font-size: 10px; padding: 6px 12px; }
+  .container { padding: 0 10px; }
+  .func-card, .detail-card, .stat-card { padding: 20px 14px; }
+  .stat-number { font-size: 1.6em !important; }
+}
+
+</style>
+</head>
+<body>
+
+<!-- HERO -->
+<div class="hero">
+  <div class="hero-content">
+    <div class="hero-badge"><i class="fas fa-circle-info"></i> &nbsp;MasterD Portugal</div>
+    <h1><i class="fas fa-link"></i> Mais Informações</h1>
+    <p>Explore o nosso website, siga-nos nas redes sociais e mantenha-se a par de todas as novidades do universo MasterD.</p>
+  </div>
+</div>
+
+<!-- WEBSITE PREVIEW -->
+<div class="container">
+  <div class="website-section fade-up">
+    <div class="website-card">
+      <div class="website-header">
+        <i class="fas fa-globe"></i>
+        <div>
+          <h2>Descubra Mais sobre Esta Formação</h2>
+          <p>Visite o nosso website e explore todos os cursos disponíveis</p>
+        </div>
+      </div>
+      <img src="imagens/mais_informacoes.png" alt="Website MasterD e perfil Instagram masterd.portugal" class="website-image" />
+      <div class="website-cta">
+        <p>Encontre mais detalhes sobre esta formação e todas as outras áreas disponíveis em <strong>www.masterd.pt/cursos-informatica</strong></p>
+        <a href="https://www.masterd.pt/cursos-informatica" target="_blank" class="btn-site">
+          <i class="fas fa-arrow-up-right-from-square"></i> Visitar Website
+        </a>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- TODOS OS CURSOS -->
+<div class="container">
+  <div class="cursos-section fade-up">
+    <div class="cursos-card">
+      <div class="cursos-icon"><i class="fas fa-book-open"></i></div>
+      <div class="cursos-text">
+        <h2>Descubra Todos os Nossos Cursos</h2>
+        <p>A MasterD é o Grupo Educativo Líder em Formação Profissional. Explore o nosso catálogo completo de formações certificadas em diversas áreas — informática, saúde, segurança, administração e muito mais.</p>
+        <a href="https://www.masterd.pt" target="_blank" class="btn-cursos">
+          <i class="fas fa-arrow-right"></i> Ver Todos os Cursos em masterd.pt
+        </a>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- REDES SOCIAIS -->
+<div class="container">
+  <div class="social-section">
+    <div class="section-label fade-up">
+      <div class="section-label-icon"><i class="fas fa-share-nodes"></i></div>
+      <span>Siga-nos nas Redes Sociais</span>
+    </div>
+
+    <div class="social-grid">
+
+      <a href="http://www.facebook.com/MasterDPortugal/" target="_blank" class="social-card fb fade-up delay-1">
+        <div class="social-icon-wrap"><i class="fab fa-facebook-f"></i></div>
+        <div class="social-name">Facebook</div>
+        <div class="social-handle">MasterDPortugal</div>
+      </a>
+
+      <a href="http://twitter.com/masterdportugal" target="_blank" class="social-card tw fade-up delay-2">
+        <div class="social-icon-wrap"><i class="fab fa-x-twitter"></i></div>
+        <div class="social-name">X / Twitter</div>
+        <div class="social-handle">masterdportugal</div>
+      </a>
+
+      <a href="http://www.youtube.com/user/MasterDPortugal" target="_blank" class="social-card yt fade-up delay-3">
+        <div class="social-icon-wrap"><i class="fab fa-youtube"></i></div>
+        <div class="social-name">YouTube</div>
+        <div class="social-handle">MasterDPortugal</div>
+      </a>
+
+      <a href="https://www.instagram.com/masterd.portugal/" target="_blank" class="social-card ig fade-up delay-4">
+        <div class="social-icon-wrap"><i class="fab fa-instagram"></i></div>
+        <div class="social-name">Instagram</div>
+        <div class="social-handle">masterd.portugal</div>
+      </a>
+
+      <a href="https://www.linkedin.com/showcase/masterdportugal/" target="_blank" class="social-card li fade-up delay-5">
+        <div class="social-icon-wrap"><i class="fab fa-linkedin-in"></i></div>
+        <div class="social-name">LinkedIn</div>
+        <div class="social-handle">masterdportugal</div>
+      </a>
+
+    </div>
+  </div>
+</div>
+
+<!-- CONTACT CTA -->
+<div class="container">
+  <div class="contact-section fade-up">
+    <div class="contact-card">
+      <h2>Pronto para Dar o Próximo Passo?</h2>
+      <p>Entre em contacto connosco ou visite o nosso website para saber mais sobre esta formação e como se inscrever. A nossa equipa está pronta para o ajudar.</p>
+      <div class="contact-links">
+        <a href="https://www.masterd.pt/cursos-informatica" target="_blank" class="contact-btn primary">
+          <i class="fas fa-globe"></i> masterd.pt/cursos-informatica
+        </a>
+        <a href="https://www.instagram.com/masterd.portugal/" target="_blank" class="contact-btn">
+          <i class="fab fa-instagram"></i> Seguir no Instagram
+        </a>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+const observer = new IntersectionObserver((entries) => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting) entry.target.classList.add('visible');
+  });
+}, { threshold: 0.08 });
+
+document.querySelectorAll('.fade-up').forEach(el => observer.observe(el));
+</script>
+</body>
+</html>

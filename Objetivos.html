@@ -1,0 +1,774 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>MasterD – Objetivos da Formação</title>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+<style>
+* { margin: 0; padding: 0; box-sizing: border-box; }
+
+:root {
+  --orange:      #e67e22;
+  --orange-dark: #d35400;
+  --dark:        #2c3e50;
+  --darker:      #1a252f;
+  --text:        #444;
+  --text-light:  #666;
+  --white:       #ffffff;
+}
+
+html { scroll-behavior: smooth; }
+
+body {
+  background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+  font-family: 'Inter', sans-serif;
+  min-height: 100vh;
+  overflow-x: hidden;
+  color: var(--text);
+}
+
+.fade-up {
+  opacity: 0;
+  transform: translateY(24px);
+  transition: opacity 0.65s ease, transform 0.65s ease;
+}
+.fade-up.visible { opacity: 1; transform: translateY(0); }
+.delay-1 { transition-delay: 0.08s; }
+.delay-2 { transition-delay: 0.16s; }
+.delay-3 { transition-delay: 0.24s; }
+.delay-4 { transition-delay: 0.32s; }
+
+/* ── HERO ─────────────────────────────────────────── */
+.hero {
+  background: linear-gradient(135deg, var(--orange) 0%, var(--orange-dark) 100%);
+  color: #fff;
+  padding: 80px 20px 110px;
+  text-align: center;
+  position: relative;
+  overflow: hidden;
+  box-shadow: 0 20px 60px rgba(230,126,34,0.3);
+}
+
+.hero::before {
+  content: '';
+  position: absolute;
+  top: -50%; right: -10%;
+  width: 600px; height: 600px;
+  background: radial-gradient(circle, rgba(255,255,255,0.1) 0%, transparent 70%);
+  border-radius: 50%;
+  animation: float 8s ease-in-out infinite;
+}
+
+.hero::after {
+  content: '';
+  position: absolute;
+  bottom: -2px; left: 0;
+  width: 100%; height: 65px;
+  background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+  clip-path: ellipse(55% 100% at 50% 100%);
+}
+
+@keyframes float {
+  0%,100% { transform: translateY(0); }
+  50%      { transform: translateY(20px); }
+}
+
+.hero-content {
+  position: relative;
+  z-index: 2;
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+.hero-badge {
+  display: inline-block;
+  background: rgba(255,255,255,0.2);
+  padding: 10px 22px;
+  border-radius: 50px;
+  font-size: 13px;
+  font-weight: 600;
+  margin-bottom: 22px;
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(255,255,255,0.3);
+  letter-spacing: 0.5px;
+}
+
+.hero h1 {
+  font-family: 'Poppins', sans-serif;
+  font-size: 3.2em;
+  font-weight: 800;
+  margin-bottom: 18px;
+  text-shadow: 2px 2px 8px rgba(0,0,0,0.2);
+  line-height: 1.2;
+}
+
+.hero p {
+  font-size: 1.2em;
+  opacity: 0.95;
+  font-weight: 300;
+  line-height: 1.7;
+  max-width: 620px;
+  margin: 0 auto;
+}
+
+/* ── CONTAINER ────────────────────────────────────── */
+.container {
+  max-width: 1000px;
+  margin: 0 auto;
+  padding: 0 20px;
+}
+
+/* ── INTRO ─────────────────────────────────────────── */
+.intro-section { margin: 60px 0 50px; }
+
+.intro-card {
+  background: var(--white);
+  border-radius: 16px;
+  padding: 44px 48px;
+  box-shadow: 0 10px 40px rgba(0,0,0,0.08);
+  position: relative;
+  overflow: hidden;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 32px;
+  align-items: flex-start;
+}
+
+.intro-card::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  height: 5px;
+  background: linear-gradient(90deg, var(--orange), var(--orange-dark));
+  border-radius: 16px 16px 0 0;
+}
+
+.intro-icon {
+  flex-shrink: 0;
+  width: 68px; height: 68px;
+  background: linear-gradient(135deg, var(--orange), var(--orange-dark));
+  border-radius: 50%;
+  display: flex;
+  flex-wrap: wrap; align-items: center; justify-content: center;
+  font-size: 26px;
+  color: #fff;
+  box-shadow: 0 8px 28px rgba(230,126,34,0.35);
+  margin-top: 4px;
+}
+
+.intro-text p {
+  font-size: 15.5px;
+  line-height: 1.9;
+  color: var(--text);
+}
+
+.intro-text strong { color: var(--orange); font-weight: 600; }
+
+/* ── SECTION LABEL ───────────────────────────────── */
+.section-label {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 14px;
+  margin-bottom: 28px;
+}
+
+.section-label-icon {
+  width: 44px; height: 44px;
+  background: linear-gradient(135deg, var(--orange), var(--orange-dark));
+  border-radius: 12px;
+  display: flex;
+  flex-wrap: wrap; align-items: center; justify-content: center;
+  color: #fff;
+  font-size: 18px;
+  flex-shrink: 0;
+}
+
+.section-label span {
+  font-family: 'Poppins', sans-serif;
+  font-size: 1.55em;
+  font-weight: 700;
+  color: var(--dark);
+}
+
+/* ── OBJECTIVES LAYOUT ───────────────────────────── */
+.objectives-section { margin: 0 0 50px; }
+
+.objectives-layout {
+  display: grid;
+  grid-template-columns: 1fr 360px;
+  gap: 28px;
+  align-items: start;
+}
+
+.objectives-list-card {
+  background: var(--white);
+  border-radius: 16px;
+  overflow: hidden;
+  box-shadow: 0 8px 30px rgba(0,0,0,0.08);
+}
+
+.objectives-list-header {
+  background: linear-gradient(135deg, var(--orange), var(--orange-dark));
+  padding: 22px 28px;
+  color: #fff;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 12px;
+}
+
+.objectives-list-header i { font-size: 18px; opacity: 0.9; }
+
+.objectives-list-header h3 {
+  font-family: 'Poppins', sans-serif;
+  font-size: 1em;
+  font-weight: 700;
+}
+
+.obj-list { padding: 8px 0; }
+
+.obj-item {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: flex-start;
+  gap: 14px;
+  padding: 14px 24px;
+  border-bottom: 1px solid rgba(0,0,0,0.05);
+  transition: background 0.25s ease, padding-left 0.25s ease;
+}
+
+.obj-item:last-child { border-bottom: none; }
+
+.obj-item:hover {
+  background: rgba(230,126,34,0.04);
+  padding-left: 30px;
+}
+
+.obj-dot {
+  flex-shrink: 0;
+  width: 28px; height: 28px;
+  background: linear-gradient(135deg, var(--orange), var(--orange-dark));
+  border-radius: 8px;
+  display: flex;
+  flex-wrap: wrap; align-items: center; justify-content: center;
+  font-size: 12px;
+  color: #fff;
+  margin-top: 1px;
+}
+
+.obj-text {
+  font-size: 14px;
+  line-height: 1.65;
+  color: var(--text);
+}
+
+.obj-text strong { color: var(--orange); font-weight: 600; }
+
+/* ── IMAGE CARD ──────────────────────────────────── */
+.image-card {
+  border-radius: 16px;
+  overflow: hidden;
+  box-shadow: 0 10px 40px rgba(0,0,0,0.12);
+  position: sticky;
+  top: 20px;
+}
+
+.image-card img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  min-height: 460px;
+}
+
+/* ── COMPTIA SECTION ─────────────────────────────── */
+.comptia-section { margin: 0 0 50px; }
+
+.comptia-card {
+  background: var(--white);
+  border-radius: 16px;
+  overflow: hidden;
+  box-shadow: 0 10px 40px rgba(0,0,0,0.09);
+}
+
+.comptia-header {
+  background: linear-gradient(135deg, var(--dark), var(--darker));
+  padding: 26px 36px;
+  color: #fff;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 16px;
+  position: relative;
+  overflow: hidden;
+}
+
+.comptia-header::before {
+  content: '';
+  position: absolute;
+  right: -40px; top: -40px;
+  width: 160px; height: 160px;
+  background: radial-gradient(circle, rgba(230,126,34,0.2) 0%, transparent 70%);
+  border-radius: 50%;
+}
+
+.comptia-header-icon {
+  width: 50px; height: 50px;
+  background: linear-gradient(135deg, var(--orange), var(--orange-dark));
+  border-radius: 12px;
+  display: flex;
+  flex-wrap: wrap; align-items: center; justify-content: center;
+  font-size: 22px;
+  flex-shrink: 0;
+  box-shadow: 0 4px 16px rgba(230,126,34,0.4);
+}
+
+.comptia-header h2 {
+  font-family: 'Poppins', sans-serif;
+  font-size: 1.1em;
+  font-weight: 700;
+}
+
+.comptia-header p {
+  font-size: 13px;
+  opacity: 0.8;
+  margin-top: 4px;
+}
+
+.comptia-body {
+  padding: 32px 36px;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 14px;
+}
+
+.comptia-item {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: flex-start;
+  gap: 12px;
+  padding: 14px 16px;
+  background: rgba(230,126,34,0.04);
+  border: 1px solid rgba(230,126,34,0.1);
+  border-radius: 10px;
+  font-size: 14px;
+  line-height: 1.6;
+  color: var(--text);
+  transition: background 0.25s ease, border-color 0.25s ease;
+}
+
+.comptia-item:hover {
+  background: rgba(230,126,34,0.08);
+  border-color: rgba(230,126,34,0.25);
+}
+
+.comptia-item i {
+  color: var(--orange);
+  font-size: 15px;
+  flex-shrink: 0;
+  margin-top: 2px;
+}
+
+/* ── BOTTOM BANNER ───────────────────────────────── */
+.bottom-section { margin: 0 0 70px; }
+
+.bottom-card {
+  background: linear-gradient(135deg, var(--orange) 0%, var(--orange-dark) 100%);
+  border-radius: 16px;
+  padding: 50px 48px;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 36px;
+  box-shadow: 0 20px 60px rgba(230,126,34,0.3);
+  color: #fff;
+  position: relative;
+  overflow: hidden;
+}
+
+.bottom-card::before {
+  content: '';
+  position: absolute;
+  right: -60px; top: -60px;
+  width: 260px; height: 260px;
+  background: radial-gradient(circle, rgba(255,255,255,0.12) 0%, transparent 70%);
+  border-radius: 50%;
+}
+
+.bottom-icon {
+  flex-shrink: 0;
+  width: 80px; height: 80px;
+  background: rgba(255,255,255,0.2);
+  border-radius: 50%;
+  display: flex;
+  flex-wrap: wrap; align-items: center; justify-content: center;
+  font-size: 32px;
+  border: 2px solid rgba(255,255,255,0.35);
+}
+
+.bottom-text h2 {
+  font-family: 'Poppins', sans-serif;
+  font-size: 1.5em;
+  font-weight: 700;
+  margin-bottom: 10px;
+}
+
+.bottom-text p {
+  font-size: 15px;
+  opacity: 0.92;
+  line-height: 1.75;
+  font-weight: 300;
+}
+
+/* ── RESPONSIVE ──────────────────────────────────── */
+@media (max-width: 900px) {
+  .objectives-layout { grid-template-columns: 1fr; }
+  .image-card { position: static; order: -1; }
+  .image-card img { min-height: 280px; }
+  .comptia-body { grid-template-columns: 1fr; }
+}
+
+@media (max-width: 768px) {
+  .hero { padding: 55px 20px 90px; }
+  .hero h1 { font-size: 2em; }
+  .hero p  { font-size: 1em; }
+  .intro-card { flex-direction: column; padding: 32px 24px; gap: 20px; }
+  .intro-icon { margin: 0 auto; }
+  .bottom-card { flex-direction: column; padding: 36px 28px; text-align: center; }
+  .bottom-icon { margin: 0 auto; }
+}
+
+@media (max-width: 480px) {
+  .hero { padding: 40px 16px 80px; }
+  .hero h1 { font-size: 1.65em; }
+  .hero-badge { font-size: 11px; padding: 8px 16px; }
+  .intro-card { padding: 26px 18px; }
+  .obj-item { padding: 12px 18px; gap: 10px; }
+  .comptia-body { padding: 22px 20px; }
+  .comptia-header { padding: 20px 22px; }
+  .bottom-card { padding: 28px 20px; }
+  .section-label span { font-size: 1.2em; }
+}
+
+/* ═══════════════════════════════════════════════════════════
+   RESPONSIVE GLOBAL PATCH — garante compatibilidade total
+   ═══════════════════════════════════════════════════════════ */
+
+/* Imagens e vídeos sempre fluidos */
+img, video, iframe {
+  max-width: 100%;
+  height: auto;
+}
+
+/* Todos os flex containers com wrap por defeito */
+[class*="card"]:not(.func-icon):not(.detail-icon):not(.stat-icon):not(.bottom-icon):not(.comptia-icon):not(.intro-icon):not(.section-label-icon):not(.format-header-icon):not(.modality-header-icon):not(.split-card-header),
+[class*="grid"]:not(.functions-grid):not(.functions-grid-bottom):not(.stats-grid):not(.detail-grid):not(.trust-grid):not(.footer-content) {
+  min-width: 0;
+}
+
+/* Breakpoint extra: tablet grande (769px – 1024px) */
+@media (max-width: 1024px) and (min-width: 769px) {
+  .container { padding: 0 28px; }
+  [class*="-grid"] { gap: 18px; }
+}
+
+/* ── TABLET (≤ 768px) — reforço global ── */
+@media (max-width: 768px) {
+  /* Grids: forçar 1 coluna ou 2 no máximo */
+  .functions-grid,
+  .detail-grid,
+  .trust-grid,
+  .footer-content,
+  .modulos-grid,
+  .main-grid,
+  .cert-layout,
+  .objectives-layout,
+  .social-grid,
+  .stats-grid,
+  [class$="-grid"] {
+    grid-template-columns: 1fr 1fr !important;
+    gap: 16px;
+  }
+
+  /* Flex containers: empilhar em coluna */
+  .intro-card,
+  .bottom-card,
+  .comptia-card,
+  .bolsa-card,
+  .access-card,
+  .cursos-card,
+  .commitment-card,
+  .iso-card,
+  .modality-body,
+  .format-body,
+  .split-card-body,
+  .campus-card,
+  .acesso-card {
+    flex-direction: column !important;
+    align-items: flex-start;
+  }
+
+  /* Ícones centralizados quando em coluna */
+  .intro-icon, .bottom-icon, .comptia-icon, .section-label-icon,
+  .intro-icon-wrap, .diploma-header-icon, .modality-header-icon,
+  .format-header-icon, .split-card-header {
+    margin: 0 auto;
+  }
+
+  /* Texto centrado nos banners */
+  .bottom-card, .comptia-card { text-align: center; }
+
+  /* Vídeos responsivos */
+  video { width: 100% !important; }
+}
+
+/* ── MOBILE (≤ 480px) — reforço global ── */
+@media (max-width: 480px) {
+  /* Todos os grids em 1 coluna */
+  .functions-grid,
+  .functions-grid-bottom,
+  .detail-grid,
+  .trust-grid,
+  .footer-content,
+  .modulos-grid,
+  .main-grid,
+  .cert-layout,
+  .objectives-layout,
+  .social-grid,
+  .stats-grid,
+  [class$="-grid"],
+  .certifications {
+    grid-template-columns: 1fr !important;
+    gap: 14px;
+  }
+
+  /* Stat cards em coluna */
+  .stat-card {
+    flex-direction: column;
+    text-align: center;
+    align-items: center;
+  }
+
+  /* Garantir que nenhum elemento transborde */
+  * { max-width: 100%; word-break: break-word; }
+
+  /* Padding seguro nos containers */
+  .container { padding: 0 14px; }
+
+  /* Tipografia escalada */
+  .hero h1 { font-size: clamp(1.4em, 6vw, 2em) !important; }
+  .stat-number { font-size: clamp(1.8em, 8vw, 2.8em) !important; }
+
+  /* Botões full-width em mobile */
+  .btn, .cta-btn, .hero-cta a, .hero-cta button {
+    width: 100%;
+    max-width: 320px;
+    display: block;
+    margin: 0 auto 10px;
+    text-align: center;
+  }
+
+  /* Hero CTA em coluna */
+  .hero-cta { flex-direction: column; align-items: center; }
+
+  /* Certificações em coluna */
+  .certifications { flex-direction: column; align-items: center; }
+  .cert-item { width: 100%; max-width: 280px; text-align: center; }
+
+  /* Vídeos */
+  video { width: 100% !important; height: auto !important; }
+
+  /* Cards de docentes */
+  .teacher-photo-wrap, .photo-ring { width: 120px !important; height: 120px !important; }
+}
+
+/* ── MOBILE PEQUENO (≤ 360px) ── */
+@media (max-width: 360px) {
+  .hero h1 { font-size: 1.3em !important; }
+  .hero-badge { font-size: 10px; padding: 6px 12px; }
+  .container { padding: 0 10px; }
+  .func-card, .detail-card, .stat-card { padding: 20px 14px; }
+  .stat-number { font-size: 1.6em !important; }
+}
+
+</style>
+</head>
+<body>
+
+<!-- HERO -->
+<div class="hero">
+  <div class="hero-content">
+    <div class="hero-badge"><i class="fas fa-bullseye"></i> &nbsp;Sistemas Informáticos e Redes</div>
+    <h1><i class="fas fa-crosshairs"></i> Objetivos da Formação</h1>
+    <p>Uma formação completa que prepara profissionais competentes e certificados para os desafios reais do mercado de IT.</p>
+  </div>
+</div>
+
+<!-- INTRO -->
+<div class="container">
+  <div class="intro-section fade-up">
+    <div class="intro-card">
+      <div class="intro-icon"><i class="fas fa-users"></i></div>
+      <div class="intro-text">
+        <p>Esta formação destina-se a atuais ou futuros profissionais da área (<strong>técnicos de informática, programadores</strong>, entre outros), com ou sem experiência, que desejem adquirir, melhorar ou atualizar os seus <strong>conhecimentos e competências técnicas</strong> no âmbito dos <strong>sistemas informáticos e redes</strong>.</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- OBJECTIVES + IMAGE -->
+<div class="container">
+  <div class="objectives-section">
+    <div class="section-label fade-up">
+      <div class="section-label-icon"><i class="fas fa-list-check"></i></div>
+      <span>O Que Vai Aprender</span>
+    </div>
+
+    <div class="objectives-layout">
+
+      <div class="objectives-list-card fade-up delay-1">
+        <div class="objectives-list-header">
+          <i class="fas fa-check-double"></i>
+          <h3>Objetivos Específicos da Formação</h3>
+        </div>
+        <div class="obj-list">
+
+          <div class="obj-item">
+            <div class="obj-dot"><i class="fas fa-check"></i></div>
+            <div class="obj-text">Adquirir uma <strong>base teórica</strong> no campo da informática para poder compreender e aplicar os conceitos práticos.</div>
+          </div>
+
+          <div class="obj-item">
+            <div class="obj-dot"><i class="fas fa-check"></i></div>
+            <div class="obj-text">Conhecer os princípios físicos e lógicos da <strong>administração de um sistema</strong> (hardware e software) e rede informática.</div>
+          </div>
+
+          <div class="obj-item">
+            <div class="obj-dot"><i class="fas fa-check"></i></div>
+            <div class="obj-text">Aprender a <strong>interação dos componentes</strong> de um sistema e rede informática e que conflitos/avarias podem acontecer.</div>
+          </div>
+
+          <div class="obj-item">
+            <div class="obj-dot"><i class="fas fa-check"></i></div>
+            <div class="obj-text">Conhecer <strong>configurações de administração</strong> nos sistemas informáticos e redes.</div>
+          </div>
+
+          <div class="obj-item">
+            <div class="obj-dot"><i class="fas fa-check"></i></div>
+            <div class="obj-text">Compreender como deve ser realizada uma <strong>correta administração</strong>, manutenção e reparação de equipamentos e redes.</div>
+          </div>
+
+          <div class="obj-item">
+            <div class="obj-dot"><i class="fas fa-check"></i></div>
+            <div class="obj-text"><strong>Otimizar</strong> equipamentos e redes, aumentando a sua rentabilidade para a empresa.</div>
+          </div>
+
+          <div class="obj-item">
+            <div class="obj-dot"><i class="fas fa-check"></i></div>
+            <div class="obj-text">Desenvolver <strong>configurações de segurança</strong> informática em sistemas e redes.</div>
+          </div>
+
+          <div class="obj-item">
+            <div class="obj-dot"><i class="fas fa-check"></i></div>
+            <div class="obj-text">Administrar a <strong>ligação de equipamentos em rede</strong>.</div>
+          </div>
+
+          <div class="obj-item">
+            <div class="obj-dot"><i class="fas fa-check"></i></div>
+            <div class="obj-text">Administrar as funções e <strong>manutenção de servidores Windows</strong>.</div>
+          </div>
+
+          <div class="obj-item">
+            <div class="obj-dot"><i class="fas fa-check"></i></div>
+            <div class="obj-text">Compreender os <strong>fundamentos das redes Cisco</strong>.</div>
+          </div>
+
+          <div class="obj-item">
+            <div class="obj-dot"><i class="fas fa-check"></i></div>
+            <div class="obj-text">Obter a certificação informática <strong>CompTIA A+</strong>.</div>
+          </div>
+
+        </div>
+      </div>
+
+      <div class="image-card fade-up delay-2">
+        <img src="imagens/Imagem22.jpg" alt="Técnico de IT a trabalhar em sala de servidores" />
+      </div>
+
+    </div>
+  </div>
+</div>
+
+<!-- COMPTIA EXAM -->
+<div class="container">
+  <div class="comptia-section fade-up">
+    <div class="section-label">
+      <div class="section-label-icon"><i class="fas fa-certificate"></i></div>
+      <span>Exame CompTIA A+ Core Series</span>
+    </div>
+
+    <div class="comptia-card">
+      <div class="comptia-header">
+        <div class="comptia-header-icon"><i class="fas fa-award"></i></div>
+        <div>
+          <h2>Conteúdos Abrangidos pelo Exame CompTIA A+</h2>
+          <p>O exame exige aprovação em dois exames cobrindo as tecnologias e competências essenciais para profissionais de IT</p>
+        </div>
+      </div>
+      <div class="comptia-body">
+        <div class="comptia-item">
+          <i class="fas fa-cloud"></i>
+          <span>Dominar aplicativos <strong>SaaS</strong> para trabalho remoto e ambientes híbridos</span>
+        </div>
+        <div class="comptia-item">
+          <i class="fas fa-screwdriver-wrench"></i>
+          <span>Solução de problemas e diagnóstico remoto de <strong>software, hardware e conectividade</strong></span>
+        </div>
+        <div class="comptia-item">
+          <i class="fas fa-shield-halved"></i>
+          <span>Tecnologias de <strong>virtualização em cloud</strong> e segurança de dispositivos IoT</span>
+        </div>
+        <div class="comptia-item">
+          <i class="fas fa-laptop"></i>
+          <span>Dominar os vários <strong>sistemas operativos</strong> encontrados pelos técnicos regularmente</span>
+        </div>
+        <div class="comptia-item">
+          <i class="fas fa-arrows-spin"></i>
+          <span>Refletir a <strong>natureza mutável da função</strong> de trabalho no ambiente digital atual</span>
+        </div>
+        <div class="comptia-item">
+          <i class="fas fa-balance-scale"></i>
+          <span>Avaliar se é melhor <strong>reparar no local</strong> ou enviar a fornecedores especializados</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- BOTTOM BANNER -->
+<div class="container">
+  <div class="bottom-section fade-up">
+    <div class="bottom-card">
+      <div class="bottom-icon">🎯</div>
+      <div class="bottom-text">
+        <h2>Formação com Propósito e Direção</h2>
+        <p>Com objetivos claros e um programa estruturado, esta formação garante que ao terminar está preparado para atuar com competência e confiança em qualquer ambiente de IT — e com a certificação CompTIA A+ para o provar.</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+const observer = new IntersectionObserver((entries) => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting) entry.target.classList.add('visible');
+  });
+}, { threshold: 0.08 });
+
+document.querySelectorAll('.fade-up').forEach(el => observer.observe(el));
+</script>
+</body>
+</html>

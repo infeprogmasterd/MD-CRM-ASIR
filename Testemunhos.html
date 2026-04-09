@@ -1,0 +1,785 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>MasterD – Testemunhos dos Formandos</title>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+<style>
+* { margin: 0; padding: 0; box-sizing: border-box; }
+
+:root {
+  --orange:      #e67e22;
+  --orange-dark: #d35400;
+  --dark:        #2c3e50;
+  --darker:      #1a252f;
+  --text:        #444;
+  --text-light:  #666;
+  --white:       #ffffff;
+}
+
+html { scroll-behavior: smooth; }
+
+body {
+  background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+  font-family: 'Inter', sans-serif;
+  min-height: 100vh;
+  overflow-x: hidden;
+  color: var(--text);
+}
+
+/* ── FADE UP ─────────────────────────────────────── */
+.fade-up {
+  opacity: 0;
+  transform: translateY(24px);
+  transition: opacity 0.65s ease, transform 0.65s ease;
+}
+.fade-up.visible { opacity: 1; transform: translateY(0); }
+.delay-1 { transition-delay: 0.08s; }
+.delay-2 { transition-delay: 0.16s; }
+.delay-3 { transition-delay: 0.24s; }
+
+/* ── HERO ─────────────────────────────────────────── */
+.hero {
+  background: linear-gradient(135deg, var(--orange) 0%, var(--orange-dark) 100%);
+  color: #fff;
+  padding: 80px 20px 110px;
+  text-align: center;
+  position: relative;
+  overflow: hidden;
+  box-shadow: 0 20px 60px rgba(230,126,34,0.3);
+}
+
+.hero::before {
+  content: '';
+  position: absolute;
+  top: -50%; right: -10%;
+  width: 600px; height: 600px;
+  background: radial-gradient(circle, rgba(255,255,255,0.1) 0%, transparent 70%);
+  border-radius: 50%;
+  animation: float 8s ease-in-out infinite;
+}
+
+.hero::after {
+  content: '';
+  position: absolute;
+  bottom: -2px; left: 0;
+  width: 100%; height: 65px;
+  background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+  clip-path: ellipse(55% 100% at 50% 100%);
+}
+
+@keyframes float {
+  0%,100% { transform: translateY(0); }
+  50%      { transform: translateY(20px); }
+}
+
+.hero-content {
+  position: relative;
+  z-index: 2;
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+.hero-badge {
+  display: inline-block;
+  background: rgba(255,255,255,0.2);
+  padding: 10px 22px;
+  border-radius: 50px;
+  font-size: 13px;
+  font-weight: 600;
+  margin-bottom: 22px;
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(255,255,255,0.3);
+  letter-spacing: 0.5px;
+}
+
+.hero h1 {
+  font-family: 'Poppins', sans-serif;
+  font-size: 3.4em;
+  font-weight: 800;
+  margin-bottom: 18px;
+  text-shadow: 2px 2px 8px rgba(0,0,0,0.2);
+  line-height: 1.2;
+}
+
+.hero p {
+  font-size: 1.2em;
+  opacity: 0.95;
+  font-weight: 300;
+  line-height: 1.7;
+  max-width: 620px;
+  margin: 0 auto;
+}
+
+/* ── CONTAINER ────────────────────────────────────── */
+.container {
+  max-width: 1000px;
+  margin: 0 auto;
+  padding: 0 20px;
+}
+
+/* ── INTRO ─────────────────────────────────────────── */
+.intro-section { margin: 60px 0 50px; }
+
+.intro-card {
+  background: var(--white);
+  border-radius: 16px;
+  padding: 44px 48px;
+  box-shadow: 0 10px 40px rgba(0,0,0,0.08);
+  position: relative;
+  overflow: hidden;
+  text-align: center;
+}
+
+.intro-card::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  height: 5px;
+  background: linear-gradient(90deg, var(--orange), var(--orange-dark));
+  border-radius: 16px 16px 0 0;
+}
+
+.intro-icon {
+  width: 72px; height: 72px;
+  background: linear-gradient(135deg, var(--orange), var(--orange-dark));
+  border-radius: 50%;
+  display: flex;
+  flex-wrap: wrap; align-items: center; justify-content: center;
+  font-size: 28px;
+  color: #fff;
+  margin: 0 auto 22px;
+  box-shadow: 0 8px 28px rgba(230,126,34,0.35);
+}
+
+.intro-card p {
+  font-size: 16px;
+  line-height: 1.9;
+  color: var(--text);
+  max-width: 680px;
+  margin: 0 auto;
+}
+
+.intro-card strong { color: var(--orange); font-weight: 600; }
+
+/* ── FEATURED VIDEO ──────────────────────────────── */
+.featured-section { margin: 0 0 50px; }
+
+.section-label {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 14px;
+  margin-bottom: 28px;
+}
+
+.section-label-icon {
+  width: 44px; height: 44px;
+  background: linear-gradient(135deg, var(--orange), var(--orange-dark));
+  border-radius: 12px;
+  display: flex;
+  flex-wrap: wrap; align-items: center; justify-content: center;
+  color: #fff;
+  font-size: 18px;
+  flex-shrink: 0;
+}
+
+.section-label span {
+  font-family: 'Poppins', sans-serif;
+  font-size: 1.55em;
+  font-weight: 700;
+  color: var(--dark);
+}
+
+.featured-card {
+  background: var(--white);
+  border-radius: 16px;
+  overflow: hidden;
+  box-shadow: 0 14px 50px rgba(0,0,0,0.1);
+}
+
+.featured-header {
+  background: linear-gradient(135deg, var(--dark), var(--darker));
+  padding: 28px 36px;
+  color: #fff;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 18px;
+  position: relative;
+  overflow: hidden;
+}
+
+.featured-header::before {
+  content: '';
+  position: absolute;
+  right: -40px; top: -40px;
+  width: 160px; height: 160px;
+  background: radial-gradient(circle, rgba(230,126,34,0.2) 0%, transparent 70%);
+  border-radius: 50%;
+}
+
+.featured-avatar {
+  width: 56px; height: 56px;
+  background: linear-gradient(135deg, var(--orange), var(--orange-dark));
+  border-radius: 50%;
+  display: flex;
+  flex-wrap: wrap; align-items: center; justify-content: center;
+  font-size: 22px;
+  flex-shrink: 0;
+  box-shadow: 0 4px 16px rgba(230,126,34,0.4);
+}
+
+.featured-info h3 {
+  font-family: 'Poppins', sans-serif;
+  font-size: 1.1em;
+  font-weight: 700;
+}
+
+.featured-info p {
+  font-size: 13px;
+  opacity: 0.8;
+  margin-top: 4px;
+}
+
+.featured-tag {
+  margin-left: auto;
+  background: rgba(230,126,34,0.25);
+  border: 1px solid rgba(230,126,34,0.5);
+  color: var(--orange);
+  font-size: 11px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  padding: 6px 14px;
+  border-radius: 50px;
+  flex-shrink: 0;
+}
+
+.video-wrapper {
+  position: relative;
+  padding-bottom: 56.25%;
+  height: 0;
+  overflow: hidden;
+  background: #000;
+}
+
+.video-wrapper video {
+  position: absolute;
+  top: 0; left: 0;
+  width: 100%;
+  height: 100%;
+  display: block;
+}
+
+/* ── TESTIMONIALS GRID ───────────────────────────── */
+.grid-section { margin: 0 0 70px; }
+
+.testimonials-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 28px;
+}
+
+.testimonial-card {
+  background: var(--white);
+  border-radius: 16px;
+  overflow: hidden;
+  box-shadow: 0 8px 30px rgba(0,0,0,0.09);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.testimonial-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 20px 55px rgba(230,126,34,0.14);
+}
+
+.testimonial-header {
+  background: linear-gradient(135deg, var(--orange), var(--orange-dark));
+  padding: 20px 26px;
+  color: #fff;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 14px;
+}
+
+.t-avatar {
+  width: 44px; height: 44px;
+  background: rgba(255,255,255,0.2);
+  border-radius: 50%;
+  display: flex;
+  flex-wrap: wrap; align-items: center; justify-content: center;
+  font-size: 18px;
+  flex-shrink: 0;
+  border: 2px solid rgba(255,255,255,0.35);
+}
+
+.t-info h3 {
+  font-family: 'Poppins', sans-serif;
+  font-size: 0.95em;
+  font-weight: 700;
+  line-height: 1.3;
+}
+
+.t-info p {
+  font-size: 12px;
+  opacity: 0.85;
+  margin-top: 3px;
+}
+
+.t-video-wrapper {
+  position: relative;
+  padding-bottom: 56.25%;
+  height: 0;
+  overflow: hidden;
+  background: #111;
+}
+
+.t-video-wrapper video {
+  position: absolute;
+  top: 0; left: 0;
+  width: 100%;
+  height: 100%;
+  display: block;
+}
+
+/* ── QUOTE STRIP ─────────────────────────────────── */
+.quote-strip {
+  background: linear-gradient(135deg, var(--orange) 0%, var(--orange-dark) 100%);
+  border-radius: 16px;
+  padding: 44px 48px;
+  text-align: center;
+  margin: 0 0 50px;
+  box-shadow: 0 14px 50px rgba(230,126,34,0.28);
+  color: #fff;
+  position: relative;
+  overflow: hidden;
+}
+
+.quote-strip::before {
+  content: '\201C';
+  position: absolute;
+  top: -20px; left: 20px;
+  font-family: 'Poppins', sans-serif;
+  font-size: 160px;
+  font-weight: 800;
+  opacity: 0.1;
+  line-height: 1;
+}
+
+.quote-strip p {
+  font-family: 'Poppins', sans-serif;
+  font-size: 1.3em;
+  font-weight: 600;
+  line-height: 1.6;
+  max-width: 680px;
+  margin: 0 auto;
+  position: relative;
+  z-index: 1;
+}
+
+.quote-strip span {
+  display: block;
+  font-size: 0.7em;
+  font-weight: 400;
+  opacity: 0.85;
+  margin-top: 14px;
+}
+
+/* ── STATS ───────────────────────────────────────── */
+.stats-section { margin: 0 0 70px; }
+
+.stats-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 22px;
+}
+
+.stat-card {
+  background: var(--white);
+  border-radius: 14px;
+  padding: 32px 22px;
+  text-align: center;
+  box-shadow: 0 8px 28px rgba(0,0,0,0.07);
+  border-top: 4px solid var(--orange);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.stat-card:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 18px 50px rgba(230,126,34,0.15);
+}
+
+.stat-number {
+  font-family: 'Poppins', sans-serif;
+  font-size: 2.4em;
+  font-weight: 800;
+  color: var(--orange);
+  margin-bottom: 8px;
+  line-height: 1;
+}
+
+.stat-label {
+  font-size: 13px;
+  color: var(--text-light);
+  font-weight: 500;
+  line-height: 1.5;
+}
+
+/* ── RESPONSIVE ──────────────────────────────────── */
+@media (max-width: 768px) {
+  .hero { padding: 55px 20px 90px; }
+  .hero h1 { font-size: 2.1em; }
+  .hero p  { font-size: 1em; }
+
+  .intro-card { padding: 32px 22px; }
+
+  .featured-header { flex-wrap: wrap; gap: 12px; }
+  .featured-tag { margin-left: 0; }
+
+  .testimonials-grid { grid-template-columns: 1fr; }
+
+  .stats-grid { grid-template-columns: 1fr 1fr; }
+
+  .quote-strip { padding: 36px 28px; }
+  .quote-strip p { font-size: 1.1em; }
+}
+
+@media (max-width: 480px) {
+  .hero { padding: 40px 16px 80px; }
+  .hero h1 { font-size: 1.65em; }
+  .hero-badge { font-size: 11px; padding: 8px 16px; }
+
+  .intro-card { padding: 26px 18px; }
+  .intro-icon { width: 56px; height: 56px; font-size: 22px; }
+
+  .featured-header { padding: 20px 20px; }
+  .testimonial-header { padding: 16px 20px; }
+
+  .stats-grid { grid-template-columns: 1fr 1fr; gap: 14px; }
+  .stat-card { padding: 24px 14px; }
+  .stat-number { font-size: 1.9em; }
+
+  .quote-strip { padding: 28px 20px; }
+  .quote-strip p { font-size: 1em; }
+
+  .section-label span { font-size: 1.2em; }
+}
+
+/* ═══════════════════════════════════════════════════════════
+   RESPONSIVE GLOBAL PATCH — garante compatibilidade total
+   ═══════════════════════════════════════════════════════════ */
+
+/* Imagens e vídeos sempre fluidos */
+img, video, iframe {
+  max-width: 100%;
+  height: auto;
+}
+
+/* Todos os flex containers com wrap por defeito */
+[class*="card"]:not(.func-icon):not(.detail-icon):not(.stat-icon):not(.bottom-icon):not(.comptia-icon):not(.intro-icon):not(.section-label-icon):not(.format-header-icon):not(.modality-header-icon):not(.split-card-header),
+[class*="grid"]:not(.functions-grid):not(.functions-grid-bottom):not(.stats-grid):not(.detail-grid):not(.trust-grid):not(.footer-content) {
+  min-width: 0;
+}
+
+/* Breakpoint extra: tablet grande (769px – 1024px) */
+@media (max-width: 1024px) and (min-width: 769px) {
+  .container { padding: 0 28px; }
+  [class*="-grid"] { gap: 18px; }
+}
+
+/* ── TABLET (≤ 768px) — reforço global ── */
+@media (max-width: 768px) {
+  /* Grids: forçar 1 coluna ou 2 no máximo */
+  .functions-grid,
+  .detail-grid,
+  .trust-grid,
+  .footer-content,
+  .modulos-grid,
+  .main-grid,
+  .cert-layout,
+  .objectives-layout,
+  .social-grid,
+  .stats-grid,
+  [class$="-grid"] {
+    grid-template-columns: 1fr 1fr !important;
+    gap: 16px;
+  }
+
+  /* Flex containers: empilhar em coluna */
+  .intro-card,
+  .bottom-card,
+  .comptia-card,
+  .bolsa-card,
+  .access-card,
+  .cursos-card,
+  .commitment-card,
+  .iso-card,
+  .modality-body,
+  .format-body,
+  .split-card-body,
+  .campus-card,
+  .acesso-card {
+    flex-direction: column !important;
+    align-items: flex-start;
+  }
+
+  /* Ícones centralizados quando em coluna */
+  .intro-icon, .bottom-icon, .comptia-icon, .section-label-icon,
+  .intro-icon-wrap, .diploma-header-icon, .modality-header-icon,
+  .format-header-icon, .split-card-header {
+    margin: 0 auto;
+  }
+
+  /* Texto centrado nos banners */
+  .bottom-card, .comptia-card { text-align: center; }
+
+  /* Vídeos responsivos */
+  video { width: 100% !important; }
+}
+
+/* ── MOBILE (≤ 480px) — reforço global ── */
+@media (max-width: 480px) {
+  /* Todos os grids em 1 coluna */
+  .functions-grid,
+  .functions-grid-bottom,
+  .detail-grid,
+  .trust-grid,
+  .footer-content,
+  .modulos-grid,
+  .main-grid,
+  .cert-layout,
+  .objectives-layout,
+  .social-grid,
+  .stats-grid,
+  [class$="-grid"],
+  .certifications {
+    grid-template-columns: 1fr !important;
+    gap: 14px;
+  }
+
+  /* Stat cards em coluna */
+  .stat-card {
+    flex-direction: column;
+    text-align: center;
+    align-items: center;
+  }
+
+  /* Garantir que nenhum elemento transborde */
+  * { max-width: 100%; word-break: break-word; }
+
+  /* Padding seguro nos containers */
+  .container { padding: 0 14px; }
+
+  /* Tipografia escalada */
+  .hero h1 { font-size: clamp(1.4em, 6vw, 2em) !important; }
+  .stat-number { font-size: clamp(1.8em, 8vw, 2.8em) !important; }
+
+  /* Botões full-width em mobile */
+  .btn, .cta-btn, .hero-cta a, .hero-cta button {
+    width: 100%;
+    max-width: 320px;
+    display: block;
+    margin: 0 auto 10px;
+    text-align: center;
+  }
+
+  /* Hero CTA em coluna */
+  .hero-cta { flex-direction: column; align-items: center; }
+
+  /* Certificações em coluna */
+  .certifications { flex-direction: column; align-items: center; }
+  .cert-item { width: 100%; max-width: 280px; text-align: center; }
+
+  /* Vídeos */
+  video { width: 100% !important; height: auto !important; }
+
+  /* Cards de docentes */
+  .teacher-photo-wrap, .photo-ring { width: 120px !important; height: 120px !important; }
+}
+
+/* ── MOBILE PEQUENO (≤ 360px) ── */
+@media (max-width: 360px) {
+  .hero h1 { font-size: 1.3em !important; }
+  .hero-badge { font-size: 10px; padding: 6px 12px; }
+  .container { padding: 0 10px; }
+  .func-card, .detail-card, .stat-card { padding: 20px 14px; }
+  .stat-number { font-size: 1.6em !important; }
+}
+
+</style>
+</head>
+<body>
+
+<!-- HERO -->
+<div class="hero">
+  <div class="hero-content">
+    <div class="hero-badge"><i class="fas fa-star"></i> &nbsp;Histórias Reais de Sucesso</div>
+    <h1><i class="fas fa-quote-left"></i> Testemunhos dos Formandos</h1>
+    <p>Conhece as histórias de quem já percorreu este caminho — formandos reais que transformaram a sua carreira com a MasterD.</p>
+  </div>
+</div>
+
+<!-- INTRO -->
+<div class="container">
+  <div class="intro-section fade-up">
+    <div class="intro-card">
+      <div class="intro-icon"><i class="fas fa-users"></i></div>
+      <p>Nada é mais convincente do que quem já viveu a experiência. Conhece os <strong>testemunhos reais</strong> dos nossos formandos — as suas histórias, os seus desafios e como a <strong>formação MasterD</strong> transformou as suas carreiras e os ajudou a <strong>entrar no mundo da Informática</strong>.</p>
+    </div>
+  </div>
+</div>
+
+<!-- FEATURED VIDEO -->
+<div class="container">
+  <div class="featured-section fade-up">
+    <div class="section-label">
+      <div class="section-label-icon"><i class="fas fa-play"></i></div>
+      <span>Em Destaque</span>
+    </div>
+
+    <div class="featured-card">
+      <div class="featured-header">
+        <div class="featured-avatar"><i class="fas fa-user"></i></div>
+        <div class="featured-info">
+          <h3>Queres trabalhar em Informática?</h3>
+          <p>Opiniões dos nossos formandos MasterD</p>
+        </div>
+        <div class="featured-tag"><i class="fas fa-fire"></i> &nbsp;Destaque</div>
+      </div>
+      <div class="video-wrapper">
+        <video controls preload="metadata">
+          <source src="imagens/video_opinioes.mkv" type="video/mp4">
+          <source src="imagens/video_opinioes.mkv" type="video/webm">
+        </video>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- QUOTE STRIP -->
+<div class="container">
+  <div class="quote-strip fade-up">
+    <p>
+      "A formação MasterD abriu-me as portas para uma carreira que eu nunca imaginei ser possível. O suporte da equipa e os conteúdos práticos fizeram toda a diferença."
+      <span>— Testemunho de um formando MasterD</span>
+    </p>
+  </div>
+</div>
+
+<!-- TESTIMONIALS GRID -->
+<div class="container">
+  <div class="grid-section">
+    <div class="section-label fade-up">
+      <div class="section-label-icon"><i class="fas fa-video"></i></div>
+      <span>Histórias dos Nossos Formandos</span>
+    </div>
+
+    <div class="testimonials-grid">
+
+      <!-- Marco Costa -->
+      <div class="testimonial-card fade-up delay-1">
+        <div class="testimonial-header">
+          <div class="t-avatar"><i class="fas fa-user"></i></div>
+          <div class="t-info">
+            <h3>Marco Costa</h3>
+            <p>Descobriu a sua profissão e já trabalha em informática</p>
+          </div>
+        </div>
+        <div class="t-video-wrapper">
+          <video controls preload="metadata">
+            <source src="imagens/video_marco_costa.mkv" type="video/mp4">
+            <source src="imagens/video_marco_costa.mkv" type="video/webm">
+          </video>
+        </div>
+      </div>
+
+      <!-- Rodrigo Enes -->
+      <div class="testimonial-card fade-up delay-2">
+        <div class="testimonial-header">
+          <div class="t-avatar"><i class="fas fa-user"></i></div>
+          <div class="t-info">
+            <h3>Rodrigo Enes</h3>
+            <p>Trabalha em manutenção e reparação de computadores</p>
+          </div>
+        </div>
+        <div class="t-video-wrapper">
+          <video controls preload="metadata">
+            <source src="imagens/video_rodrigo_enes.mkv" type="video/mp4">
+            <source src="imagens/video_rodrigo_enes.mkv" type="video/webm">
+          </video>
+        </div>
+      </div>
+
+      <!-- Miguel Carrasco -->
+      <div class="testimonial-card fade-up delay-1">
+        <div class="testimonial-header">
+          <div class="t-avatar"><i class="fas fa-user"></i></div>
+          <div class="t-info">
+            <h3>Miguel Carrasco</h3>
+            <p>Licenciado em Engenharia que complementou a formação</p>
+          </div>
+        </div>
+        <div class="t-video-wrapper">
+          <video controls preload="metadata">
+            <source src="imagens/video_miguel_carrasco.mkv" type="video/mp4">
+            <source src="imagens/video_miguel_carrasco.mkv" type="video/webm">
+          </video>
+        </div>
+      </div>
+
+      <!-- Diego Soares -->
+      <div class="testimonial-card fade-up delay-2">
+        <div class="testimonial-header">
+          <div class="t-avatar"><i class="fas fa-user"></i></div>
+          <div class="t-info">
+            <h3>Diego Soares</h3>
+            <p>Trocou a Economia pela Informática — reparação de computadores</p>
+          </div>
+        </div>
+        <div class="t-video-wrapper">
+          <video controls preload="metadata">
+            <source src="imagens/video_diego_soares.mkv" type="video/mp4">
+            <source src="imagens/video_diego_soares.mkv" type="video/webm">
+          </video>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+<!-- STATS -->
+<div class="container">
+  <div class="stats-section">
+    <div class="stats-grid">
+      <div class="stat-card fade-up delay-1">
+        <div class="stat-number">500+</div>
+        <div class="stat-label">Alunos formados com sucesso</div>
+      </div>
+      <div class="stat-card fade-up delay-2">
+        <div class="stat-number">92%</div>
+        <div class="stat-label">Taxa de empregabilidade nos primeiros 6 meses</div>
+      </div>
+      <div class="stat-card fade-up delay-3">
+        <div class="stat-number">91%</div>
+        <div class="stat-label">Índice geral de satisfação dos formandos</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+const observer = new IntersectionObserver((entries) => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting) entry.target.classList.add('visible');
+  });
+}, { threshold: 0.08 });
+
+document.querySelectorAll('.fade-up').forEach(el => observer.observe(el));
+</script>
+</body>
+</html>

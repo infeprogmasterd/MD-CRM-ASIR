@@ -1,0 +1,821 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>MasterD – Vantagens para os Formandos</title>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+<style>
+* { margin: 0; padding: 0; box-sizing: border-box; }
+
+:root {
+  --orange:      #e67e22;
+  --orange-dark: #d35400;
+  --red:         #c0392b;
+  --red-dark:    #96281b;
+  --dark:        #2c3e50;
+  --darker:      #1a252f;
+  --text:        #444;
+  --text-light:  #666;
+  --white:       #ffffff;
+}
+
+html { scroll-behavior: smooth; }
+
+body {
+  background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+  font-family: 'Inter', sans-serif;
+  min-height: 100vh;
+  overflow-x: hidden;
+  color: var(--text);
+}
+
+/* ── FADE UP ─────────────────────────────────────── */
+.fade-up {
+  opacity: 0;
+  transform: translateY(24px);
+  transition: opacity 0.65s ease, transform 0.65s ease;
+}
+.fade-up.visible { opacity: 1; transform: translateY(0); }
+.delay-1 { transition-delay: 0.08s; }
+.delay-2 { transition-delay: 0.16s; }
+.delay-3 { transition-delay: 0.24s; }
+.delay-4 { transition-delay: 0.32s; }
+.delay-5 { transition-delay: 0.40s; }
+
+/* ── HERO ─────────────────────────────────────────── */
+.hero {
+  background: linear-gradient(135deg, var(--orange) 0%, var(--orange-dark) 100%);
+  color: #fff;
+  padding: 80px 20px 110px;
+  text-align: center;
+  position: relative;
+  overflow: hidden;
+  box-shadow: 0 20px 60px rgba(230,126,34,0.3);
+}
+
+.hero::before {
+  content: '';
+  position: absolute;
+  top: -50%; right: -10%;
+  width: 600px; height: 600px;
+  background: radial-gradient(circle, rgba(255,255,255,0.1) 0%, transparent 70%);
+  border-radius: 50%;
+  animation: float 8s ease-in-out infinite;
+}
+
+.hero::after {
+  content: '';
+  position: absolute;
+  bottom: -2px; left: 0;
+  width: 100%; height: 65px;
+  background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+  clip-path: ellipse(55% 100% at 50% 100%);
+}
+
+@keyframes float {
+  0%,100% { transform: translateY(0); }
+  50%      { transform: translateY(20px); }
+}
+
+.hero-content {
+  position: relative;
+  z-index: 2;
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+.hero-badge {
+  display: inline-block;
+  background: rgba(255,255,255,0.2);
+  padding: 10px 22px;
+  border-radius: 50px;
+  font-size: 13px;
+  font-weight: 600;
+  margin-bottom: 22px;
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(255,255,255,0.3);
+  letter-spacing: 0.5px;
+}
+
+.hero h1 {
+  font-family: 'Poppins', sans-serif;
+  font-size: 3.2em;
+  font-weight: 800;
+  margin-bottom: 18px;
+  text-shadow: 2px 2px 8px rgba(0,0,0,0.2);
+  line-height: 1.2;
+}
+
+.hero p {
+  font-size: 1.2em;
+  opacity: 0.95;
+  font-weight: 300;
+  line-height: 1.7;
+  max-width: 620px;
+  margin: 0 auto;
+}
+
+/* ── CONTAINER ────────────────────────────────────── */
+.container {
+  max-width: 1000px;
+  margin: 0 auto;
+  padding: 0 20px;
+}
+
+/* ── VANTAGENS GRID ──────────────────────────────── */
+.vantagens-section { margin: 60px 0 50px; }
+
+.vantagens-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 22px;
+}
+
+.vantagem-card {
+  background: var(--white);
+  border-radius: 16px;
+  padding: 34px 28px;
+  box-shadow: 0 8px 28px rgba(0,0,0,0.07);
+  text-align: center;
+  position: relative;
+  overflow: hidden;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.vantagem-card:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 20px 55px rgba(230,126,34,0.15);
+}
+
+.vantagem-card::after {
+  content: '';
+  position: absolute;
+  bottom: 0; left: 0;
+  width: 100%; height: 4px;
+  background: linear-gradient(90deg, var(--orange), var(--orange-dark));
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform 0.4s ease;
+}
+
+.vantagem-card:hover::after { transform: scaleX(1); }
+
+.vantagem-icon {
+  width: 64px; height: 64px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, rgba(230,126,34,0.1), rgba(230,126,34,0.04));
+  display: flex;
+  flex-wrap: wrap; align-items: center; justify-content: center;
+  font-size: 26px;
+  color: var(--orange);
+  margin: 0 auto 18px;
+  transition: all 0.3s ease;
+}
+
+.vantagem-card:hover .vantagem-icon {
+  background: linear-gradient(135deg, var(--orange), var(--orange-dark));
+  color: #fff;
+  transform: scale(1.08);
+}
+
+.vantagem-card h3 {
+  font-family: 'Poppins', sans-serif;
+  font-size: 1em;
+  font-weight: 700;
+  color: var(--dark);
+  margin-bottom: 10px;
+}
+
+.vantagem-card p {
+  font-size: 13.5px;
+  line-height: 1.75;
+  color: var(--text-light);
+}
+
+/* ── SECTION LABEL ───────────────────────────────── */
+.section-label {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 14px;
+  margin-bottom: 28px;
+}
+
+.section-label-icon {
+  width: 44px; height: 44px;
+  background: linear-gradient(135deg, var(--orange), var(--orange-dark));
+  border-radius: 12px;
+  display: flex;
+  flex-wrap: wrap; align-items: center; justify-content: center;
+  color: #fff;
+  font-size: 18px;
+  flex-shrink: 0;
+}
+
+.section-label span {
+  font-family: 'Poppins', sans-serif;
+  font-size: 1.55em;
+  font-weight: 700;
+  color: var(--dark);
+}
+
+/* ── COMPTIA CARD ────────────────────────────────── */
+.comptia-section { margin: 0 0 50px; }
+
+.comptia-card {
+  background: var(--white);
+  border-radius: 16px;
+  overflow: hidden;
+  box-shadow: 0 10px 40px rgba(0,0,0,0.09);
+  display: grid;
+  grid-template-columns: 280px 1fr;
+}
+
+.comptia-left {
+  background: linear-gradient(160deg, #c0392b 0%, #7b241c 100%);
+  padding: 50px 32px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 18px;
+  position: relative;
+  overflow: hidden;
+}
+
+.comptia-left::before {
+  content: '';
+  position: absolute;
+  bottom: -60px; right: -60px;
+  width: 220px; height: 220px;
+  background: rgba(255,255,255,0.06);
+  border-radius: 50%;
+}
+
+.comptia-left::after {
+  content: '';
+  position: absolute;
+  top: -30px; left: -30px;
+  width: 120px; height: 120px;
+  background: rgba(255,255,255,0.04);
+  border-radius: 50%;
+}
+
+.comptia-badge-img {
+  width: 160px;
+  height: auto;
+  filter: drop-shadow(0 8px 24px rgba(0,0,0,0.3));
+  transition: transform 0.4s ease;
+  position: relative;
+  z-index: 1;
+}
+
+.comptia-left:hover .comptia-badge-img {
+  transform: scale(1.08) rotate(-3deg);
+}
+
+.comptia-badge-label {
+  font-family: 'Poppins', sans-serif;
+  font-size: 1em;
+  font-weight: 700;
+  color: #fff;
+  text-align: center;
+  line-height: 1.4;
+  position: relative;
+  z-index: 1;
+}
+
+.comptia-right {
+  padding: 44px 44px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.comptia-tag {
+  display: inline-block;
+  background: linear-gradient(135deg, rgba(192,57,43,0.1), rgba(192,57,43,0.04));
+  border: 1px solid rgba(192,57,43,0.25);
+  color: var(--red);
+  font-size: 11px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  padding: 5px 14px;
+  border-radius: 50px;
+  margin-bottom: 16px;
+  width: fit-content;
+}
+
+.comptia-right h2 {
+  font-family: 'Poppins', sans-serif;
+  font-size: 1.35em;
+  font-weight: 700;
+  color: var(--dark);
+  margin-bottom: 16px;
+  line-height: 1.4;
+}
+
+.comptia-right p {
+  font-size: 14.5px;
+  line-height: 1.85;
+  color: var(--text);
+  margin-bottom: 12px;
+}
+
+.comptia-right strong { color: var(--dark); font-weight: 600; }
+
+.comptia-features {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 11px;
+  margin-top: 22px;
+}
+
+.comptia-feat {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 10px;
+  font-size: 13.5px;
+  color: var(--text);
+  background: rgba(192,57,43,0.04);
+  border: 1px solid rgba(192,57,43,0.12);
+  border-radius: 9px;
+  padding: 10px 14px;
+  transition: background 0.25s ease, border-color 0.25s ease;
+}
+
+.comptia-feat:hover {
+  background: rgba(192,57,43,0.08);
+  border-color: rgba(192,57,43,0.25);
+}
+
+.comptia-feat i {
+  color: var(--red);
+  font-size: 14px;
+  flex-shrink: 0;
+}
+
+/* ── ACESSO EXAME BANNER ─────────────────────────── */
+.acesso-section { margin: 0 0 50px; }
+
+.acesso-card {
+  background: linear-gradient(135deg, var(--dark) 0%, var(--darker) 100%);
+  border-radius: 16px;
+  padding: 46px 48px;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 36px;
+  box-shadow: 0 14px 50px rgba(0,0,0,0.15);
+  color: #fff;
+  position: relative;
+  overflow: hidden;
+}
+
+.acesso-card::before {
+  content: '';
+  position: absolute;
+  right: -60px; top: -60px;
+  width: 260px; height: 260px;
+  background: radial-gradient(circle, rgba(230,126,34,0.18) 0%, transparent 70%);
+  border-radius: 50%;
+}
+
+.acesso-icon {
+  flex-shrink: 0;
+  width: 80px; height: 80px;
+  background: linear-gradient(135deg, var(--orange), var(--orange-dark));
+  border-radius: 50%;
+  display: flex;
+  flex-wrap: wrap; align-items: center; justify-content: center;
+  font-size: 32px;
+  box-shadow: 0 8px 28px rgba(230,126,34,0.4);
+}
+
+.acesso-text h2 {
+  font-family: 'Poppins', sans-serif;
+  font-size: 1.4em;
+  font-weight: 700;
+  margin-bottom: 12px;
+}
+
+.acesso-text p {
+  font-size: 15px;
+  opacity: 0.85;
+  line-height: 1.75;
+  font-weight: 300;
+  max-width: 600px;
+}
+
+.acesso-text strong { color: var(--orange); opacity: 1; font-weight: 600; }
+
+.acesso-steps {
+  display: flex;
+  gap: 20px;
+  flex-wrap: wrap;
+  margin-top: 20px;
+}
+
+.acesso-step {
+  background: rgba(255,255,255,0.1);
+  border: 1px solid rgba(255,255,255,0.2);
+  border-radius: 50px;
+  padding: 8px 18px;
+  font-size: 13px;
+  font-weight: 600;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 8px;
+}
+
+/* ── QUOTE STRIP ─────────────────────────────────── */
+.quote-section { margin: 0 0 70px; }
+
+.quote-card {
+  background: linear-gradient(135deg, var(--orange) 0%, var(--orange-dark) 100%);
+  border-radius: 16px;
+  padding: 50px 56px;
+  text-align: center;
+  box-shadow: 0 14px 50px rgba(230,126,34,0.28);
+  color: #fff;
+  position: relative;
+  overflow: hidden;
+}
+
+.quote-card::before {
+  content: '\201C';
+  position: absolute;
+  top: -30px; left: 16px;
+  font-family: 'Poppins', sans-serif;
+  font-size: 180px;
+  font-weight: 800;
+  opacity: 0.1;
+  line-height: 1;
+}
+
+.quote-card::after {
+  content: '';
+  position: absolute;
+  bottom: -50px; right: -50px;
+  width: 200px; height: 200px;
+  background: rgba(255,255,255,0.07);
+  border-radius: 50%;
+}
+
+.quote-card p {
+  font-family: 'Poppins', sans-serif;
+  font-size: 1.35em;
+  font-weight: 600;
+  line-height: 1.65;
+  max-width: 680px;
+  margin: 0 auto;
+  position: relative;
+  z-index: 1;
+}
+
+.quote-card span {
+  display: block;
+  font-size: 0.7em;
+  font-weight: 400;
+  opacity: 0.85;
+  margin-top: 16px;
+}
+
+/* ── RESPONSIVE ──────────────────────────────────── */
+@media (max-width: 800px) {
+  .comptia-card { grid-template-columns: 1fr; }
+  .comptia-left { padding: 36px 28px; }
+  .comptia-right { padding: 32px 28px; }
+  .comptia-features { grid-template-columns: 1fr; }
+}
+
+@media (max-width: 768px) {
+  .hero { padding: 55px 20px 90px; }
+  .hero h1 { font-size: 2em; }
+  .hero p  { font-size: 1em; }
+
+  .vantagens-grid { grid-template-columns: 1fr 1fr; }
+
+  .acesso-card { flex-direction: column; padding: 36px 28px; text-align: center; }
+  .acesso-icon { margin: 0 auto; }
+  .acesso-steps { justify-content: center; }
+  .acesso-text p { max-width: 100%; }
+
+  .quote-card { padding: 40px 28px; }
+  .quote-card p { font-size: 1.1em; }
+}
+
+@media (max-width: 480px) {
+  .hero { padding: 40px 16px 80px; }
+  .hero h1 { font-size: 1.6em; }
+  .hero-badge { font-size: 11px; padding: 8px 16px; }
+
+  .vantagens-grid { grid-template-columns: 1fr; gap: 16px; }
+  .vantagem-card { padding: 26px 20px; }
+
+  .comptia-badge-img { width: 120px; }
+  .acesso-card { padding: 28px 20px; }
+  .acesso-icon { width: 60px; height: 60px; font-size: 24px; }
+  .acesso-text h2 { font-size: 1.2em; }
+
+  .quote-card { padding: 32px 20px; }
+  .quote-card::before { font-size: 120px; }
+  .section-label span { font-size: 1.2em; }
+}
+
+/* ═══════════════════════════════════════════════════════════
+   RESPONSIVE GLOBAL PATCH — garante compatibilidade total
+   ═══════════════════════════════════════════════════════════ */
+
+/* Imagens e vídeos sempre fluidos */
+img, video, iframe {
+  max-width: 100%;
+  height: auto;
+}
+
+/* Todos os flex containers com wrap por defeito */
+[class*="card"]:not(.func-icon):not(.detail-icon):not(.stat-icon):not(.bottom-icon):not(.comptia-icon):not(.intro-icon):not(.section-label-icon):not(.format-header-icon):not(.modality-header-icon):not(.split-card-header),
+[class*="grid"]:not(.functions-grid):not(.functions-grid-bottom):not(.stats-grid):not(.detail-grid):not(.trust-grid):not(.footer-content) {
+  min-width: 0;
+}
+
+/* Breakpoint extra: tablet grande (769px – 1024px) */
+@media (max-width: 1024px) and (min-width: 769px) {
+  .container { padding: 0 28px; }
+  [class*="-grid"] { gap: 18px; }
+}
+
+/* ── TABLET (≤ 768px) — reforço global ── */
+@media (max-width: 768px) {
+  /* Grids: forçar 1 coluna ou 2 no máximo */
+  .functions-grid,
+  .detail-grid,
+  .trust-grid,
+  .footer-content,
+  .modulos-grid,
+  .main-grid,
+  .cert-layout,
+  .objectives-layout,
+  .social-grid,
+  .stats-grid,
+  [class$="-grid"] {
+    grid-template-columns: 1fr 1fr !important;
+    gap: 16px;
+  }
+
+  /* Flex containers: empilhar em coluna */
+  .intro-card,
+  .bottom-card,
+  .comptia-card,
+  .bolsa-card,
+  .access-card,
+  .cursos-card,
+  .commitment-card,
+  .iso-card,
+  .modality-body,
+  .format-body,
+  .split-card-body,
+  .campus-card,
+  .acesso-card {
+    flex-direction: column !important;
+    align-items: flex-start;
+  }
+
+  /* Ícones centralizados quando em coluna */
+  .intro-icon, .bottom-icon, .comptia-icon, .section-label-icon,
+  .intro-icon-wrap, .diploma-header-icon, .modality-header-icon,
+  .format-header-icon, .split-card-header {
+    margin: 0 auto;
+  }
+
+  /* Texto centrado nos banners */
+  .bottom-card, .comptia-card { text-align: center; }
+
+  /* Vídeos responsivos */
+  video { width: 100% !important; }
+}
+
+/* ── MOBILE (≤ 480px) — reforço global ── */
+@media (max-width: 480px) {
+  /* Todos os grids em 1 coluna */
+  .functions-grid,
+  .functions-grid-bottom,
+  .detail-grid,
+  .trust-grid,
+  .footer-content,
+  .modulos-grid,
+  .main-grid,
+  .cert-layout,
+  .objectives-layout,
+  .social-grid,
+  .stats-grid,
+  [class$="-grid"],
+  .certifications {
+    grid-template-columns: 1fr !important;
+    gap: 14px;
+  }
+
+  /* Stat cards em coluna */
+  .stat-card {
+    flex-direction: column;
+    text-align: center;
+    align-items: center;
+  }
+
+  /* Garantir que nenhum elemento transborde */
+  * { max-width: 100%; word-break: break-word; }
+
+  /* Padding seguro nos containers */
+  .container { padding: 0 14px; }
+
+  /* Tipografia escalada */
+  .hero h1 { font-size: clamp(1.4em, 6vw, 2em) !important; }
+  .stat-number { font-size: clamp(1.8em, 8vw, 2.8em) !important; }
+
+  /* Botões full-width em mobile */
+  .btn, .cta-btn, .hero-cta a, .hero-cta button {
+    width: 100%;
+    max-width: 320px;
+    display: block;
+    margin: 0 auto 10px;
+    text-align: center;
+  }
+
+  /* Hero CTA em coluna */
+  .hero-cta { flex-direction: column; align-items: center; }
+
+  /* Certificações em coluna */
+  .certifications { flex-direction: column; align-items: center; }
+  .cert-item { width: 100%; max-width: 280px; text-align: center; }
+
+  /* Vídeos */
+  video { width: 100% !important; height: auto !important; }
+
+  /* Cards de docentes */
+  .teacher-photo-wrap, .photo-ring { width: 120px !important; height: 120px !important; }
+}
+
+/* ── MOBILE PEQUENO (≤ 360px) ── */
+@media (max-width: 360px) {
+  .hero h1 { font-size: 1.3em !important; }
+  .hero-badge { font-size: 10px; padding: 6px 12px; }
+  .container { padding: 0 10px; }
+  .func-card, .detail-card, .stat-card { padding: 20px 14px; }
+  .stat-number { font-size: 1.6em !important; }
+}
+
+</style>
+</head>
+<body>
+
+<!-- HERO -->
+<div class="hero">
+  <div class="hero-content">
+    <div class="hero-badge"><i class="fas fa-star"></i> &nbsp;Certificação CompTIA A+</div>
+    <h1><i class="fas fa-trophy"></i> Vantagens para os Formandos</h1>
+    <p>Muito mais do que formação — uma certificação reconhecida mundialmente que transforma a sua carreira em IT.</p>
+  </div>
+</div>
+
+<!-- VANTAGENS GRID -->
+<div class="container">
+  <div class="vantagens-section">
+    <div class="vantagens-grid">
+
+      <div class="vantagem-card fade-up delay-1">
+        <div class="vantagem-icon"><i class="fas fa-certificate"></i></div>
+        <h3>Certificação Internacional</h3>
+        <p>A CompTIA A+ é o padrão da indústria reconhecido globalmente para lançar e consolidar carreiras de TI.</p>
+      </div>
+
+      <div class="vantagem-card fade-up delay-2">
+        <div class="vantagem-icon"><i class="fas fa-screwdriver-wrench"></i></div>
+        <h3>Solucionadores de Problemas</h3>
+        <p>Os profissionais certificados estão preparados para resolver desafios técnicos complexos em qualquer ambiente de trabalho.</p>
+      </div>
+
+      <div class="vantagem-card fade-up delay-3">
+        <div class="vantagem-icon"><i class="fas fa-shield-halved"></i></div>
+        <h3>Segurança e Cloud</h3>
+        <p>Suporte às tecnologias centrais de hoje — desde a segurança informática até à cloud e muito mais.</p>
+      </div>
+
+      <div class="vantagem-card fade-up delay-1">
+        <div class="vantagem-icon"><i class="fas fa-rocket"></i></div>
+        <h3>Lançamento de Carreira</h3>
+        <p>O padrão da indústria para iniciar uma carreira de TI no mundo digital de hoje, com reconhecimento imediato pelos empregadores.</p>
+      </div>
+
+      <div class="vantagem-card fade-up delay-2">
+        <div class="vantagem-icon"><i class="fas fa-building-user"></i></div>
+        <h3>Exame em Centro Certificado</h3>
+        <p>O formando realiza os exames de certificação num dos centros formativos certificadores da MasterD — sem sair da rede de confiança.</p>
+      </div>
+
+      <div class="vantagem-card fade-up delay-3">
+        <div class="vantagem-icon"><i class="fas fa-globe"></i></div>
+        <h3>Validade Mundial</h3>
+        <p>A certificação CompTIA A+ é aceite em mais de 100 países, abrindo portas em qualquer mercado de trabalho internacional.</p>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+<!-- COMPTIA DEEP DIVE -->
+<div class="container">
+  <div class="comptia-section">
+    <div class="section-label fade-up">
+      <div class="section-label-icon"><i class="fas fa-award"></i></div>
+      <span>Certificação CompTIA A+</span>
+    </div>
+
+    <div class="comptia-card fade-up">
+      <div class="comptia-left">
+        <img src="imagens/Comptia.png" alt="CompTIA A+ Certified CE" class="comptia-badge-img" />
+        <div class="comptia-badge-label">Certificação Oficial<br>CompTIA A+</div>
+      </div>
+      <div class="comptia-right">
+        <div class="comptia-tag"><i class="fas fa-globe"></i> &nbsp;Padrão Mundial da Indústria IT</div>
+        <h2>A Certificação que o Mercado Reconhece e Valoriza</h2>
+        <p>Os profissionais certificados pela <strong>CompTIA A+</strong> são <strong>solucionadores de problemas</strong>. Oferecem <strong>suporte às tecnologias</strong> centrais de hoje, desde a <strong>segurança até à cloud</strong> e muito mais.</p>
+        <p>A certificação CompTIA A+ é o <strong>padrão da indústria</strong> para lançar carreiras de TI no mundo digital de hoje — reconhecida por empregadores em todo o mundo como prova de competência técnica real.</p>
+
+        <div class="comptia-features">
+          <div class="comptia-feat">
+            <i class="fas fa-shield-halved"></i>
+            <span>Segurança e Cibersegurança</span>
+          </div>
+          <div class="comptia-feat">
+            <i class="fas fa-cloud"></i>
+            <span>Cloud Computing</span>
+          </div>
+          <div class="comptia-feat">
+            <i class="fas fa-network-wired"></i>
+            <span>Redes e Conectividade</span>
+          </div>
+          <div class="comptia-feat">
+            <i class="fas fa-laptop"></i>
+            <span>Hardware e Software</span>
+          </div>
+          <div class="comptia-feat">
+            <i class="fas fa-headset"></i>
+            <span>Suporte Técnico</span>
+          </div>
+          <div class="comptia-feat">
+            <i class="fas fa-globe"></i>
+            <span>+100 países reconhecem</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ACESSO AO EXAME -->
+<div class="container">
+  <div class="acesso-section fade-up">
+    <div class="acesso-card">
+      <div class="acesso-icon"><i class="fas fa-file-circle-check"></i></div>
+      <div class="acesso-text">
+        <h2>Como Aceder à Certificação CompTIA A+</h2>
+        <p>No final da formação, se assim o pretender, o formando poderá ter acesso aos exames de <strong>Certificação CompTIA A+</strong> (versão em vigor à data da realização do exame). O formando realizará os exames num dos nossos <strong>centros formativos certificadores</strong> — de forma cómoda, segura e acompanhada.</p>
+        <div class="acesso-steps">
+          <div class="acesso-step"><i class="fas fa-graduation-cap"></i> Concluir a formação</div>
+          <div class="acesso-step"><i class="fas fa-file-pen"></i> Inscrição no exame</div>
+          <div class="acesso-step"><i class="fas fa-building"></i> Exame no centro MasterD</div>
+          <div class="acesso-step"><i class="fas fa-certificate"></i> Certificação CompTIA A+</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- QUOTE -->
+<div class="container">
+  <div class="quote-section fade-up">
+    <div class="quote-card">
+      <p>
+        A certificação CompTIA A+ é o ponto de partida ideal para qualquer profissional que queira entrar e crescer no mundo da tecnologia — com credenciais que os empregadores reconhecem e valorizam em todo o mundo.
+        <span>— CompTIA A+ · Padrão da Indústria IT</span>
+      </p>
+    </div>
+  </div>
+</div>
+
+<script>
+const observer = new IntersectionObserver((entries) => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting) entry.target.classList.add('visible');
+  });
+}, { threshold: 0.08 });
+
+document.querySelectorAll('.fade-up').forEach(el => observer.observe(el));
+</script>
+</body>
+</html>

@@ -1,0 +1,792 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>MasterD – Mercado IT em Portugal</title>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+<style>
+* { margin: 0; padding: 0; box-sizing: border-box; }
+
+:root {
+  --orange:      #e67e22;
+  --orange-dark: #d35400;
+  --dark:        #2c3e50;
+  --darker:      #1a252f;
+  --blue:        #2980b9;
+  --blue-dark:   #1f618d;
+  --green:       #27ae60;
+  --text:        #444;
+  --text-light:  #666;
+  --white:       #ffffff;
+}
+
+html { scroll-behavior: smooth; }
+
+body {
+  background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+  font-family: 'Inter', sans-serif;
+  min-height: 100vh;
+  overflow-x: hidden;
+  color: var(--text);
+}
+
+/* ── FADE UP ─────────────────────────────────────── */
+.fade-up {
+  opacity: 0;
+  transform: translateY(24px);
+  transition: opacity 0.65s ease, transform 0.65s ease;
+}
+.fade-up.visible { opacity: 1; transform: translateY(0); }
+.delay-1 { transition-delay: 0.08s; }
+.delay-2 { transition-delay: 0.16s; }
+.delay-3 { transition-delay: 0.24s; }
+.delay-4 { transition-delay: 0.32s; }
+
+/* ── HERO ─────────────────────────────────────────── */
+.hero {
+  background: linear-gradient(135deg, var(--orange) 0%, var(--orange-dark) 100%);
+  color: #fff;
+  padding: 80px 20px 110px;
+  text-align: center;
+  position: relative;
+  overflow: hidden;
+  box-shadow: 0 20px 60px rgba(230,126,34,0.3);
+}
+
+.hero::before {
+  content: '';
+  position: absolute;
+  top: -50%; right: -10%;
+  width: 600px; height: 600px;
+  background: radial-gradient(circle, rgba(255,255,255,0.1) 0%, transparent 70%);
+  border-radius: 50%;
+  animation: float 8s ease-in-out infinite;
+}
+
+.hero::after {
+  content: '';
+  position: absolute;
+  bottom: -2px; left: 0;
+  width: 100%; height: 65px;
+  background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+  clip-path: ellipse(55% 100% at 50% 100%);
+}
+
+@keyframes float {
+  0%,100% { transform: translateY(0); }
+  50%      { transform: translateY(20px); }
+}
+
+.hero-content {
+  position: relative;
+  z-index: 2;
+  max-width: 840px;
+  margin: 0 auto;
+}
+
+.hero-badge {
+  display: inline-block;
+  background: rgba(255,255,255,0.2);
+  padding: 10px 22px;
+  border-radius: 50px;
+  font-size: 13px;
+  font-weight: 600;
+  margin-bottom: 22px;
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(255,255,255,0.3);
+  letter-spacing: 0.5px;
+}
+
+.hero h1 {
+  font-family: 'Poppins', sans-serif;
+  font-size: 3.2em;
+  font-weight: 800;
+  margin-bottom: 18px;
+  text-shadow: 2px 2px 8px rgba(0,0,0,0.2);
+  line-height: 1.2;
+}
+
+.hero p {
+  font-size: 1.2em;
+  opacity: 0.95;
+  font-weight: 300;
+  line-height: 1.7;
+  max-width: 640px;
+  margin: 0 auto;
+}
+
+/* ── CONTAINER ────────────────────────────────────── */
+.container {
+  max-width: 1000px;
+  margin: 0 auto;
+  padding: 0 20px;
+}
+
+/* ── KEY STATS ───────────────────────────────────── */
+.stats-section { margin: 60px 0 50px; }
+
+.stats-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 20px;
+}
+
+.stat-card {
+  background: var(--white);
+  border-radius: 14px;
+  padding: 30px 16px;
+  text-align: center;
+  box-shadow: 0 8px 28px rgba(0,0,0,0.07);
+  border-top: 4px solid var(--orange);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.stat-card:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 18px 50px rgba(230,126,34,0.15);
+}
+
+.stat-number {
+  font-family: 'Poppins', sans-serif;
+  font-size: 2.2em;
+  font-weight: 800;
+  color: var(--orange);
+  line-height: 1;
+  margin-bottom: 8px;
+}
+
+.stat-label {
+  font-size: 12.5px;
+  color: var(--text-light);
+  font-weight: 500;
+  line-height: 1.45;
+}
+
+/* ── SECTION LABEL ───────────────────────────────── */
+.section-label {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 14px;
+  margin-bottom: 28px;
+}
+
+.section-label-icon {
+  width: 44px; height: 44px;
+  background: linear-gradient(135deg, var(--orange), var(--orange-dark));
+  border-radius: 12px;
+  display: flex;
+  flex-wrap: wrap; align-items: center; justify-content: center;
+  color: #fff;
+  font-size: 18px;
+  flex-shrink: 0;
+}
+
+.section-label span {
+  font-family: 'Poppins', sans-serif;
+  font-size: 1.55em;
+  font-weight: 700;
+  color: var(--dark);
+}
+
+/* ── NEWS CARDS ──────────────────────────────────── */
+.news-section { margin: 0 0 50px; }
+
+.news-featured {
+  background: var(--white);
+  border-radius: 16px;
+  overflow: hidden;
+  box-shadow: 0 10px 40px rgba(0,0,0,0.09);
+  margin-bottom: 28px;
+}
+
+.news-source-bar {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 12px;
+  padding: 14px 28px;
+  border-bottom: 1px solid rgba(0,0,0,0.06);
+  background: #fafafa;
+}
+
+.source-logo {
+  height: 22px;
+  width: auto;
+  object-fit: contain;
+}
+
+.source-name {
+  font-family: 'Poppins', sans-serif;
+  font-size: 13px;
+  font-weight: 700;
+  color: var(--dark);
+}
+
+.source-date {
+  margin-left: auto;
+  font-size: 12px;
+  color: var(--text-light);
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 6px;
+}
+
+.news-image {
+  width: 100%;
+  height: auto;
+  display: block;
+}
+
+.news-body {
+  padding: 28px 32px 32px;
+}
+
+.news-tag {
+  display: inline-block;
+  background: linear-gradient(135deg, rgba(230,126,34,0.1), rgba(230,126,34,0.04));
+  border: 1px solid rgba(230,126,34,0.3);
+  color: var(--orange);
+  font-size: 11px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  padding: 5px 13px;
+  border-radius: 50px;
+  margin-bottom: 14px;
+}
+
+.news-body h2 {
+  font-family: 'Poppins', sans-serif;
+  font-size: 1.35em;
+  font-weight: 700;
+  color: var(--dark);
+  margin-bottom: 14px;
+  line-height: 1.4;
+}
+
+.news-body p {
+  font-size: 14.5px;
+  line-height: 1.85;
+  color: var(--text);
+}
+
+.news-body p + p { margin-top: 12px; }
+.news-body strong { color: var(--dark); font-weight: 600; }
+
+.highlight-stat {
+  display: inline-block;
+  background: linear-gradient(135deg, var(--orange), var(--orange-dark));
+  color: #fff;
+  font-family: 'Poppins', sans-serif;
+  font-weight: 700;
+  padding: 2px 10px;
+  border-radius: 6px;
+  font-size: 0.95em;
+}
+
+/* ── NEWS GRID ───────────────────────────────────── */
+.news-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 24px;
+}
+
+.news-card {
+  background: var(--white);
+  border-radius: 16px;
+  overflow: hidden;
+  box-shadow: 0 8px 28px rgba(0,0,0,0.08);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  display: flex;
+  flex-direction: column;
+}
+
+.news-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 18px 50px rgba(0,0,0,0.13);
+}
+
+.news-card .news-source-bar {
+  background: #fafafa;
+}
+
+.news-card-image {
+  width: 100%;
+  display: block;
+  border-bottom: 1px solid rgba(0,0,0,0.06);
+}
+
+.news-card-image img {
+  width: 100%;
+  height: auto;
+  display: block;
+}
+
+.news-card-body {
+  padding: 24px 28px 28px;
+  flex: 1;
+}
+
+.news-card-body .news-tag { margin-bottom: 12px; }
+
+.news-card-body h3 {
+  font-family: 'Poppins', sans-serif;
+  font-size: 1.05em;
+  font-weight: 700;
+  color: var(--dark);
+  margin-bottom: 12px;
+  line-height: 1.45;
+}
+
+.news-card-body p {
+  font-size: 13.5px;
+  line-height: 1.75;
+  color: var(--text);
+}
+
+.news-card-body strong { color: var(--dark); font-weight: 600; }
+
+/* ── OPPORTUNITY BANNER ──────────────────────────── */
+.opportunity-section { margin: 50px 0 70px; }
+
+.opportunity-card {
+  background: linear-gradient(135deg, var(--orange) 0%, var(--orange-dark) 100%);
+  border-radius: 16px;
+  padding: 50px 48px;
+  display: grid;
+  grid-template-columns: 1fr auto;
+  gap: 36px;
+  align-items: center;
+  box-shadow: 0 20px 60px rgba(230,126,34,0.3);
+  color: #fff;
+  position: relative;
+  overflow: hidden;
+}
+
+.opportunity-card::before {
+  content: '';
+  position: absolute;
+  right: -60px; top: -60px;
+  width: 280px; height: 280px;
+  background: radial-gradient(circle, rgba(255,255,255,0.12) 0%, transparent 70%);
+  border-radius: 50%;
+}
+
+.opportunity-card::after {
+  content: '';
+  position: absolute;
+  left: -40px; bottom: -40px;
+  width: 200px; height: 200px;
+  background: radial-gradient(circle, rgba(255,255,255,0.07) 0%, transparent 70%);
+  border-radius: 50%;
+}
+
+.opp-left h2 {
+  font-family: 'Poppins', sans-serif;
+  font-size: 1.6em;
+  font-weight: 800;
+  margin-bottom: 14px;
+  line-height: 1.3;
+  position: relative;
+  z-index: 1;
+}
+
+.opp-left p {
+  font-size: 15px;
+  opacity: 0.92;
+  line-height: 1.75;
+  font-weight: 300;
+  max-width: 560px;
+  position: relative;
+  z-index: 1;
+}
+
+.opp-pills {
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+  margin-top: 20px;
+  position: relative;
+  z-index: 1;
+}
+
+.opp-pill {
+  background: rgba(255,255,255,0.18);
+  border: 1px solid rgba(255,255,255,0.3);
+  border-radius: 50px;
+  padding: 8px 18px;
+  font-size: 13px;
+  font-weight: 600;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 7px;
+  backdrop-filter: blur(8px);
+}
+
+.opp-right {
+  flex-shrink: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+  position: relative;
+  z-index: 1;
+}
+
+.opp-big-num {
+  font-family: 'Poppins', sans-serif;
+  font-size: 5em;
+  font-weight: 800;
+  line-height: 1;
+  text-shadow: 2px 4px 16px rgba(0,0,0,0.2);
+}
+
+.opp-big-label {
+  font-size: 13px;
+  opacity: 0.85;
+  font-weight: 500;
+  text-align: center;
+  max-width: 120px;
+  line-height: 1.4;
+}
+
+/* ── RESPONSIVE ──────────────────────────────────── */
+@media (max-width: 900px) {
+  .stats-grid { grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); }
+}
+
+@media (max-width: 768px) {
+  .hero { padding: 55px 20px 90px; }
+  .hero h1 { font-size: 2em; }
+  .hero p  { font-size: 1em; }
+
+  .news-grid { grid-template-columns: 1fr; }
+
+  .opportunity-card {
+    grid-template-columns: 1fr;
+    padding: 36px 28px;
+    text-align: center;
+  }
+
+  .opp-pills { justify-content: center; }
+  .opp-right { margin: 0 auto; }
+  .opp-left p { max-width: 100%; }
+}
+
+@media (max-width: 480px) {
+  .hero { padding: 40px 16px 80px; }
+  .hero h1 { font-size: 1.6em; }
+  .hero-badge { font-size: 11px; padding: 8px 16px; }
+
+  .stats-grid { grid-template-columns: 1fr 1fr; gap: 14px; }
+  .stat-card { padding: 22px 12px; }
+  .stat-number { font-size: 1.8em; }
+
+  .news-body { padding: 22px 20px 24px; }
+  .news-body h2 { font-size: 1.15em; }
+  .news-source-bar { padding: 12px 20px; }
+
+  .news-card-body { padding: 18px 20px 22px; }
+
+  .opportunity-card { padding: 28px 20px; }
+  .opp-left h2 { font-size: 1.3em; }
+  .opp-big-num { font-size: 3.5em; }
+
+  .section-label span { font-size: 1.2em; }
+}
+
+/* ═══════════════════════════════════════════════════════════
+   RESPONSIVE GLOBAL PATCH — garante compatibilidade total
+   ═══════════════════════════════════════════════════════════ */
+
+/* Imagens e vídeos sempre fluidos */
+img, video, iframe {
+  max-width: 100%;
+  height: auto;
+}
+
+/* Todos os flex containers com wrap por defeito */
+[class*="card"]:not(.func-icon):not(.detail-icon):not(.stat-icon):not(.bottom-icon):not(.comptia-icon):not(.intro-icon):not(.section-label-icon):not(.format-header-icon):not(.modality-header-icon):not(.split-card-header),
+[class*="grid"]:not(.functions-grid):not(.functions-grid-bottom):not(.stats-grid):not(.detail-grid):not(.trust-grid):not(.footer-content) {
+  min-width: 0;
+}
+
+/* Breakpoint extra: tablet grande (769px – 1024px) */
+@media (max-width: 1024px) and (min-width: 769px) {
+  .container { padding: 0 28px; }
+  [class*="-grid"] { gap: 18px; }
+}
+
+/* ── TABLET (≤ 768px) — reforço global ── */
+@media (max-width: 768px) {
+  /* Grids: forçar 1 coluna ou 2 no máximo */
+  .functions-grid,
+  .detail-grid,
+  .trust-grid,
+  .footer-content,
+  .modulos-grid,
+  .main-grid,
+  .cert-layout,
+  .objectives-layout,
+  .social-grid,
+  .stats-grid,
+  [class$="-grid"] {
+    grid-template-columns: 1fr 1fr !important;
+    gap: 16px;
+  }
+
+  /* Flex containers: empilhar em coluna */
+  .intro-card,
+  .bottom-card,
+  .comptia-card,
+  .bolsa-card,
+  .access-card,
+  .cursos-card,
+  .commitment-card,
+  .iso-card,
+  .modality-body,
+  .format-body,
+  .split-card-body,
+  .campus-card,
+  .acesso-card {
+    flex-direction: column !important;
+    align-items: flex-start;
+  }
+
+  /* Ícones centralizados quando em coluna */
+  .intro-icon, .bottom-icon, .comptia-icon, .section-label-icon,
+  .intro-icon-wrap, .diploma-header-icon, .modality-header-icon,
+  .format-header-icon, .split-card-header {
+    margin: 0 auto;
+  }
+
+  /* Texto centrado nos banners */
+  .bottom-card, .comptia-card { text-align: center; }
+
+  /* Vídeos responsivos */
+  video { width: 100% !important; }
+}
+
+/* ── MOBILE (≤ 480px) — reforço global ── */
+@media (max-width: 480px) {
+  /* Todos os grids em 1 coluna */
+  .functions-grid,
+  .functions-grid-bottom,
+  .detail-grid,
+  .trust-grid,
+  .footer-content,
+  .modulos-grid,
+  .main-grid,
+  .cert-layout,
+  .objectives-layout,
+  .social-grid,
+  .stats-grid,
+  [class$="-grid"],
+  .certifications {
+    grid-template-columns: 1fr !important;
+    gap: 14px;
+  }
+
+  /* Stat cards em coluna */
+  .stat-card {
+    flex-direction: column;
+    text-align: center;
+    align-items: center;
+  }
+
+  /* Garantir que nenhum elemento transborde */
+  * { max-width: 100%; word-break: break-word; }
+
+  /* Padding seguro nos containers */
+  .container { padding: 0 14px; }
+
+  /* Tipografia escalada */
+  .hero h1 { font-size: clamp(1.4em, 6vw, 2em) !important; }
+  .stat-number { font-size: clamp(1.8em, 8vw, 2.8em) !important; }
+
+  /* Botões full-width em mobile */
+  .btn, .cta-btn, .hero-cta a, .hero-cta button {
+    width: 100%;
+    max-width: 320px;
+    display: block;
+    margin: 0 auto 10px;
+    text-align: center;
+  }
+
+  /* Hero CTA em coluna */
+  .hero-cta { flex-direction: column; align-items: center; }
+
+  /* Certificações em coluna */
+  .certifications { flex-direction: column; align-items: center; }
+  .cert-item { width: 100%; max-width: 280px; text-align: center; }
+
+  /* Vídeos */
+  video { width: 100% !important; height: auto !important; }
+
+  /* Cards de docentes */
+  .teacher-photo-wrap, .photo-ring { width: 120px !important; height: 120px !important; }
+}
+
+/* ── MOBILE PEQUENO (≤ 360px) ── */
+@media (max-width: 360px) {
+  .hero h1 { font-size: 1.3em !important; }
+  .hero-badge { font-size: 10px; padding: 6px 12px; }
+  .container { padding: 0 10px; }
+  .func-card, .detail-card, .stat-card { padding: 20px 14px; }
+  .stat-number { font-size: 1.6em !important; }
+}
+
+</style>
+</head>
+<body>
+
+<!-- HERO -->
+<div class="hero">
+  <div class="hero-content">
+    <div class="hero-badge"><i class="fas fa-chart-line"></i> &nbsp;Mercado de Trabalho em IT</div>
+    <h1><i class="fas fa-globe"></i> Portugal Lidera na Contratação de IT</h1>
+    <p>O setor tecnológico em Portugal cresce a um ritmo acelerado — e os profissionais qualificados estão cada vez mais em falta. A tua oportunidade é agora.</p>
+  </div>
+</div>
+
+<!-- KEY STATS -->
+<div class="container">
+  <div class="stats-section">
+    <div class="stats-grid">
+      <div class="stat-card fade-up delay-1">
+        <div class="stat-number">+50%</div>
+        <div class="stat-label">Projeção de criação líquida de emprego em IT em 2026</div>
+      </div>
+      <div class="stat-card fade-up delay-2">
+        <div class="stat-number">56%</div>
+        <div class="stat-label">Das empresas pretendem aumentar as equipas de IT</div>
+      </div>
+      <div class="stat-card fade-up delay-3">
+        <div class="stat-number">76%</div>
+        <div class="stat-label">Das empresas têm dificuldade em contratar talento IT</div>
+      </div>
+      <div class="stat-card fade-up delay-4">
+        <div class="stat-number">9º</div>
+        <div class="stat-label">Portugal no ranking mundial de intenções de contratação</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- NOTÍCIAS -->
+<div class="container">
+  <div class="news-section">
+    <div class="section-label fade-up">
+      <div class="section-label-icon"><i class="fas fa-newspaper"></i></div>
+      <span>O Que Diz a Imprensa</span>
+    </div>
+
+    <!-- FEATURED: IT Jobs -->
+    <div class="news-featured fade-up">
+      <div class="news-source-bar">
+        <i class="fas fa-square" style="color:#0066cc; font-size:16px;"></i>
+        <span class="source-name">ITJobs</span>
+        <div class="source-date"><i class="fas fa-calendar-alt"></i> 18 de dezembro de 2025</div>
+      </div>
+      <img src="imagens/IT_jobs.png" alt="IT Jobs – Setor tecnológico em Portugal lidera intenções de contratação no início de 2026" class="news-image" />
+      <div class="news-body">
+        <div class="news-tag"><i class="fas fa-fire"></i> &nbsp;Destaque</div>
+        <h2>Setor tecnológico em Portugal lidera intenções de contratação no início de 2026</h2>
+        <p>De acordo com um estudo da Experis, <span class="highlight-stat">quase 60%</span> das empresas planeiam reforçar equipas, refletindo a aceleração da transformação digital e novos projetos especializados.</p>
+        <p>O setor de IT em Portugal antecipa um crescimento significativo na criação líquida de emprego para o primeiro trimestre de 2026, alcançando uma projeção de <strong>+36%</strong> — um aumento de <strong>19 pontos percentuais</strong> face ao mesmo período do ano anterior, posicionando Portugal como o <strong>nono país com as intenções de contratação mais otimistas</strong>, um ponto percentual acima da média global.</p>
+      </div>
+    </div>
+
+    <!-- GRID: SAPO + TEK 1 -->
+    <div class="news-grid">
+
+      <div class="news-card fade-up delay-1">
+        <div class="news-source-bar">
+          <i class="fas fa-circle" style="color:#00b050; font-size:14px;"></i>
+          <span class="source-name">SAPO Notícias</span>
+          <div class="source-date"><i class="fas fa-calendar-alt"></i> 2026</div>
+        </div>
+        <div class="news-card-image">
+          <img src="imagens/TI_em_Portugal_-_sapo.png" alt="SAPO – Contratações em TI crescem em Portugal e superam média mundial" />
+        </div>
+        <div class="news-card-body">
+          <div class="news-tag"><i class="fas fa-globe"></i> &nbsp;Portugal vs Mundo</div>
+          <h3>Contratações em TI crescem em Portugal e superam média mundial</h3>
+          <p>Para o terceiro trimestre de 2026, o setor tecnológico mantém sinais de forte dinamismo, com a Projeção para a Criação Líquida de Emprego a situar-se nos <strong>+50%</strong> — acima da média global de +45%.</p>
+        </div>
+      </div>
+
+      <div class="news-card fade-up delay-2">
+        <div class="news-source-bar">
+          <i class="fas fa-circle" style="color:#333; font-size:14px;"></i>
+          <span class="source-name">Tek Notícias</span>
+          <div class="source-date"><i class="fas fa-calendar-alt"></i> 2025</div>
+        </div>
+        <div class="news-card-image">
+          <img src="imagens/tek_noticias.jpg" alt="Tek Notícias – Escassez de talento em TI abranda em Portugal" />
+        </div>
+        <div class="news-card-body">
+          <div class="news-tag"><i class="fas fa-magnifying-glass-chart"></i> &nbsp;Análise</div>
+          <h3>Escassez de talento em TI abranda em Portugal, mas 76% das empresas ainda têm dificuldade em contratar</h3>
+          <p>Apesar de alguma melhoria, a procura por profissionais qualificados supera largamente a oferta disponível no mercado português.</p>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- FULL WIDTH: TEK 2 -->
+    <div class="news-featured fade-up" style="margin-top: 24px; margin-bottom: 0;">
+      <div class="news-source-bar">
+        <i class="fas fa-circle" style="color:#333; font-size:14px;"></i>
+        <span class="source-name">Tek Notícias</span>
+        <div class="source-date"><i class="fas fa-calendar-alt"></i> 29 set 2025</div>
+      </div>
+      <img src="imagens/tek_noticias_2.jpg" alt="Tek Notícias – Atrair candidatos qualificados é o maior desafio das empresas em Portugal" class="news-image" />
+      <div class="news-body">
+        <div class="news-tag"><i class="fas fa-triangle-exclamation"></i> &nbsp;Desafio do Mercado</div>
+        <h2>Atrair candidatos qualificados é o maior desafio das empresas em Portugal. IA (ainda) não ajuda</h2>
+        <p>A inteligência artificial ainda não é uma ajuda no recrutamento de talento, que a maior parte das empresas reconhecem ser cada vez mais complicado, mesmo considerando os seus processos de recrutamento bons ou excelentes.</p>
+        <p>Este cenário representa uma <strong>oportunidade única</strong> para quem investe na sua qualificação técnica — profissionais certificados e com competências comprovadas têm cada vez mais vantagem num mercado com escassez de talento.</p>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<!-- OPPORTUNITY BANNER -->
+<div class="container">
+  <div class="opportunity-section fade-up">
+    <div class="opportunity-card">
+      <div class="opp-left">
+        <h2>A Tua Oportunidade no Mercado IT Português</h2>
+        <p>Com <strong>76% das empresas</strong> a ter dificuldade em contratar e o setor a crescer mais de 50% ao ano, nunca houve um momento tão favorável para entrar no mercado de IT em Portugal com uma certificação reconhecida internacionalmente.</p>
+        <div class="opp-pills">
+          <div class="opp-pill"><i class="fas fa-certificate"></i> CompTIA A+ Certified</div>
+          <div class="opp-pill"><i class="fas fa-chart-line"></i> Mercado em crescimento</div>
+          <div class="opp-pill"><i class="fas fa-briefcase"></i> 1500+ empresas parceiras</div>
+        </div>
+      </div>
+      <div class="opp-right">
+        <div class="opp-big-num">+50%</div>
+        <div class="opp-big-label">crescimento do emprego IT em Portugal</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+const observer = new IntersectionObserver((entries) => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting) entry.target.classList.add('visible');
+  });
+}, { threshold: 0.08 });
+
+document.querySelectorAll('.fade-up').forEach(el => observer.observe(el));
+</script>
+</body>
+</html>

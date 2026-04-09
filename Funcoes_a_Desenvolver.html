@@ -1,0 +1,640 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>MasterD – Funções a Desenvolver</title>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+<style>
+* { margin: 0; padding: 0; box-sizing: border-box; }
+
+:root {
+  --orange:      #e67e22;
+  --orange-dark: #d35400;
+  --dark:        #2c3e50;
+  --darker:      #1a252f;
+  --text:        #444;
+  --text-light:  #666;
+  --white:       #ffffff;
+}
+
+html { scroll-behavior: smooth; }
+
+body {
+  background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+  font-family: 'Inter', sans-serif;
+  min-height: 100vh;
+  overflow-x: hidden;
+  color: var(--text);
+}
+
+.fade-up {
+  opacity: 0;
+  transform: translateY(24px);
+  transition: opacity 0.65s ease, transform 0.65s ease;
+}
+.fade-up.visible { opacity: 1; transform: translateY(0); }
+.delay-1 { transition-delay: 0.08s; }
+.delay-2 { transition-delay: 0.16s; }
+.delay-3 { transition-delay: 0.24s; }
+.delay-4 { transition-delay: 0.32s; }
+.delay-5 { transition-delay: 0.40s; }
+.delay-6 { transition-delay: 0.48s; }
+.delay-7 { transition-delay: 0.56s; }
+
+/* ── HERO ─────────────────────────────────────────── */
+.hero {
+  background: linear-gradient(135deg, var(--orange) 0%, var(--orange-dark) 100%);
+  color: #fff;
+  padding: 80px 20px 110px;
+  text-align: center;
+  position: relative;
+  overflow: hidden;
+  box-shadow: 0 20px 60px rgba(230,126,34,0.3);
+}
+
+.hero::before {
+  content: '';
+  position: absolute;
+  top: -50%; right: -10%;
+  width: 600px; height: 600px;
+  background: radial-gradient(circle, rgba(255,255,255,0.1) 0%, transparent 70%);
+  border-radius: 50%;
+  animation: float 8s ease-in-out infinite;
+}
+
+.hero::after {
+  content: '';
+  position: absolute;
+  bottom: -2px; left: 0;
+  width: 100%; height: 65px;
+  background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+  clip-path: ellipse(55% 100% at 50% 100%);
+}
+
+@keyframes float {
+  0%,100% { transform: translateY(0); }
+  50%      { transform: translateY(20px); }
+}
+
+.hero-content {
+  position: relative;
+  z-index: 2;
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+.hero-badge {
+  display: inline-block;
+  background: rgba(255,255,255,0.2);
+  padding: 10px 22px;
+  border-radius: 50px;
+  font-size: 13px;
+  font-weight: 600;
+  margin-bottom: 22px;
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(255,255,255,0.3);
+  letter-spacing: 0.5px;
+}
+
+.hero h1 {
+  font-family: 'Poppins', sans-serif;
+  font-size: 3.2em;
+  font-weight: 800;
+  margin-bottom: 18px;
+  text-shadow: 2px 2px 8px rgba(0,0,0,0.2);
+  line-height: 1.2;
+}
+
+.hero p {
+  font-size: 1.2em;
+  opacity: 0.95;
+  font-weight: 300;
+  line-height: 1.7;
+  max-width: 620px;
+  margin: 0 auto;
+}
+
+/* ── CONTAINER ────────────────────────────────────── */
+.container {
+  max-width: 1000px;
+  margin: 0 auto;
+  padding: 0 20px;
+}
+
+/* ── INTRO ─────────────────────────────────────────── */
+.intro-section { margin: 60px 0 50px; }
+
+.intro-card {
+  background: var(--white);
+  border-radius: 16px;
+  padding: 44px 48px;
+  box-shadow: 0 10px 40px rgba(0,0,0,0.08);
+  position: relative;
+  overflow: hidden;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 32px;
+  align-items: flex-start;
+}
+
+.intro-card::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  height: 5px;
+  background: linear-gradient(90deg, var(--orange), var(--orange-dark));
+  border-radius: 16px 16px 0 0;
+}
+
+.intro-icon {
+  flex-shrink: 0;
+  width: 68px; height: 68px;
+  background: linear-gradient(135deg, var(--orange), var(--orange-dark));
+  border-radius: 50%;
+  display: flex;
+  flex-wrap: wrap; align-items: center; justify-content: center;
+  font-size: 26px;
+  color: #fff;
+  box-shadow: 0 8px 28px rgba(230,126,34,0.35);
+  margin-top: 4px;
+}
+
+.intro-text p {
+  font-size: 15.5px;
+  line-height: 1.9;
+  color: var(--text);
+}
+
+.intro-text strong { color: var(--orange); font-weight: 600; }
+
+/* ── FUNCTIONS GRID ──────────────────────────────── */
+.functions-section { margin: 0 0 50px; }
+
+.section-label {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 14px;
+  margin-bottom: 28px;
+}
+
+.section-label-icon {
+  width: 44px; height: 44px;
+  background: linear-gradient(135deg, var(--orange), var(--orange-dark));
+  border-radius: 12px;
+  display: flex;
+  flex-wrap: wrap; align-items: center; justify-content: center;
+  color: #fff;
+  font-size: 18px;
+  flex-shrink: 0;
+}
+
+.section-label span {
+  font-family: 'Poppins', sans-serif;
+  font-size: 1.55em;
+  font-weight: 700;
+  color: var(--dark);
+}
+
+.functions-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 22px;
+  margin-bottom: 22px;
+}
+
+/* last row: 2 cards centered if needed */
+.functions-grid-bottom {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  gap: 22px;
+  max-width: 660px;
+  margin: 0 auto;
+}
+
+.func-card {
+  background: var(--white);
+  border-radius: 16px;
+  padding: 32px 26px;
+  box-shadow: 0 8px 28px rgba(0,0,0,0.07);
+  text-align: center;
+  position: relative;
+  overflow: hidden;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.func-card:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 20px 55px rgba(230,126,34,0.16);
+}
+
+.func-card::after {
+  content: '';
+  position: absolute;
+  bottom: 0; left: 0;
+  width: 100%; height: 4px;
+  background: linear-gradient(90deg, var(--orange), var(--orange-dark));
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform 0.4s ease;
+}
+
+.func-card:hover::after { transform: scaleX(1); }
+
+.func-icon {
+  width: 64px; height: 64px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, rgba(230,126,34,0.1), rgba(230,126,34,0.04));
+  display: flex;
+  flex-wrap: wrap; align-items: center; justify-content: center;
+  font-size: 26px;
+  color: var(--orange);
+  margin: 0 auto 18px;
+  transition: all 0.3s ease;
+}
+
+.func-card:hover .func-icon {
+  background: linear-gradient(135deg, var(--orange), var(--orange-dark));
+  color: #fff;
+  transform: scale(1.08);
+}
+
+.func-card h3 {
+  font-family: 'Poppins', sans-serif;
+  font-size: 1em;
+  font-weight: 700;
+  color: var(--dark);
+  margin-bottom: 10px;
+}
+
+.func-card p {
+  font-size: 13.5px;
+  line-height: 1.7;
+  color: var(--text-light);
+}
+
+/* ── IMAGE SECTION ─────────────────────────────────── */
+.image-section { margin: 0 0 50px; }
+
+.image-card {
+  border-radius: 16px;
+  overflow: hidden;
+  box-shadow: 0 14px 50px rgba(0,0,0,0.12);
+}
+
+.image-card img {
+  width: 100%;
+  height: auto;
+  display: block;
+}
+
+/* ── COMPTIA STRIP ───────────────────────────────── */
+.comptia-section { margin: 0 0 70px; }
+
+.comptia-card {
+  background: linear-gradient(135deg, var(--dark) 0%, var(--darker) 100%);
+  border-radius: 16px;
+  padding: 46px 48px;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 36px;
+  box-shadow: 0 14px 50px rgba(0,0,0,0.15);
+  color: #fff;
+  position: relative;
+  overflow: hidden;
+}
+
+.comptia-card::before {
+  content: '';
+  position: absolute;
+  right: -60px; top: -60px;
+  width: 260px; height: 260px;
+  background: radial-gradient(circle, rgba(230,126,34,0.18) 0%, transparent 70%);
+  border-radius: 50%;
+}
+
+.comptia-icon {
+  flex-shrink: 0;
+  width: 82px; height: 82px;
+  background: linear-gradient(135deg, var(--orange), var(--orange-dark));
+  border-radius: 50%;
+  display: flex;
+  flex-wrap: wrap; align-items: center; justify-content: center;
+  font-size: 34px;
+  box-shadow: 0 8px 28px rgba(230,126,34,0.4);
+}
+
+.comptia-text h2 {
+  font-family: 'Poppins', sans-serif;
+  font-size: 1.45em;
+  font-weight: 700;
+  margin-bottom: 10px;
+}
+
+.comptia-text p {
+  font-size: 15px;
+  opacity: 0.85;
+  line-height: 1.75;
+  font-weight: 300;
+}
+
+.comptia-text strong { color: var(--orange); opacity: 1; font-weight: 600; }
+
+/* ── RESPONSIVE ──────────────────────────────────── */
+@media (max-width: 768px) {
+  .hero { padding: 55px 20px 90px; }
+  .hero h1 { font-size: 2em; }
+  .hero p  { font-size: 1em; }
+
+  .intro-card { flex-direction: column; padding: 32px 24px; gap: 20px; }
+  .intro-icon { margin: 0 auto; }
+
+  .functions-grid { grid-template-columns: 1fr 1fr; }
+  .functions-grid-bottom { grid-template-columns: 1fr 1fr; max-width: 100%; }
+
+  .comptia-card { flex-direction: column; padding: 36px 28px; text-align: center; }
+  .comptia-icon { margin: 0 auto; }
+}
+
+@media (max-width: 480px) {
+  .hero { padding: 40px 16px 80px; }
+  .hero h1 { font-size: 1.65em; }
+  .hero-badge { font-size: 11px; padding: 8px 16px; }
+
+  .intro-card { padding: 26px 18px; }
+  .functions-grid { grid-template-columns: 1fr; }
+  .functions-grid-bottom { grid-template-columns: 1fr; max-width: 100%; }
+  .func-card { padding: 26px 20px; }
+
+  .comptia-card { padding: 28px 20px; }
+  .comptia-text h2 { font-size: 1.2em; }
+  .section-label span { font-size: 1.2em; }
+}
+
+/* ═══════════════════════════════════════════════════════════
+   RESPONSIVE GLOBAL PATCH — garante compatibilidade total
+   ═══════════════════════════════════════════════════════════ */
+
+/* Imagens e vídeos sempre fluidos */
+img, video, iframe {
+  max-width: 100%;
+  height: auto;
+}
+
+/* Todos os flex containers com wrap por defeito */
+[class*="card"]:not(.func-icon):not(.detail-icon):not(.stat-icon):not(.bottom-icon):not(.comptia-icon):not(.intro-icon):not(.section-label-icon):not(.format-header-icon):not(.modality-header-icon):not(.split-card-header),
+[class*="grid"]:not(.functions-grid):not(.functions-grid-bottom):not(.stats-grid):not(.detail-grid):not(.trust-grid):not(.footer-content) {
+  min-width: 0;
+}
+
+/* Breakpoint extra: tablet grande (769px – 1024px) */
+@media (max-width: 1024px) and (min-width: 769px) {
+  .container { padding: 0 28px; }
+  [class*="-grid"] { gap: 18px; }
+}
+
+/* ── TABLET (≤ 768px) — reforço global ── */
+@media (max-width: 768px) {
+  /* Grids: forçar 1 coluna ou 2 no máximo */
+  .functions-grid,
+  .detail-grid,
+  .trust-grid,
+  .footer-content,
+  .modulos-grid,
+  .main-grid,
+  .cert-layout,
+  .objectives-layout,
+  .social-grid,
+  .stats-grid,
+  [class$="-grid"] {
+    grid-template-columns: 1fr 1fr !important;
+    gap: 16px;
+  }
+
+  /* Flex containers: empilhar em coluna */
+  .intro-card,
+  .bottom-card,
+  .comptia-card,
+  .bolsa-card,
+  .access-card,
+  .cursos-card,
+  .commitment-card,
+  .iso-card,
+  .modality-body,
+  .format-body,
+  .split-card-body,
+  .campus-card,
+  .acesso-card {
+    flex-direction: column !important;
+    align-items: flex-start;
+  }
+
+  /* Ícones centralizados quando em coluna */
+  .intro-icon, .bottom-icon, .comptia-icon, .section-label-icon,
+  .intro-icon-wrap, .diploma-header-icon, .modality-header-icon,
+  .format-header-icon, .split-card-header {
+    margin: 0 auto;
+  }
+
+  /* Texto centrado nos banners */
+  .bottom-card, .comptia-card { text-align: center; }
+
+  /* Vídeos responsivos */
+  video { width: 100% !important; }
+}
+
+/* ── MOBILE (≤ 480px) — reforço global ── */
+@media (max-width: 480px) {
+  /* Todos os grids em 1 coluna */
+  .functions-grid,
+  .functions-grid-bottom,
+  .detail-grid,
+  .trust-grid,
+  .footer-content,
+  .modulos-grid,
+  .main-grid,
+  .cert-layout,
+  .objectives-layout,
+  .social-grid,
+  .stats-grid,
+  [class$="-grid"],
+  .certifications {
+    grid-template-columns: 1fr !important;
+    gap: 14px;
+  }
+
+  /* Stat cards em coluna */
+  .stat-card {
+    flex-direction: column;
+    text-align: center;
+    align-items: center;
+  }
+
+  /* Garantir que nenhum elemento transborde */
+  * { max-width: 100%; word-break: break-word; }
+
+  /* Padding seguro nos containers */
+  .container { padding: 0 14px; }
+
+  /* Tipografia escalada */
+  .hero h1 { font-size: clamp(1.4em, 6vw, 2em) !important; }
+  .stat-number { font-size: clamp(1.8em, 8vw, 2.8em) !important; }
+
+  /* Botões full-width em mobile */
+  .btn, .cta-btn, .hero-cta a, .hero-cta button {
+    width: 100%;
+    max-width: 320px;
+    display: block;
+    margin: 0 auto 10px;
+    text-align: center;
+  }
+
+  /* Hero CTA em coluna */
+  .hero-cta { flex-direction: column; align-items: center; }
+
+  /* Certificações em coluna */
+  .certifications { flex-direction: column; align-items: center; }
+  .cert-item { width: 100%; max-width: 280px; text-align: center; }
+
+  /* Vídeos */
+  video { width: 100% !important; height: auto !important; }
+
+  /* Cards de docentes */
+  .teacher-photo-wrap, .photo-ring { width: 120px !important; height: 120px !important; }
+}
+
+/* ── MOBILE PEQUENO (≤ 360px) ── */
+@media (max-width: 360px) {
+  .hero h1 { font-size: 1.3em !important; }
+  .hero-badge { font-size: 10px; padding: 6px 12px; }
+  .container { padding: 0 10px; }
+  .func-card, .detail-card, .stat-card { padding: 20px 14px; }
+  .stat-number { font-size: 1.6em !important; }
+}
+
+</style>
+</head>
+<body>
+
+<!-- HERO -->
+<div class="hero">
+  <div class="hero-content">
+    <div class="hero-badge"><i class="fas fa-certificate"></i> &nbsp;CompTIA A+ Certified</div>
+    <h1><i class="fas fa-laptop-code"></i> Funções a Desenvolver</h1>
+    <p>Os profissionais certificados pela CompTIA A+ são solucionadores de problemas preparados para os desafios reais do mundo digital.</p>
+  </div>
+</div>
+
+<!-- INTRO -->
+<div class="container">
+  <div class="intro-section fade-up">
+    <div class="intro-card">
+      <div class="intro-icon"><i class="fas fa-star"></i></div>
+      <div class="intro-text">
+        <p>Os <strong>profissionais certificados pela CompTIA A+</strong> são solucionadores de problemas. Oferecem suporte às tecnologias centrais de hoje, desde a <strong>segurança até à cloud</strong> e muito mais. A certificação CompTIA A+ é o <strong>padrão da indústria</strong> para lançar carreiras de TI no mundo digital de hoje.</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- FUNCTIONS -->
+<div class="container">
+  <div class="functions-section">
+    <div class="section-label fade-up">
+      <div class="section-label-icon"><i class="fas fa-tools"></i></div>
+      <span>Estes Profissionais Serão Capazes de</span>
+    </div>
+
+    <div class="functions-grid">
+
+      <div class="func-card fade-up delay-1">
+        <div class="func-icon"><i class="fas fa-server"></i></div>
+        <h3>Administrar Sistemas e Redes</h3>
+        <p>Gestão completa de sistemas informáticos e infraestruturas de rede em ambiente empresarial.</p>
+      </div>
+
+      <div class="func-card fade-up delay-2">
+        <div class="func-icon"><i class="fas fa-sliders"></i></div>
+        <h3>Configurar e Manter Sistemas</h3>
+        <p>Configuração e manutenção de sistemas completos — hardware e software — garantindo o seu correto funcionamento.</p>
+      </div>
+
+      <div class="func-card fade-up delay-3">
+        <div class="func-icon"><i class="fas fa-screwdriver-wrench"></i></div>
+        <h3>Reparar Sistemas</h3>
+        <p>Diagnóstico e reparação de avarias em equipamentos informáticos, garantindo a continuidade operacional.</p>
+      </div>
+
+      <div class="func-card fade-up delay-1">
+        <div class="func-icon"><i class="fas fa-shield-halved"></i></div>
+        <h3>Manutenção Preventiva</h3>
+        <p>Planeamento e execução de manutenção preventiva em sistemas e redes para evitar falhas e perdas de dados.</p>
+      </div>
+
+      <div class="func-card fade-up delay-2">
+        <div class="func-icon"><i class="fas fa-lock"></i></div>
+        <h3>Políticas de Segurança</h3>
+        <p>Configuração de políticas de segurança e de utilização em sistemas e redes para proteger ativos digitais.</p>
+      </div>
+
+      <div class="func-card fade-up delay-3">
+        <div class="func-icon"><i class="fas fa-chart-line"></i></div>
+        <h3>Rentabilizar Sistemas</h3>
+        <p>Otimização de sistemas informáticos e redes, visando melhorar a produtividade e rentabilidade da empresa.</p>
+      </div>
+
+    </div>
+
+    <div class="functions-grid-bottom" style="margin-top: 22px;">
+      <div class="func-card fade-up delay-1">
+        <div class="func-icon"><i class="fas fa-shop"></i></div>
+        <h3>Serviço Comercial de Informática</h3>
+        <p>Prestação de serviço comercial na área de informática — consultoria, venda e suporte a clientes.</p>
+      </div>
+
+      <div class="func-card fade-up delay-2">
+        <div class="func-icon"><i class="fas fa-cloud"></i></div>
+        <h3>Suporte a Tecnologias Atuais</h3>
+        <p>Suporte às tecnologias centrais de hoje — da segurança à cloud — adaptando-se à constante evolução digital.</p>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<!-- IMAGE -->
+<div class="container">
+  <div class="image-section fade-up">
+    <div class="image-card">
+      <img src="imagens/funcoes.jpg" alt="Técnicos de IT a trabalhar em infraestrutura de redes e servidores" />
+    </div>
+  </div>
+</div>
+
+<!-- COMPTIA BOTTOM -->
+<div class="container">
+  <div class="comptia-section fade-up">
+    <div class="comptia-card">
+      <div class="comptia-icon"><i class="fas fa-award"></i></div>
+      <div class="comptia-text">
+        <h2>O Padrão da Indústria para Carreiras de TI</h2>
+        <p>A certificação <strong>CompTIA A+</strong> é reconhecida mundialmente como o padrão da indústria para profissionais de IT. Com esta certificação, os formandos estão preparados para atuar com confiança em qualquer ambiente tecnológico — do suporte técnico à administração de sistemas e redes.</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+const observer = new IntersectionObserver((entries) => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting) entry.target.classList.add('visible');
+  });
+}, { threshold: 0.08 });
+
+document.querySelectorAll('.fade-up').forEach(el => observer.observe(el));
+</script>
+</body>
+</html>

@@ -1,0 +1,926 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>MasterD – Diploma e Certificações</title>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+<style>
+* { margin: 0; padding: 0; box-sizing: border-box; }
+
+:root {
+  --orange:      #e67e22;
+  --orange-dark: #d35400;
+  --red:         #c0392b;
+  --red-dark:    #96281b;
+  --dark:        #2c3e50;
+  --darker:      #1a252f;
+  --text:        #444;
+  --text-light:  #666;
+  --white:       #ffffff;
+}
+
+html { scroll-behavior: smooth; }
+
+body {
+  background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+  font-family: 'Inter', sans-serif;
+  min-height: 100vh;
+  overflow-x: hidden;
+  color: var(--text);
+}
+
+/* ── FADE UP ─────────────────────────────────────── */
+.fade-up {
+  opacity: 0;
+  transform: translateY(24px);
+  transition: opacity 0.65s ease, transform 0.65s ease;
+}
+.fade-up.visible { opacity: 1; transform: translateY(0); }
+.delay-1 { transition-delay: 0.08s; }
+.delay-2 { transition-delay: 0.16s; }
+.delay-3 { transition-delay: 0.24s; }
+
+/* ── HERO ─────────────────────────────────────────── */
+.hero {
+  background: linear-gradient(135deg, var(--orange) 0%, var(--orange-dark) 100%);
+  color: #fff;
+  padding: 80px 20px 110px;
+  text-align: center;
+  position: relative;
+  overflow: hidden;
+  box-shadow: 0 20px 60px rgba(230,126,34,0.3);
+}
+
+.hero::before {
+  content: '';
+  position: absolute;
+  top: -50%; right: -10%;
+  width: 600px; height: 600px;
+  background: radial-gradient(circle, rgba(255,255,255,0.1) 0%, transparent 70%);
+  border-radius: 50%;
+  animation: float 8s ease-in-out infinite;
+}
+
+.hero::after {
+  content: '';
+  position: absolute;
+  bottom: -2px; left: 0;
+  width: 100%; height: 65px;
+  background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+  clip-path: ellipse(55% 100% at 50% 100%);
+}
+
+@keyframes float {
+  0%,100% { transform: translateY(0); }
+  50%      { transform: translateY(20px); }
+}
+
+.hero-content {
+  position: relative;
+  z-index: 2;
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+.hero-badge {
+  display: inline-block;
+  background: rgba(255,255,255,0.2);
+  padding: 10px 22px;
+  border-radius: 50px;
+  font-size: 13px;
+  font-weight: 600;
+  margin-bottom: 22px;
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(255,255,255,0.3);
+  letter-spacing: 0.5px;
+}
+
+.hero h1 {
+  font-family: 'Poppins', sans-serif;
+  font-size: 3.2em;
+  font-weight: 800;
+  margin-bottom: 18px;
+  text-shadow: 2px 2px 8px rgba(0,0,0,0.2);
+  line-height: 1.2;
+}
+
+.hero p {
+  font-size: 1.2em;
+  opacity: 0.95;
+  font-weight: 300;
+  line-height: 1.7;
+  max-width: 620px;
+  margin: 0 auto;
+}
+
+/* ── CONTAINER ────────────────────────────────────── */
+.container {
+  max-width: 1000px;
+  margin: 0 auto;
+  padding: 0 20px;
+}
+
+/* ── ISO BANNER ──────────────────────────────────── */
+.iso-section { margin: 60px 0 50px; }
+
+.iso-card {
+  background: var(--white);
+  border-radius: 16px;
+  padding: 40px 48px;
+  box-shadow: 0 10px 40px rgba(0,0,0,0.08);
+  position: relative;
+  overflow: hidden;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 36px;
+}
+
+.iso-card::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  height: 5px;
+  background: linear-gradient(90deg, var(--orange), var(--orange-dark));
+  border-radius: 16px 16px 0 0;
+}
+
+.iso-icon {
+  flex-shrink: 0;
+  width: 80px; height: 80px;
+  background: linear-gradient(135deg, var(--orange), var(--orange-dark));
+  border-radius: 50%;
+  display: flex;
+  flex-wrap: wrap; align-items: center; justify-content: center;
+  font-size: 32px;
+  color: #fff;
+  box-shadow: 0 8px 28px rgba(230,126,34,0.35);
+}
+
+.iso-text h3 {
+  font-family: 'Poppins', sans-serif;
+  font-size: 1.15em;
+  font-weight: 700;
+  color: var(--dark);
+  margin-bottom: 10px;
+}
+
+.iso-text p {
+  font-size: 15px;
+  line-height: 1.85;
+  color: var(--text);
+}
+
+.iso-text strong { color: var(--orange); font-weight: 600; }
+
+.iso-badge {
+  margin-left: auto;
+  flex-shrink: 0;
+  background: linear-gradient(135deg, rgba(230,126,34,0.08), rgba(230,126,34,0.03));
+  border: 2px solid rgba(230,126,34,0.25);
+  border-radius: 14px;
+  padding: 18px 24px;
+  text-align: center;
+}
+
+.iso-badge-num {
+  font-family: 'Poppins', sans-serif;
+  font-size: 1em;
+  font-weight: 800;
+  color: var(--orange);
+  line-height: 1.3;
+}
+
+.iso-badge-label {
+  font-size: 11px;
+  color: var(--text-light);
+  margin-top: 4px;
+}
+
+/* ── SECTION LABEL ───────────────────────────────── */
+.section-label {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 14px;
+  margin-bottom: 28px;
+}
+
+.section-label-icon {
+  width: 44px; height: 44px;
+  background: linear-gradient(135deg, var(--orange), var(--orange-dark));
+  border-radius: 12px;
+  display: flex;
+  flex-wrap: wrap; align-items: center; justify-content: center;
+  color: #fff;
+  font-size: 18px;
+  flex-shrink: 0;
+}
+
+.section-label span {
+  font-family: 'Poppins', sans-serif;
+  font-size: 1.55em;
+  font-weight: 700;
+  color: var(--dark);
+}
+
+/* ── CERTIFICADO SECTION ─────────────────────────── */
+.cert-section { margin: 0 0 50px; }
+
+.cert-layout {
+  display: grid;
+  grid-template-columns: 1fr 340px;
+  gap: 28px;
+  align-items: start;
+}
+
+.cert-info-card {
+  background: var(--white);
+  border-radius: 16px;
+  padding: 38px 36px;
+  box-shadow: 0 8px 30px rgba(0,0,0,0.08);
+  height: 100%;
+}
+
+.cert-info-card h3 {
+  font-family: 'Poppins', sans-serif;
+  font-size: 1.2em;
+  font-weight: 700;
+  color: var(--dark);
+  margin-bottom: 18px;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 10px;
+}
+
+.cert-info-card h3 i {
+  width: 36px; height: 36px;
+  background: linear-gradient(135deg, var(--orange), var(--orange-dark));
+  border-radius: 9px;
+  display: flex;
+  flex-wrap: wrap; align-items: center; justify-content: center;
+  font-size: 16px;
+  color: #fff;
+  flex-shrink: 0;
+}
+
+.cert-info-card p {
+  font-size: 15px;
+  line-height: 1.85;
+  color: var(--text);
+  margin-bottom: 24px;
+}
+
+.cert-info-card strong { color: var(--orange); font-weight: 600; }
+
+.cert-features {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+.cert-feature {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: flex-start;
+  gap: 12px;
+  font-size: 14px;
+  line-height: 1.65;
+  color: var(--text);
+}
+
+.feat-dot {
+  flex-shrink: 0;
+  width: 24px; height: 24px;
+  background: linear-gradient(135deg, var(--orange), var(--orange-dark));
+  border-radius: 50%;
+  display: flex;
+  flex-wrap: wrap; align-items: center; justify-content: center;
+  font-size: 10px;
+  color: #fff;
+  margin-top: 1px;
+}
+
+.cert-image-card {
+  background: var(--white);
+  border-radius: 16px;
+  overflow: hidden;
+  box-shadow: 0 8px 30px rgba(0,0,0,0.1);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.cert-image-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 20px 55px rgba(230,126,34,0.15);
+}
+
+.cert-image-card img {
+  width: 100%;
+  height: auto;
+  display: block;
+}
+
+.cert-image-label {
+  padding: 14px 18px;
+  background: linear-gradient(135deg, var(--orange), var(--orange-dark));
+  color: #fff;
+  font-family: 'Poppins', sans-serif;
+  font-size: 13px;
+  font-weight: 600;
+  text-align: center;
+}
+
+/* ── DIPLOMA SECTION ─────────────────────────────── */
+.diploma-section { margin: 0 0 50px; }
+
+.diploma-card {
+  background: var(--white);
+  border-radius: 16px;
+  overflow: hidden;
+  box-shadow: 0 10px 40px rgba(0,0,0,0.09);
+}
+
+.diploma-header {
+  background: linear-gradient(135deg, var(--dark), var(--darker));
+  padding: 26px 36px;
+  color: #fff;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 16px;
+  position: relative;
+  overflow: hidden;
+}
+
+.diploma-header::before {
+  content: '';
+  position: absolute;
+  right: -40px; top: -40px;
+  width: 160px; height: 160px;
+  background: radial-gradient(circle, rgba(230,126,34,0.2) 0%, transparent 70%);
+  border-radius: 50%;
+}
+
+.diploma-header-icon {
+  width: 52px; height: 52px;
+  background: linear-gradient(135deg, var(--orange), var(--orange-dark));
+  border-radius: 12px;
+  display: flex;
+  flex-wrap: wrap; align-items: center; justify-content: center;
+  font-size: 22px;
+  flex-shrink: 0;
+  box-shadow: 0 4px 16px rgba(230,126,34,0.4);
+}
+
+.diploma-header h2 {
+  font-family: 'Poppins', sans-serif;
+  font-size: 1.15em;
+  font-weight: 700;
+}
+
+.diploma-header p {
+  font-size: 13px;
+  opacity: 0.8;
+  margin-top: 3px;
+}
+
+.diploma-image {
+  padding: 36px 48px;
+  background: #f8f9fa;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+}
+
+.diploma-image img {
+  width: 100%;
+  max-width: 700px;
+  height: auto;
+  display: block;
+  border-radius: 8px;
+  box-shadow: 0 8px 30px rgba(0,0,0,0.12);
+}
+
+/* ── COMPTIA SECTION ─────────────────────────────── */
+.comptia-section { margin: 0 0 70px; }
+
+.comptia-card {
+  background: var(--white);
+  border-radius: 16px;
+  overflow: hidden;
+  box-shadow: 0 10px 40px rgba(0,0,0,0.09);
+  display: grid;
+  grid-template-columns: 300px 1fr;
+}
+
+.comptia-left {
+  background: linear-gradient(135deg, #c0392b 0%, #96281b 100%);
+  padding: 50px 36px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 20px;
+  position: relative;
+  overflow: hidden;
+}
+
+.comptia-left::before {
+  content: '';
+  position: absolute;
+  bottom: -50px; right: -50px;
+  width: 200px; height: 200px;
+  background: rgba(255,255,255,0.06);
+  border-radius: 50%;
+}
+
+.comptia-badge-img {
+  width: 160px;
+  height: auto;
+  filter: drop-shadow(0 8px 24px rgba(0,0,0,0.3));
+  transition: transform 0.4s ease;
+}
+
+.comptia-left:hover .comptia-badge-img {
+  transform: scale(1.06) rotate(-2deg);
+}
+
+.comptia-badge-label {
+  font-family: 'Poppins', sans-serif;
+  font-size: 1.1em;
+  font-weight: 700;
+  color: #fff;
+  text-align: center;
+  line-height: 1.4;
+}
+
+.comptia-right {
+  padding: 44px 44px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.comptia-tag {
+  display: inline-block;
+  background: linear-gradient(135deg, rgba(192,57,43,0.1), rgba(192,57,43,0.04));
+  border: 1px solid rgba(192,57,43,0.25);
+  color: var(--red);
+  font-size: 11px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  padding: 5px 14px;
+  border-radius: 50px;
+  margin-bottom: 16px;
+  width: fit-content;
+}
+
+.comptia-right h2 {
+  font-family: 'Poppins', sans-serif;
+  font-size: 1.35em;
+  font-weight: 700;
+  color: var(--dark);
+  margin-bottom: 16px;
+  line-height: 1.4;
+}
+
+.comptia-right p {
+  font-size: 14.5px;
+  line-height: 1.85;
+  color: var(--text);
+  margin-bottom: 14px;
+}
+
+.comptia-right strong { color: var(--dark); font-weight: 600; }
+
+.comptia-features {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
+  margin-top: 20px;
+}
+
+.comptia-feature {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 10px;
+  font-size: 13.5px;
+  color: var(--text);
+  background: rgba(192,57,43,0.04);
+  border: 1px solid rgba(192,57,43,0.12);
+  border-radius: 9px;
+  padding: 10px 14px;
+}
+
+.comptia-feature i {
+  color: var(--red);
+  font-size: 14px;
+  flex-shrink: 0;
+}
+
+/* ── BOTTOM BANNER ───────────────────────────────── */
+.bottom-section { margin: 0 0 70px; }
+
+.bottom-card {
+  background: linear-gradient(135deg, var(--orange) 0%, var(--orange-dark) 100%);
+  border-radius: 16px;
+  padding: 50px 48px;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 36px;
+  box-shadow: 0 20px 60px rgba(230,126,34,0.3);
+  color: #fff;
+  position: relative;
+  overflow: hidden;
+}
+
+.bottom-card::before {
+  content: '';
+  position: absolute;
+  right: -60px; top: -60px;
+  width: 260px; height: 260px;
+  background: radial-gradient(circle, rgba(255,255,255,0.12) 0%, transparent 70%);
+  border-radius: 50%;
+}
+
+.bottom-icon {
+  flex-shrink: 0;
+  width: 80px; height: 80px;
+  background: rgba(255,255,255,0.2);
+  border-radius: 50%;
+  display: flex;
+  flex-wrap: wrap; align-items: center; justify-content: center;
+  font-size: 32px;
+  border: 2px solid rgba(255,255,255,0.3);
+}
+
+.bottom-text h2 {
+  font-family: 'Poppins', sans-serif;
+  font-size: 1.5em;
+  font-weight: 700;
+  margin-bottom: 10px;
+}
+
+.bottom-text p {
+  font-size: 15px;
+  opacity: 0.92;
+  line-height: 1.75;
+  font-weight: 300;
+}
+
+/* ── RESPONSIVE ──────────────────────────────────── */
+@media (max-width: 800px) {
+  .cert-layout { grid-template-columns: 1fr; }
+  .cert-image-card { max-width: 340px; margin: 0 auto; }
+  .comptia-card { grid-template-columns: 1fr; }
+  .comptia-left { padding: 36px 28px; }
+  .comptia-right { padding: 32px 28px; }
+}
+
+@media (max-width: 768px) {
+  .hero { padding: 55px 20px 90px; }
+  .hero h1 { font-size: 2em; }
+  .hero p  { font-size: 1em; }
+
+  .iso-card { flex-direction: column; padding: 32px 24px; gap: 20px; }
+  .iso-badge { margin-left: 0; }
+
+  .diploma-image { padding: 24px 20px; }
+
+  .comptia-features { grid-template-columns: 1fr; }
+
+  .bottom-card { flex-direction: column; padding: 36px 28px; text-align: center; }
+  .bottom-icon { margin: 0 auto; }
+}
+
+@media (max-width: 480px) {
+  .hero { padding: 40px 16px 80px; }
+  .hero h1 { font-size: 1.6em; }
+  .hero-badge { font-size: 11px; padding: 8px 16px; }
+
+  .iso-card { padding: 26px 18px; }
+  .iso-icon { width: 60px; height: 60px; font-size: 24px; }
+
+  .cert-info-card { padding: 26px 20px; }
+  .diploma-header { padding: 18px 20px; }
+  .diploma-image { padding: 18px 16px; }
+
+  .comptia-badge-img { width: 120px; }
+  .bottom-card { padding: 28px 20px; }
+  .section-label span { font-size: 1.2em; }
+}
+
+/* ═══════════════════════════════════════════════════════════
+   RESPONSIVE GLOBAL PATCH — garante compatibilidade total
+   ═══════════════════════════════════════════════════════════ */
+
+/* Imagens e vídeos sempre fluidos */
+img, video, iframe {
+  max-width: 100%;
+  height: auto;
+}
+
+/* Todos os flex containers com wrap por defeito */
+[class*="card"]:not(.func-icon):not(.detail-icon):not(.stat-icon):not(.bottom-icon):not(.comptia-icon):not(.intro-icon):not(.section-label-icon):not(.format-header-icon):not(.modality-header-icon):not(.split-card-header),
+[class*="grid"]:not(.functions-grid):not(.functions-grid-bottom):not(.stats-grid):not(.detail-grid):not(.trust-grid):not(.footer-content) {
+  min-width: 0;
+}
+
+/* Breakpoint extra: tablet grande (769px – 1024px) */
+@media (max-width: 1024px) and (min-width: 769px) {
+  .container { padding: 0 28px; }
+  [class*="-grid"] { gap: 18px; }
+}
+
+/* ── TABLET (≤ 768px) — reforço global ── */
+@media (max-width: 768px) {
+  /* Grids: forçar 1 coluna ou 2 no máximo */
+  .functions-grid,
+  .detail-grid,
+  .trust-grid,
+  .footer-content,
+  .modulos-grid,
+  .main-grid,
+  .cert-layout,
+  .objectives-layout,
+  .social-grid,
+  .stats-grid,
+  [class$="-grid"] {
+    grid-template-columns: 1fr 1fr !important;
+    gap: 16px;
+  }
+
+  /* Flex containers: empilhar em coluna */
+  .intro-card,
+  .bottom-card,
+  .comptia-card,
+  .bolsa-card,
+  .access-card,
+  .cursos-card,
+  .commitment-card,
+  .iso-card,
+  .modality-body,
+  .format-body,
+  .split-card-body,
+  .campus-card,
+  .acesso-card {
+    flex-direction: column !important;
+    align-items: flex-start;
+  }
+
+  /* Ícones centralizados quando em coluna */
+  .intro-icon, .bottom-icon, .comptia-icon, .section-label-icon,
+  .intro-icon-wrap, .diploma-header-icon, .modality-header-icon,
+  .format-header-icon, .split-card-header {
+    margin: 0 auto;
+  }
+
+  /* Texto centrado nos banners */
+  .bottom-card, .comptia-card { text-align: center; }
+
+  /* Vídeos responsivos */
+  video { width: 100% !important; }
+}
+
+/* ── MOBILE (≤ 480px) — reforço global ── */
+@media (max-width: 480px) {
+  /* Todos os grids em 1 coluna */
+  .functions-grid,
+  .functions-grid-bottom,
+  .detail-grid,
+  .trust-grid,
+  .footer-content,
+  .modulos-grid,
+  .main-grid,
+  .cert-layout,
+  .objectives-layout,
+  .social-grid,
+  .stats-grid,
+  [class$="-grid"],
+  .certifications {
+    grid-template-columns: 1fr !important;
+    gap: 14px;
+  }
+
+  /* Stat cards em coluna */
+  .stat-card {
+    flex-direction: column;
+    text-align: center;
+    align-items: center;
+  }
+
+  /* Garantir que nenhum elemento transborde */
+  * { max-width: 100%; word-break: break-word; }
+
+  /* Padding seguro nos containers */
+  .container { padding: 0 14px; }
+
+  /* Tipografia escalada */
+  .hero h1 { font-size: clamp(1.4em, 6vw, 2em) !important; }
+  .stat-number { font-size: clamp(1.8em, 8vw, 2.8em) !important; }
+
+  /* Botões full-width em mobile */
+  .btn, .cta-btn, .hero-cta a, .hero-cta button {
+    width: 100%;
+    max-width: 320px;
+    display: block;
+    margin: 0 auto 10px;
+    text-align: center;
+  }
+
+  /* Hero CTA em coluna */
+  .hero-cta { flex-direction: column; align-items: center; }
+
+  /* Certificações em coluna */
+  .certifications { flex-direction: column; align-items: center; }
+  .cert-item { width: 100%; max-width: 280px; text-align: center; }
+
+  /* Vídeos */
+  video { width: 100% !important; height: auto !important; }
+
+  /* Cards de docentes */
+  .teacher-photo-wrap, .photo-ring { width: 120px !important; height: 120px !important; }
+}
+
+/* ── MOBILE PEQUENO (≤ 360px) ── */
+@media (max-width: 360px) {
+  .hero h1 { font-size: 1.3em !important; }
+  .hero-badge { font-size: 10px; padding: 6px 12px; }
+  .container { padding: 0 10px; }
+  .func-card, .detail-card, .stat-card { padding: 20px 14px; }
+  .stat-number { font-size: 1.6em !important; }
+}
+
+</style>
+</head>
+<body>
+
+<!-- HERO -->
+<div class="hero">
+  <div class="hero-content">
+    <div class="hero-badge"><i class="fas fa-award"></i> &nbsp;Certificação Reconhecida Internacionalmente</div>
+    <h1><i class="fas fa-certificate"></i> Diploma e Certificações</h1>
+    <p>Ao concluir a formação, recebe documentação oficial que comprova as suas competências e abre portas em qualquer mercado do mundo.</p>
+  </div>
+</div>
+
+<!-- ISO BANNER -->
+<div class="container">
+  <div class="iso-section fade-up">
+    <div class="iso-card">
+      <div class="iso-icon"><i class="fas fa-shield-halved"></i></div>
+      <div class="iso-text">
+        <h3>Entidade Certificada pela APCER</h3>
+        <p>A MasterD é uma entidade certificada pela <strong>APCER – Associação Portuguesa de Certificação</strong> segundo a Norma <strong>NP EN ISO 9001:2015</strong> (Sistemas de Gestão da Qualidade). Desta forma, conseguimos garantir aos formandos um serviço de acordo com diretrizes certificadas por normas de referência <strong>reconhecidas no Mercado</strong>.</p>
+      </div>
+      <div class="iso-badge">
+        <div class="iso-badge-num">NP EN ISO<br>9001:2015</div>
+        <div class="iso-badge-label">Certificação APCER</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- CERTIFICADO DE FORMAÇÃO PROFISSIONAL -->
+<div class="container">
+  <div class="cert-section">
+    <div class="section-label fade-up">
+      <div class="section-label-icon"><i class="fas fa-file-certificate"></i></div>
+      <span>Certificado de Formação Profissional</span>
+    </div>
+
+    <div class="cert-layout">
+
+      <div class="cert-info-card fade-up delay-1">
+        <h3><i class="fas fa-scroll"></i> Certificado Oficial</h3>
+        <p>Ao concluir com aproveitamento esta formação, receberá um <strong>Certificado de Formação Profissional</strong> segundo a legislação nacional em vigor — um documento oficial que comprova as competências adquiridas e o tempo de formação realizado.</p>
+
+        <div class="cert-features">
+          <div class="cert-feature">
+            <div class="feat-dot"><i class="fas fa-check"></i></div>
+            <span>Emitido segundo a <strong>legislação nacional</strong> em vigor</span>
+          </div>
+          <div class="cert-feature">
+            <div class="feat-dot"><i class="fas fa-check"></i></div>
+            <span>Inclui as <strong>unidades de formação</strong>, horas e classificação</span>
+          </div>
+          <div class="cert-feature">
+            <div class="feat-dot"><i class="fas fa-check"></i></div>
+            <span>Entidade formadora certificada pela <strong>DGERT</strong></span>
+          </div>
+          <div class="cert-feature">
+            <div class="feat-dot"><i class="fas fa-check"></i></div>
+            <span>Reconhecido por <strong>entidades empregadoras</strong> nacionais e internacionais</span>
+          </div>
+          <div class="cert-feature">
+            <div class="feat-dot"><i class="fas fa-check"></i></div>
+            <span>Certificado pelo <strong>Governo de Portugal</strong></span>
+          </div>
+        </div>
+      </div>
+
+      <div class="cert-image-card fade-up delay-2">
+        <img src="imagens/certificado_de_formação_profissional_Master_D.jpg" alt="Certificado de Formação Profissional MasterD – Exemplo" />
+        <div class="cert-image-label"><i class="fas fa-eye"></i> &nbsp;Exemplo de Certificado de Formação Profissional</div>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+<!-- DIPLOMA MASTERD -->
+<div class="container">
+  <div class="diploma-section fade-up">
+    <div class="section-label">
+      <div class="section-label-icon"><i class="fas fa-graduation-cap"></i></div>
+      <span>Diploma MasterD</span>
+    </div>
+
+    <div class="diploma-card">
+      <div class="diploma-header">
+        <div class="diploma-header-icon"><i class="fas fa-medal"></i></div>
+        <div>
+          <h2>Diploma MasterD – Centros Formativos</h2>
+          <p>Documento emitido pela MasterD a todos os formandos que concluam a formação com aproveitamento</p>
+        </div>
+      </div>
+      <div class="diploma-image">
+        <img src="imagens/Diploma_Master_D.png" alt="Diploma MasterD – Centros Formativos" />
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- COMPTIA A+ -->
+<div class="container">
+  <div class="comptia-section">
+    <div class="section-label fade-up">
+      <div class="section-label-icon"><i class="fas fa-globe"></i></div>
+      <span>Certificação CompTIA A+</span>
+    </div>
+
+    <div class="comptia-card fade-up">
+      <div class="comptia-left">
+        <img src="imagens/Comptia.png" alt="CompTIA A+ Certified CE" class="comptia-badge-img" />
+        <div class="comptia-badge-label">Certificação Oficial<br>CompTIA A+</div>
+      </div>
+      <div class="comptia-right">
+        <div class="comptia-tag"><i class="fas fa-globe"></i> &nbsp;Reconhecimento Mundial</div>
+        <h2>A Certificação de Referência para Carreiras de IT</h2>
+        <p>No final da formação, se assim o pretender, o formando poderá ter acesso aos exames de <strong>Certificação CompTIA A+</strong> (versão em vigor à data da realização do exame). O formando realizará os exames num dos nossos <strong>centros formativos certificadores</strong>.</p>
+        <p>Os profissionais certificados pela CompTIA A+ são <strong>solucionadores de problemas</strong>. Oferecem suporte às tecnologias centrais de hoje, desde a <strong>segurança até à cloud</strong> e muito mais. A certificação CompTIA A+ é o <strong>padrão da indústria</strong> para lançar carreiras de TI no mundo digital de hoje.</p>
+
+        <div class="comptia-features">
+          <div class="comptia-feature">
+            <i class="fas fa-shield-halved"></i>
+            <span>Segurança e Cloud</span>
+          </div>
+          <div class="comptia-feature">
+            <i class="fas fa-globe"></i>
+            <span>Reconhecida mundialmente</span>
+          </div>
+          <div class="comptia-feature">
+            <i class="fas fa-screwdriver-wrench"></i>
+            <span>Suporte técnico avançado</span>
+          </div>
+          <div class="comptia-feature">
+            <i class="fas fa-rocket"></i>
+            <span>Padrão da indústria IT</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- BOTTOM BANNER -->
+<div class="container">
+  <div class="bottom-section fade-up">
+    <div class="bottom-card">
+      <div class="bottom-icon">🏆</div>
+      <div class="bottom-text">
+        <h2>Três Credenciais, Uma Carreira de Sucesso</h2>
+        <p>Ao concluir a formação MasterD, poderá obter o Certificado de Formação Profissional, o Diploma MasterD e a Certificação internacional CompTIA A+ — três documentos que comprovam a sua qualificação e abrem portas em qualquer empresa de IT do mundo.</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+const observer = new IntersectionObserver((entries) => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting) entry.target.classList.add('visible');
+  });
+}, { threshold: 0.08 });
+
+document.querySelectorAll('.fade-up').forEach(el => observer.observe(el));
+</script>
+</body>
+</html>

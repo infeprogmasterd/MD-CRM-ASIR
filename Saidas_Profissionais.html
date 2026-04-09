@@ -1,0 +1,780 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>MasterD – Saídas Profissionais</title>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+<style>
+* { margin: 0; padding: 0; box-sizing: border-box; }
+
+:root {
+  --orange:      #e67e22;
+  --orange-dark: #d35400;
+  --dark:        #2c3e50;
+  --darker:      #1a252f;
+  --text:        #444;
+  --text-light:  #666;
+  --white:       #ffffff;
+}
+
+html { scroll-behavior: smooth; }
+
+body {
+  background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+  font-family: 'Inter', sans-serif;
+  min-height: 100vh;
+  overflow-x: hidden;
+  color: var(--text);
+}
+
+/* ── FADE UP ─────────────────────────────────────── */
+.fade-up {
+  opacity: 0;
+  transform: translateY(24px);
+  transition: opacity 0.65s ease, transform 0.65s ease;
+}
+.fade-up.visible { opacity: 1; transform: translateY(0); }
+.delay-1 { transition-delay: 0.08s; }
+.delay-2 { transition-delay: 0.16s; }
+.delay-3 { transition-delay: 0.24s; }
+.delay-4 { transition-delay: 0.32s; }
+.delay-5 { transition-delay: 0.40s; }
+
+/* ── HERO ─────────────────────────────────────────── */
+.hero {
+  background: linear-gradient(135deg, var(--orange) 0%, var(--orange-dark) 100%);
+  color: #fff;
+  padding: 80px 20px 110px;
+  text-align: center;
+  position: relative;
+  overflow: hidden;
+  box-shadow: 0 20px 60px rgba(230,126,34,0.3);
+}
+
+.hero::before {
+  content: '';
+  position: absolute;
+  top: -50%; right: -10%;
+  width: 600px; height: 600px;
+  background: radial-gradient(circle, rgba(255,255,255,0.1) 0%, transparent 70%);
+  border-radius: 50%;
+  animation: float 8s ease-in-out infinite;
+}
+
+.hero::after {
+  content: '';
+  position: absolute;
+  bottom: -2px; left: 0;
+  width: 100%; height: 65px;
+  background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+  clip-path: ellipse(55% 100% at 50% 100%);
+}
+
+@keyframes float {
+  0%,100% { transform: translateY(0); }
+  50%      { transform: translateY(20px); }
+}
+
+.hero-content {
+  position: relative;
+  z-index: 2;
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+.hero-badge {
+  display: inline-block;
+  background: rgba(255,255,255,0.2);
+  padding: 10px 22px;
+  border-radius: 50px;
+  font-size: 13px;
+  font-weight: 600;
+  margin-bottom: 22px;
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(255,255,255,0.3);
+  letter-spacing: 0.5px;
+}
+
+.hero h1 {
+  font-family: 'Poppins', sans-serif;
+  font-size: 3.4em;
+  font-weight: 800;
+  margin-bottom: 18px;
+  text-shadow: 2px 2px 8px rgba(0,0,0,0.2);
+  line-height: 1.2;
+}
+
+.hero p {
+  font-size: 1.2em;
+  opacity: 0.95;
+  font-weight: 300;
+  line-height: 1.7;
+  max-width: 620px;
+  margin: 0 auto;
+}
+
+/* ── CONTAINER ────────────────────────────────────── */
+.container {
+  max-width: 1000px;
+  margin: 0 auto;
+  padding: 0 20px;
+}
+
+/* ── INTRO ─────────────────────────────────────────── */
+.intro-section { margin: 60px 0 50px; }
+
+.intro-card {
+  background: var(--white);
+  border-radius: 16px;
+  padding: 44px 48px;
+  box-shadow: 0 10px 40px rgba(0,0,0,0.08);
+  position: relative;
+  overflow: hidden;
+  text-align: center;
+}
+
+.intro-card::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  height: 5px;
+  background: linear-gradient(90deg, var(--orange), var(--orange-dark));
+  border-radius: 16px 16px 0 0;
+}
+
+.intro-icon {
+  width: 72px; height: 72px;
+  background: linear-gradient(135deg, var(--orange), var(--orange-dark));
+  border-radius: 50%;
+  display: flex;
+  flex-wrap: wrap; align-items: center; justify-content: center;
+  font-size: 28px;
+  color: #fff;
+  margin: 0 auto 22px;
+  box-shadow: 0 8px 28px rgba(230,126,34,0.35);
+}
+
+.intro-card p {
+  font-size: 16px;
+  line-height: 1.9;
+  color: var(--text);
+  max-width: 680px;
+  margin: 0 auto;
+}
+
+/* ── MAIN LAYOUT ─────────────────────────────────── */
+.main-section { margin: 0 0 60px; }
+
+.main-grid {
+  display: grid;
+  grid-template-columns: 1fr 420px;
+  gap: 28px;
+  align-items: start;
+}
+
+/* ── JOBS LIST CARD ──────────────────────────────── */
+.jobs-card {
+  background: var(--white);
+  border-radius: 16px;
+  overflow: hidden;
+  box-shadow: 0 10px 40px rgba(0,0,0,0.09);
+}
+
+.jobs-header {
+  background: linear-gradient(135deg, var(--orange), var(--orange-dark));
+  padding: 26px 32px;
+  color: #fff;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 14px;
+}
+
+.jobs-header i { font-size: 22px; opacity: 0.9; }
+
+.jobs-header h2 {
+  font-family: 'Poppins', sans-serif;
+  font-size: 1.15em;
+  font-weight: 700;
+}
+
+.jobs-header p {
+  font-size: 13px;
+  opacity: 0.85;
+  margin-top: 3px;
+  font-weight: 300;
+}
+
+.jobs-list {
+  padding: 10px 0;
+}
+
+.job-item {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 16px;
+  padding: 16px 28px;
+  border-bottom: 1px solid rgba(0,0,0,0.05);
+  transition: background 0.25s ease, padding-left 0.25s ease;
+  cursor: default;
+}
+
+.job-item:last-child { border-bottom: none; }
+
+.job-item:hover {
+  background: rgba(230,126,34,0.04);
+  padding-left: 34px;
+}
+
+.job-num {
+  flex-shrink: 0;
+  width: 32px; height: 32px;
+  background: linear-gradient(135deg, var(--orange), var(--orange-dark));
+  border-radius: 8px;
+  display: flex;
+  flex-wrap: wrap; align-items: center; justify-content: center;
+  font-family: 'Poppins', sans-serif;
+  font-size: 12px;
+  font-weight: 700;
+  color: #fff;
+}
+
+.job-icon {
+  flex-shrink: 0;
+  width: 36px; height: 36px;
+  background: rgba(230,126,34,0.08);
+  border-radius: 10px;
+  display: flex;
+  flex-wrap: wrap; align-items: center; justify-content: center;
+  font-size: 15px;
+  color: var(--orange);
+  transition: background 0.25s ease;
+}
+
+.job-item:hover .job-icon {
+  background: rgba(230,126,34,0.15);
+}
+
+.job-info { flex: 1; }
+
+.job-title {
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--dark);
+  line-height: 1.4;
+}
+
+.job-sub {
+  font-size: 12px;
+  color: var(--text-light);
+  margin-top: 2px;
+}
+
+.job-arrow {
+  color: #ccc;
+  font-size: 12px;
+  transition: color 0.25s ease, transform 0.25s ease;
+}
+
+.job-item:hover .job-arrow {
+  color: var(--orange);
+  transform: translateX(3px);
+}
+
+/* ── IMAGE CARD ──────────────────────────────────── */
+.image-card {
+  border-radius: 16px;
+  overflow: hidden;
+  box-shadow: 0 10px 40px rgba(0,0,0,0.12);
+  position: sticky;
+  top: 20px;
+}
+
+.image-card img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  min-height: 500px;
+}
+
+/* ── STATS ROW ───────────────────────────────────── */
+.stats-section { margin: 0 0 60px; }
+
+.stats-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 24px;
+}
+
+.stat-card {
+  background: var(--white);
+  border-radius: 14px;
+  padding: 34px 24px;
+  text-align: center;
+  box-shadow: 0 8px 28px rgba(0,0,0,0.07);
+  border-top: 4px solid var(--orange);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.stat-card:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 18px 50px rgba(230,126,34,0.14);
+}
+
+.stat-number {
+  font-family: 'Poppins', sans-serif;
+  font-size: 2.6em;
+  font-weight: 800;
+  color: var(--orange);
+  line-height: 1;
+  margin-bottom: 8px;
+}
+
+.stat-label {
+  font-size: 13.5px;
+  color: var(--text-light);
+  font-weight: 500;
+  line-height: 1.4;
+}
+
+/* ── BOTTOM BANNER ───────────────────────────────── */
+.bottom-section { margin: 0 0 70px; }
+
+.bottom-card {
+  background: linear-gradient(135deg, var(--dark) 0%, var(--darker) 100%);
+  border-radius: 16px;
+  padding: 50px 48px;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 36px;
+  box-shadow: 0 14px 50px rgba(0,0,0,0.15);
+  color: #fff;
+  position: relative;
+  overflow: hidden;
+}
+
+.bottom-card::before {
+  content: '';
+  position: absolute;
+  right: -60px; top: -60px;
+  width: 280px; height: 280px;
+  background: radial-gradient(circle, rgba(230,126,34,0.18) 0%, transparent 70%);
+  border-radius: 50%;
+}
+
+.bottom-icon {
+  flex-shrink: 0;
+  width: 82px; height: 82px;
+  background: linear-gradient(135deg, var(--orange), var(--orange-dark));
+  border-radius: 50%;
+  display: flex;
+  flex-wrap: wrap; align-items: center; justify-content: center;
+  font-size: 34px;
+  box-shadow: 0 8px 28px rgba(230,126,34,0.4);
+}
+
+.bottom-text h2 {
+  font-family: 'Poppins', sans-serif;
+  font-size: 1.5em;
+  font-weight: 700;
+  margin-bottom: 12px;
+}
+
+.bottom-text p {
+  font-size: 15px;
+  opacity: 0.85;
+  line-height: 1.75;
+  font-weight: 300;
+  max-width: 580px;
+}
+
+.bottom-text strong { color: var(--orange); opacity: 1; font-weight: 600; }
+
+/* ── RESPONSIVE ──────────────────────────────────── */
+@media (max-width: 800px) {
+  .main-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .image-card {
+    position: static;
+    order: -1;
+  }
+
+  .image-card img { min-height: 300px; }
+
+  .stats-grid { grid-template-columns: 1fr 1fr; }
+}
+
+@media (max-width: 768px) {
+  .hero { padding: 55px 20px 90px; }
+  .hero h1 { font-size: 2.1em; }
+  .hero p  { font-size: 1em; }
+
+  .intro-card { padding: 32px 22px; }
+
+  .bottom-card { flex-direction: column; padding: 36px 28px; text-align: center; }
+  .bottom-icon { margin: 0 auto; }
+}
+
+@media (max-width: 480px) {
+  .hero { padding: 40px 16px 80px; }
+  .hero h1 { font-size: 1.65em; }
+  .hero-badge { font-size: 11px; padding: 8px 16px; }
+
+  .intro-card { padding: 26px 18px; }
+  .intro-icon { width: 56px; height: 56px; font-size: 22px; }
+
+  .jobs-header { padding: 20px 22px; }
+  .job-item { padding: 14px 20px; gap: 12px; }
+  .job-num { width: 28px; height: 28px; font-size: 11px; }
+
+  .stats-grid { grid-template-columns: 1fr 1fr; gap: 16px; }
+  .stat-card { padding: 24px 16px; }
+  .stat-number { font-size: 2em; }
+
+  .bottom-card { padding: 28px 20px; }
+  .bottom-text h2 { font-size: 1.2em; }
+}
+
+/* ═══════════════════════════════════════════════════════════
+   RESPONSIVE GLOBAL PATCH — garante compatibilidade total
+   ═══════════════════════════════════════════════════════════ */
+
+/* Imagens e vídeos sempre fluidos */
+img, video, iframe {
+  max-width: 100%;
+  height: auto;
+}
+
+/* Todos os flex containers com wrap por defeito */
+[class*="card"]:not(.func-icon):not(.detail-icon):not(.stat-icon):not(.bottom-icon):not(.comptia-icon):not(.intro-icon):not(.section-label-icon):not(.format-header-icon):not(.modality-header-icon):not(.split-card-header),
+[class*="grid"]:not(.functions-grid):not(.functions-grid-bottom):not(.stats-grid):not(.detail-grid):not(.trust-grid):not(.footer-content) {
+  min-width: 0;
+}
+
+/* Breakpoint extra: tablet grande (769px – 1024px) */
+@media (max-width: 1024px) and (min-width: 769px) {
+  .container { padding: 0 28px; }
+  [class*="-grid"] { gap: 18px; }
+}
+
+/* ── TABLET (≤ 768px) — reforço global ── */
+@media (max-width: 768px) {
+  /* Grids: forçar 1 coluna ou 2 no máximo */
+  .functions-grid,
+  .detail-grid,
+  .trust-grid,
+  .footer-content,
+  .modulos-grid,
+  .main-grid,
+  .cert-layout,
+  .objectives-layout,
+  .social-grid,
+  .stats-grid,
+  [class$="-grid"] {
+    grid-template-columns: 1fr 1fr !important;
+    gap: 16px;
+  }
+
+  /* Flex containers: empilhar em coluna */
+  .intro-card,
+  .bottom-card,
+  .comptia-card,
+  .bolsa-card,
+  .access-card,
+  .cursos-card,
+  .commitment-card,
+  .iso-card,
+  .modality-body,
+  .format-body,
+  .split-card-body,
+  .campus-card,
+  .acesso-card {
+    flex-direction: column !important;
+    align-items: flex-start;
+  }
+
+  /* Ícones centralizados quando em coluna */
+  .intro-icon, .bottom-icon, .comptia-icon, .section-label-icon,
+  .intro-icon-wrap, .diploma-header-icon, .modality-header-icon,
+  .format-header-icon, .split-card-header {
+    margin: 0 auto;
+  }
+
+  /* Texto centrado nos banners */
+  .bottom-card, .comptia-card { text-align: center; }
+
+  /* Vídeos responsivos */
+  video { width: 100% !important; }
+}
+
+/* ── MOBILE (≤ 480px) — reforço global ── */
+@media (max-width: 480px) {
+  /* Todos os grids em 1 coluna */
+  .functions-grid,
+  .functions-grid-bottom,
+  .detail-grid,
+  .trust-grid,
+  .footer-content,
+  .modulos-grid,
+  .main-grid,
+  .cert-layout,
+  .objectives-layout,
+  .social-grid,
+  .stats-grid,
+  [class$="-grid"],
+  .certifications {
+    grid-template-columns: 1fr !important;
+    gap: 14px;
+  }
+
+  /* Stat cards em coluna */
+  .stat-card {
+    flex-direction: column;
+    text-align: center;
+    align-items: center;
+  }
+
+  /* Garantir que nenhum elemento transborde */
+  * { max-width: 100%; word-break: break-word; }
+
+  /* Padding seguro nos containers */
+  .container { padding: 0 14px; }
+
+  /* Tipografia escalada */
+  .hero h1 { font-size: clamp(1.4em, 6vw, 2em) !important; }
+  .stat-number { font-size: clamp(1.8em, 8vw, 2.8em) !important; }
+
+  /* Botões full-width em mobile */
+  .btn, .cta-btn, .hero-cta a, .hero-cta button {
+    width: 100%;
+    max-width: 320px;
+    display: block;
+    margin: 0 auto 10px;
+    text-align: center;
+  }
+
+  /* Hero CTA em coluna */
+  .hero-cta { flex-direction: column; align-items: center; }
+
+  /* Certificações em coluna */
+  .certifications { flex-direction: column; align-items: center; }
+  .cert-item { width: 100%; max-width: 280px; text-align: center; }
+
+  /* Vídeos */
+  video { width: 100% !important; height: auto !important; }
+
+  /* Cards de docentes */
+  .teacher-photo-wrap, .photo-ring { width: 120px !important; height: 120px !important; }
+}
+
+/* ── MOBILE PEQUENO (≤ 360px) ── */
+@media (max-width: 360px) {
+  .hero h1 { font-size: 1.3em !important; }
+  .hero-badge { font-size: 10px; padding: 6px 12px; }
+  .container { padding: 0 10px; }
+  .func-card, .detail-card, .stat-card { padding: 20px 14px; }
+  .stat-number { font-size: 1.6em !important; }
+}
+
+</style>
+</head>
+<body>
+
+<!-- HERO -->
+<div class="hero">
+  <div class="hero-content">
+    <div class="hero-badge"><i class="fas fa-briefcase"></i> &nbsp;Certificação CompTIA A+</div>
+    <h1><i class="fas fa-network-wired"></i> Saídas Profissionais</h1>
+    <p>Após a conclusão da formação, abre-se um leque alargado de oportunidades no mercado de IT e de sistemas informáticos.</p>
+  </div>
+</div>
+
+<!-- INTRO -->
+<div class="container">
+  <div class="intro-section fade-up">
+    <div class="intro-card">
+      <div class="intro-icon"><i class="fas fa-graduation-cap"></i></div>
+      <p>Após concluírem esta formação, os formandos estarão <strong style="color:var(--orange)">aptos para desempenharem</strong> as seguintes atividades profissionais — com as competências e a certificação reconhecida internacionalmente para entrar no mercado de IT com confiança.</p>
+    </div>
+  </div>
+</div>
+
+<!-- STATS -->
+<div class="container">
+  <div class="stats-section">
+    <div class="stats-grid">
+      <div class="stat-card fade-up delay-1">
+        <div class="stat-number">10</div>
+        <div class="stat-label">Saídas Profissionais disponíveis</div>
+      </div>
+      <div class="stat-card fade-up delay-2">
+        <div class="stat-number">92%</div>
+        <div class="stat-label">Taxa de empregabilidade nos primeiros 6 meses</div>
+      </div>
+      <div class="stat-card fade-up delay-3">
+        <div class="stat-number">1000+</div>
+        <div class="stat-label">Empresas parceiras de emprego</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- MAIN: JOBS LIST + IMAGE -->
+<div class="container">
+  <div class="main-section">
+    <div class="main-grid">
+
+      <!-- JOBS LIST -->
+      <div class="jobs-card fade-up">
+        <div class="jobs-header">
+          <i class="fas fa-list-check"></i>
+          <div>
+            <h2>Funções para as quais ficará habilitado</h2>
+            <p>10 saídas profissionais reconhecidas no mercado</p>
+          </div>
+        </div>
+        <div class="jobs-list">
+
+          <div class="job-item">
+            <div class="job-num">01</div>
+            <div class="job-icon"><i class="fas fa-screwdriver-wrench"></i></div>
+            <div class="job-info">
+              <div class="job-title">Assistente de Manutenção e Reparação</div>
+              <div class="job-sub">Hardware, software e redes informáticas</div>
+            </div>
+            <i class="fas fa-chevron-right job-arrow"></i>
+          </div>
+
+          <div class="job-item">
+            <div class="job-num">02</div>
+            <div class="job-icon"><i class="fas fa-headset"></i></div>
+            <div class="job-info">
+              <div class="job-title">Operador de Assistência Informática</div>
+              <div class="job-sub">Sistemas e redes</div>
+            </div>
+            <i class="fas fa-chevron-right job-arrow"></i>
+          </div>
+
+          <div class="job-item">
+            <div class="job-num">03</div>
+            <div class="job-icon"><i class="fas fa-code"></i></div>
+            <div class="job-info">
+              <div class="job-title">Assistente de Software</div>
+              <div class="job-sub">Sistemas e redes</div>
+            </div>
+            <i class="fas fa-chevron-right job-arrow"></i>
+          </div>
+
+          <div class="job-item">
+            <div class="job-num">04</div>
+            <div class="job-icon"><i class="fas fa-shop"></i></div>
+            <div class="job-info">
+              <div class="job-title">Comercial de Informática</div>
+              <div class="job-sub">Vendas e consultoria tecnológica</div>
+            </div>
+            <i class="fas fa-chevron-right job-arrow"></i>
+          </div>
+
+          <div class="job-item">
+            <div class="job-num">05</div>
+            <div class="job-icon"><i class="fas fa-handshake"></i></div>
+            <div class="job-info">
+              <div class="job-title">Assistente de Serviço Pós-Venda</div>
+              <div class="job-sub">Suporte e fidelização de clientes</div>
+            </div>
+            <i class="fas fa-chevron-right job-arrow"></i>
+          </div>
+
+          <div class="job-item">
+            <div class="job-num">06</div>
+            <div class="job-icon"><i class="fas fa-desktop"></i></div>
+            <div class="job-info">
+              <div class="job-title">Operador de Manutenção de Equipamentos</div>
+              <div class="job-sub">Equipamentos informáticos</div>
+            </div>
+            <i class="fas fa-chevron-right job-arrow"></i>
+          </div>
+
+          <div class="job-item">
+            <div class="job-num">07</div>
+            <div class="job-icon"><i class="fas fa-network-wired"></i></div>
+            <div class="job-info">
+              <div class="job-title">Suporte a Redes Informáticas</div>
+              <div class="job-sub">Network data support — pequeno/médio porte</div>
+            </div>
+            <i class="fas fa-chevron-right job-arrow"></i>
+          </div>
+
+          <div class="job-item">
+            <div class="job-num">08</div>
+            <div class="job-icon"><i class="fas fa-server"></i></div>
+            <div class="job-info">
+              <div class="job-title">Administrador de Servidores</div>
+              <div class="job-sub">Infraestrutura de pequeno/médio porte</div>
+            </div>
+            <i class="fas fa-chevron-right job-arrow"></i>
+          </div>
+
+          <div class="job-item">
+            <div class="job-num">09</div>
+            <div class="job-icon"><i class="fas fa-shield-halved"></i></div>
+            <div class="job-info">
+              <div class="job-title">Especialista de Suporte a Sistemas</div>
+              <div class="job-sub">System support specialist</div>
+            </div>
+            <i class="fas fa-chevron-right job-arrow"></i>
+          </div>
+
+          <div class="job-item">
+            <div class="job-num">10</div>
+            <div class="job-icon"><i class="fas fa-user-gear"></i></div>
+            <div class="job-info">
+              <div class="job-title">Suporte de Sistemas Finais</div>
+              <div class="job-sub">End user computing</div>
+            </div>
+            <i class="fas fa-chevron-right job-arrow"></i>
+          </div>
+
+        </div>
+      </div>
+
+      <!-- IMAGE -->
+      <div class="image-card fade-up delay-2">
+        <img src="imagens/saidas_profissionais.jpg" alt="Técnico de IT a trabalhar com infraestrutura de redes" />
+      </div>
+
+    </div>
+  </div>
+</div>
+
+<!-- BOTTOM BANNER -->
+<div class="container">
+  <div class="bottom-section fade-up">
+    <div class="bottom-card">
+      <div class="bottom-icon"><i class="fas fa-rocket"></i></div>
+      <div class="bottom-text">
+        <h2>O Teu Futuro Começa Aqui</h2>
+        <p>Com a formação MasterD e a certificação <strong>CompTIA A+</strong>, estarás equipado com as competências técnicas e práticas reconhecidas internacionalmente para ingressar no mercado de IT — seja em hardware, software, redes ou helpdesk.</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+const observer = new IntersectionObserver((entries) => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting) entry.target.classList.add('visible');
+  });
+}, { threshold: 0.1 });
+
+document.querySelectorAll('.fade-up').forEach(el => observer.observe(el));
+</script>
+</body>
+</html>

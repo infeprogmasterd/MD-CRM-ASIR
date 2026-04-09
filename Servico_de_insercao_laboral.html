@@ -1,0 +1,842 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>MasterD – Serviço de Inserção Laboral</title>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+<style>
+* { margin: 0; padding: 0; box-sizing: border-box; }
+
+:root {
+  --orange:      #e67e22;
+  --orange-dark: #d35400;
+  --dark:        #2c3e50;
+  --darker:      #1a252f;
+  --blue:        #2980b9;
+  --blue-dark:   #1f618d;
+  --green:       #27ae60;
+  --text:        #444;
+  --text-light:  #666;
+  --white:       #ffffff;
+}
+
+html { scroll-behavior: smooth; }
+
+body {
+  background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+  font-family: 'Inter', sans-serif;
+  min-height: 100vh;
+  overflow-x: hidden;
+  color: var(--text);
+}
+
+/* ── FADE UP ─────────────────────────────────────── */
+.fade-up {
+  opacity: 0;
+  transform: translateY(24px);
+  transition: opacity 0.65s ease, transform 0.65s ease;
+}
+.fade-up.visible { opacity: 1; transform: translateY(0); }
+.delay-1 { transition-delay: 0.08s; }
+.delay-2 { transition-delay: 0.16s; }
+.delay-3 { transition-delay: 0.24s; }
+.delay-4 { transition-delay: 0.32s; }
+
+/* ── HERO ─────────────────────────────────────────── */
+.hero {
+  background: linear-gradient(135deg, var(--orange) 0%, var(--orange-dark) 100%);
+  color: #fff;
+  padding: 80px 20px 110px;
+  text-align: center;
+  position: relative;
+  overflow: hidden;
+  box-shadow: 0 20px 60px rgba(230,126,34,0.3);
+}
+
+.hero::before {
+  content: '';
+  position: absolute;
+  top: -50%; right: -10%;
+  width: 600px; height: 600px;
+  background: radial-gradient(circle, rgba(255,255,255,0.1) 0%, transparent 70%);
+  border-radius: 50%;
+  animation: float 8s ease-in-out infinite;
+}
+
+.hero::after {
+  content: '';
+  position: absolute;
+  bottom: -2px; left: 0;
+  width: 100%; height: 65px;
+  background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+  clip-path: ellipse(55% 100% at 50% 100%);
+}
+
+@keyframes float {
+  0%,100% { transform: translateY(0); }
+  50%      { transform: translateY(20px); }
+}
+
+.hero-content {
+  position: relative;
+  z-index: 2;
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+.hero-badge {
+  display: inline-block;
+  background: rgba(255,255,255,0.2);
+  padding: 10px 22px;
+  border-radius: 50px;
+  font-size: 13px;
+  font-weight: 600;
+  margin-bottom: 22px;
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(255,255,255,0.3);
+  letter-spacing: 0.5px;
+}
+
+.hero h1 {
+  font-family: 'Poppins', sans-serif;
+  font-size: 3.2em;
+  font-weight: 800;
+  margin-bottom: 18px;
+  text-shadow: 2px 2px 8px rgba(0,0,0,0.2);
+  line-height: 1.2;
+}
+
+.hero p {
+  font-size: 1.2em;
+  opacity: 0.95;
+  font-weight: 300;
+  line-height: 1.7;
+  max-width: 620px;
+  margin: 0 auto;
+}
+
+/* ── CONTAINER ────────────────────────────────────── */
+.container {
+  max-width: 1000px;
+  margin: 0 auto;
+  padding: 0 20px;
+}
+
+/* ── INTRO SPLIT ─────────────────────────────────── */
+.intro-section { margin: 60px 0 50px; }
+
+.intro-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 28px;
+}
+
+.intro-card {
+  background: var(--white);
+  border-radius: 16px;
+  padding: 40px 36px;
+  box-shadow: 0 10px 40px rgba(0,0,0,0.08);
+  position: relative;
+  overflow: hidden;
+}
+
+.intro-card::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  height: 5px;
+  border-radius: 16px 16px 0 0;
+}
+
+.intro-card.orange::before { background: linear-gradient(90deg, var(--orange), var(--orange-dark)); }
+.intro-card.blue::before   { background: linear-gradient(90deg, var(--blue), var(--blue-dark)); }
+
+.intro-icon {
+  width: 60px; height: 60px;
+  border-radius: 50%;
+  display: flex;
+  flex-wrap: wrap; align-items: center; justify-content: center;
+  font-size: 24px;
+  color: #fff;
+  margin-bottom: 20px;
+  box-shadow: 0 6px 22px rgba(0,0,0,0.2);
+}
+
+.icon-orange { background: linear-gradient(135deg, var(--orange), var(--orange-dark)); }
+.icon-blue   { background: linear-gradient(135deg, var(--blue), var(--blue-dark)); }
+
+.intro-card h3 {
+  font-family: 'Poppins', sans-serif;
+  font-size: 1.1em;
+  font-weight: 700;
+  color: var(--dark);
+  margin-bottom: 14px;
+}
+
+.intro-card p {
+  font-size: 15px;
+  line-height: 1.85;
+  color: var(--text);
+}
+
+.intro-card strong { color: var(--orange); font-weight: 600; }
+.intro-card.blue strong { color: var(--blue); }
+
+/* ── STATS ───────────────────────────────────────── */
+.stats-section { margin: 0 0 50px; }
+
+.stats-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 20px;
+}
+
+.stat-card {
+  background: var(--white);
+  border-radius: 14px;
+  padding: 30px 18px;
+  text-align: center;
+  box-shadow: 0 8px 28px rgba(0,0,0,0.07);
+  border-top: 4px solid var(--orange);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.stat-card:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 18px 50px rgba(230,126,34,0.15);
+}
+
+.stat-number {
+  font-family: 'Poppins', sans-serif;
+  font-size: 2.2em;
+  font-weight: 800;
+  color: var(--orange);
+  line-height: 1;
+  margin-bottom: 8px;
+}
+
+.stat-label {
+  font-size: 12.5px;
+  color: var(--text-light);
+  font-weight: 500;
+  line-height: 1.45;
+}
+
+/* ── IMAGE SECTION ─────────────────────────────────── */
+.image-section { margin: 0 0 50px; }
+
+.image-card {
+  background: var(--white);
+  border-radius: 16px;
+  overflow: hidden;
+  box-shadow: 0 14px 50px rgba(0,0,0,0.1);
+}
+
+.image-card img {
+  width: 100%;
+  height: auto;
+  display: block;
+}
+
+/* ── MDPP SECTION ────────────────────────────────── */
+.mdpp-section { margin: 0 0 50px; }
+
+.section-label {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 14px;
+  margin-bottom: 28px;
+}
+
+.section-label-icon {
+  width: 44px; height: 44px;
+  background: linear-gradient(135deg, var(--orange), var(--orange-dark));
+  border-radius: 12px;
+  display: flex;
+  flex-wrap: wrap; align-items: center; justify-content: center;
+  color: #fff;
+  font-size: 18px;
+  flex-shrink: 0;
+}
+
+.section-label span {
+  font-family: 'Poppins', sans-serif;
+  font-size: 1.55em;
+  font-weight: 700;
+  color: var(--dark);
+}
+
+.mdpp-card {
+  background: var(--white);
+  border-radius: 16px;
+  overflow: hidden;
+  box-shadow: 0 10px 40px rgba(0,0,0,0.09);
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+}
+
+.mdpp-left {
+  background: linear-gradient(135deg, var(--dark) 0%, var(--darker) 100%);
+  padding: 46px 40px;
+  color: #fff;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  position: relative;
+  overflow: hidden;
+}
+
+.mdpp-left::before {
+  content: '';
+  position: absolute;
+  bottom: -50px; right: -50px;
+  width: 200px; height: 200px;
+  background: radial-gradient(circle, rgba(230,126,34,0.2) 0%, transparent 70%);
+  border-radius: 50%;
+}
+
+.mdpp-tag {
+  display: inline-block;
+  background: rgba(230,126,34,0.2);
+  border: 1px solid rgba(230,126,34,0.4);
+  color: var(--orange);
+  font-size: 11px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  padding: 5px 14px;
+  border-radius: 50px;
+  margin-bottom: 18px;
+  width: fit-content;
+}
+
+.mdpp-left h3 {
+  font-family: 'Poppins', sans-serif;
+  font-size: 1.35em;
+  font-weight: 700;
+  margin-bottom: 14px;
+  line-height: 1.4;
+}
+
+.mdpp-left p {
+  font-size: 14.5px;
+  opacity: 0.82;
+  line-height: 1.8;
+  font-weight: 300;
+}
+
+.mdpp-left strong { color: var(--orange); opacity: 1; font-weight: 600; }
+
+.mdpp-right {
+  padding: 40px 36px;
+  background: var(--white);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 18px;
+}
+
+.mdpp-feature {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: flex-start;
+  gap: 14px;
+}
+
+.mdpp-feat-icon {
+  flex-shrink: 0;
+  width: 40px; height: 40px;
+  background: linear-gradient(135deg, rgba(230,126,34,0.1), rgba(230,126,34,0.04));
+  border-radius: 10px;
+  display: flex;
+  flex-wrap: wrap; align-items: center; justify-content: center;
+  font-size: 16px;
+  color: var(--orange);
+  transition: all 0.3s ease;
+}
+
+.mdpp-feature:hover .mdpp-feat-icon {
+  background: linear-gradient(135deg, var(--orange), var(--orange-dark));
+  color: #fff;
+}
+
+.mdpp-feat-text h4 {
+  font-family: 'Poppins', sans-serif;
+  font-size: 0.95em;
+  font-weight: 700;
+  color: var(--dark);
+  margin-bottom: 4px;
+}
+
+.mdpp-feat-text p {
+  font-size: 13.5px;
+  color: var(--text-light);
+  line-height: 1.6;
+}
+
+/* ── BOLSA EMPREGO BANNER ────────────────────────── */
+.bolsa-section { margin: 0 0 50px; }
+
+.bolsa-card {
+  background: linear-gradient(135deg, var(--green) 0%, #1e8449 100%);
+  border-radius: 16px;
+  padding: 46px 48px;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 36px;
+  box-shadow: 0 14px 50px rgba(39,174,96,0.25);
+  color: #fff;
+  position: relative;
+  overflow: hidden;
+}
+
+.bolsa-card::before {
+  content: '';
+  position: absolute;
+  right: -60px; top: -60px;
+  width: 260px; height: 260px;
+  background: radial-gradient(circle, rgba(255,255,255,0.12) 0%, transparent 70%);
+  border-radius: 50%;
+}
+
+.bolsa-icon {
+  flex-shrink: 0;
+  width: 80px; height: 80px;
+  background: rgba(255,255,255,0.2);
+  border-radius: 50%;
+  display: flex;
+  flex-wrap: wrap; align-items: center; justify-content: center;
+  font-size: 32px;
+  backdrop-filter: blur(10px);
+  border: 2px solid rgba(255,255,255,0.3);
+}
+
+.bolsa-text h2 {
+  font-family: 'Poppins', sans-serif;
+  font-size: 1.45em;
+  font-weight: 700;
+  margin-bottom: 10px;
+}
+
+.bolsa-text p {
+  font-size: 15px;
+  opacity: 0.92;
+  line-height: 1.75;
+  font-weight: 300;
+  max-width: 560px;
+}
+
+.bolsa-text strong { font-weight: 700; opacity: 1; }
+
+/* ── INFOGRAPHIC ─────────────────────────────────── */
+.infographic-section { margin: 0 0 70px; }
+
+.infographic-card {
+  border-radius: 16px;
+  overflow: hidden;
+  box-shadow: 0 14px 50px rgba(0,0,0,0.12);
+}
+
+.infographic-card img {
+  width: 100%;
+  height: auto;
+  display: block;
+}
+
+/* ── VIDEO SECTION ─────────────────────────────────── */
+.video-section { margin: 0 0 70px; }
+
+.video-card {
+  background: var(--white);
+  border-radius: 16px;
+  overflow: hidden;
+  box-shadow: 0 14px 50px rgba(0,0,0,0.1);
+}
+
+.video-header {
+  background: linear-gradient(135deg, var(--orange), var(--orange-dark));
+  padding: 26px 36px;
+  color: #fff;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 14px;
+}
+
+.video-header i { font-size: 22px; opacity: 0.9; }
+
+.video-header h2 {
+  font-family: 'Poppins', sans-serif;
+  font-size: 1.15em;
+  font-weight: 700;
+}
+
+.video-header p {
+  font-size: 13px;
+  opacity: 0.88;
+  margin-top: 3px;
+  font-weight: 300;
+}
+
+.video-wrapper {
+  position: relative;
+  padding-bottom: 56.25%;
+  height: 0;
+  overflow: hidden;
+  background: #000;
+}
+
+.video-wrapper video {
+  position: absolute;
+  top: 0; left: 0;
+  width: 100%;
+  height: 100%;
+  display: block;
+}
+
+/* ── RESPONSIVE ──────────────────────────────────── */
+@media (max-width: 900px) {
+  .stats-grid { grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); }
+}
+
+@media (max-width: 768px) {
+  .hero { padding: 55px 20px 90px; }
+  .hero h1 { font-size: 2em; }
+  .hero p  { font-size: 1em; }
+
+  .intro-grid { grid-template-columns: 1fr; }
+  .mdpp-card { grid-template-columns: 1fr; }
+  .mdpp-left { padding: 36px 28px; }
+  .mdpp-right { padding: 30px 28px; }
+
+  .bolsa-card { flex-direction: column; padding: 36px 28px; text-align: center; }
+  .bolsa-icon { margin: 0 auto; }
+}
+
+@media (max-width: 480px) {
+  .hero { padding: 40px 16px 80px; }
+  .hero h1 { font-size: 1.6em; }
+  .hero-badge { font-size: 11px; padding: 8px 16px; }
+
+  .intro-card { padding: 28px 20px; }
+  .stats-grid { grid-template-columns: 1fr 1fr; gap: 14px; }
+  .stat-card { padding: 22px 14px; }
+  .stat-number { font-size: 1.8em; }
+
+  .bolsa-card { padding: 28px 20px; }
+  .bolsa-text h2 { font-size: 1.2em; }
+
+  .video-body { padding: 24px 20px; }
+  .section-label span { font-size: 1.2em; }
+}
+
+/* ═══════════════════════════════════════════════════════════
+   RESPONSIVE GLOBAL PATCH — garante compatibilidade total
+   ═══════════════════════════════════════════════════════════ */
+
+/* Imagens e vídeos sempre fluidos */
+img, video, iframe {
+  max-width: 100%;
+  height: auto;
+}
+
+/* Todos os flex containers com wrap por defeito */
+[class*="card"]:not(.func-icon):not(.detail-icon):not(.stat-icon):not(.bottom-icon):not(.comptia-icon):not(.intro-icon):not(.section-label-icon):not(.format-header-icon):not(.modality-header-icon):not(.split-card-header),
+[class*="grid"]:not(.functions-grid):not(.functions-grid-bottom):not(.stats-grid):not(.detail-grid):not(.trust-grid):not(.footer-content) {
+  min-width: 0;
+}
+
+/* Breakpoint extra: tablet grande (769px – 1024px) */
+@media (max-width: 1024px) and (min-width: 769px) {
+  .container { padding: 0 28px; }
+  [class*="-grid"] { gap: 18px; }
+}
+
+/* ── TABLET (≤ 768px) — reforço global ── */
+@media (max-width: 768px) {
+  /* Grids: forçar 1 coluna ou 2 no máximo */
+  .functions-grid,
+  .detail-grid,
+  .trust-grid,
+  .footer-content,
+  .modulos-grid,
+  .main-grid,
+  .cert-layout,
+  .objectives-layout,
+  .social-grid,
+  .stats-grid,
+  [class$="-grid"] {
+    grid-template-columns: 1fr 1fr !important;
+    gap: 16px;
+  }
+
+  /* Flex containers: empilhar em coluna */
+  .intro-card,
+  .bottom-card,
+  .comptia-card,
+  .bolsa-card,
+  .access-card,
+  .cursos-card,
+  .commitment-card,
+  .iso-card,
+  .modality-body,
+  .format-body,
+  .split-card-body,
+  .campus-card,
+  .acesso-card {
+    flex-direction: column !important;
+    align-items: flex-start;
+  }
+
+  /* Ícones centralizados quando em coluna */
+  .intro-icon, .bottom-icon, .comptia-icon, .section-label-icon,
+  .intro-icon-wrap, .diploma-header-icon, .modality-header-icon,
+  .format-header-icon, .split-card-header {
+    margin: 0 auto;
+  }
+
+  /* Texto centrado nos banners */
+  .bottom-card, .comptia-card { text-align: center; }
+
+  /* Vídeos responsivos */
+  video { width: 100% !important; }
+}
+
+/* ── MOBILE (≤ 480px) — reforço global ── */
+@media (max-width: 480px) {
+  /* Todos os grids em 1 coluna */
+  .functions-grid,
+  .functions-grid-bottom,
+  .detail-grid,
+  .trust-grid,
+  .footer-content,
+  .modulos-grid,
+  .main-grid,
+  .cert-layout,
+  .objectives-layout,
+  .social-grid,
+  .stats-grid,
+  [class$="-grid"],
+  .certifications {
+    grid-template-columns: 1fr !important;
+    gap: 14px;
+  }
+
+  /* Stat cards em coluna */
+  .stat-card {
+    flex-direction: column;
+    text-align: center;
+    align-items: center;
+  }
+
+  /* Garantir que nenhum elemento transborde */
+  * { max-width: 100%; word-break: break-word; }
+
+  /* Padding seguro nos containers */
+  .container { padding: 0 14px; }
+
+  /* Tipografia escalada */
+  .hero h1 { font-size: clamp(1.4em, 6vw, 2em) !important; }
+  .stat-number { font-size: clamp(1.8em, 8vw, 2.8em) !important; }
+
+  /* Botões full-width em mobile */
+  .btn, .cta-btn, .hero-cta a, .hero-cta button {
+    width: 100%;
+    max-width: 320px;
+    display: block;
+    margin: 0 auto 10px;
+    text-align: center;
+  }
+
+  /* Hero CTA em coluna */
+  .hero-cta { flex-direction: column; align-items: center; }
+
+  /* Certificações em coluna */
+  .certifications { flex-direction: column; align-items: center; }
+  .cert-item { width: 100%; max-width: 280px; text-align: center; }
+
+  /* Vídeos */
+  video { width: 100% !important; height: auto !important; }
+
+  /* Cards de docentes */
+  .teacher-photo-wrap, .photo-ring { width: 120px !important; height: 120px !important; }
+}
+
+/* ── MOBILE PEQUENO (≤ 360px) ── */
+@media (max-width: 360px) {
+  .hero h1 { font-size: 1.3em !important; }
+  .hero-badge { font-size: 10px; padding: 6px 12px; }
+  .container { padding: 0 10px; }
+  .func-card, .detail-card, .stat-card { padding: 20px 14px; }
+  .stat-number { font-size: 1.6em !important; }
+}
+
+</style>
+</head>
+<body>
+
+<!-- HERO -->
+<div class="hero">
+  <div class="hero-content">
+    <div class="hero-badge"><i class="fas fa-handshake"></i> &nbsp;MasterD – Empregabilidade</div>
+    <h1><i class="fas fa-briefcase"></i> Serviço de Inserção Laboral</h1>
+    <p>A ponte entre a sua formação e o mundo laboral — acompanhamos o seu percurso até ao sucesso profissional.</p>
+  </div>
+</div>
+
+<!-- INTRO TWO CARDS -->
+<div class="container">
+  <div class="intro-section">
+    <div class="intro-grid">
+
+      <div class="intro-card orange fade-up delay-1">
+        <div class="intro-icon icon-orange"><i class="fas fa-route"></i></div>
+        <h3>Uma Ponte para o Mercado</h3>
+        <p>O <strong>Serviço de Inserção Laboral</strong> é um recurso estratégico concebido para <strong>apoiar os formandos na transição para o mercado de trabalho</strong>, impulsionando o seu <strong>sucesso profissional</strong>.</p>
+        <p style="margin-top:12px;">Acreditamos que o percurso formativo não termina — <strong>é apenas o início de uma carreira promissora</strong>.</p>
+      </div>
+
+      <div class="intro-card blue fade-up delay-2">
+        <div class="intro-icon icon-blue"><i class="fas fa-compass"></i></div>
+        <h3>Orientação e Desenvolvimento</h3>
+        <p>Vamos atuar como uma <strong>ponte entre a formação e o mundo laboral</strong>, proporcionando <strong>orientação e desenvolvimento</strong> de competências para a <strong>empregabilidade</strong>.</p>
+        <p style="margin-top:12px;">Desde o primeiro dia no Campus Virtual, passará a ter acesso a oportunidades reais na sua área.</p>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+<!-- STATS -->
+<div class="container">
+  <div class="stats-section">
+    <div class="stats-grid">
+      <div class="stat-card fade-up delay-1">
+        <div class="stat-number">+150</div>
+        <div class="stat-label">Bolsas de Emprego</div>
+      </div>
+      <div class="stat-card fade-up delay-2">
+        <div class="stat-number">+1950</div>
+        <div class="stat-label">Formandos alcançaram a sua meta</div>
+      </div>
+      <div class="stat-card fade-up delay-3">
+        <div class="stat-number">+1500</div>
+        <div class="stat-label">Empresas parceiras</div>
+      </div>
+      <div class="stat-card fade-up delay-4">
+        <div class="stat-number">+350</div>
+        <div class="stat-label">Estágios realizados</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- IMAGE -->
+<div class="container">
+  <div class="image-section fade-up">
+    <div class="image-card">
+      <img src="imagens/sil.jpg" alt="O Seu Sucesso É a Nossa Missão – MasterD" />
+    </div>
+  </div>
+</div>
+
+<!-- MDPP -->
+<div class="container">
+  <div class="mdpp-section">
+    <div class="section-label fade-up">
+      <div class="section-label-icon"><i class="fas fa-user-tie"></i></div>
+      <span>Módulo de Desenvolvimento Pessoal e Profissional</span>
+    </div>
+
+    <div class="mdpp-card fade-up">
+      <div class="mdpp-left">
+        <div class="mdpp-tag">MDPP</div>
+        <h3>Desenvolva as Competências que o Mercado Valoriza</h3>
+        <p>Ao longo da formação, terá acesso ao <strong>Módulo de Desenvolvimento Pessoal e Profissional (MDPP)</strong>, com o objetivo de desenvolver e consolidar competências essenciais que permitem aumentar a sua capacidade de resposta aos <strong>desafios profissionais</strong> que o esperam.</p>
+        <p style="margin-top:14px;">Essencial caso opte por realizar um <strong>Estágio Formativo</strong>.</p>
+      </div>
+
+      <div class="mdpp-right">
+        <div class="mdpp-feature">
+          <div class="mdpp-feat-icon"><i class="fas fa-bullseye"></i></div>
+          <div class="mdpp-feat-text">
+            <h4>Plano de Carreira Personalizado</h4>
+            <p>Definição de objetivos e estratégias adaptados ao perfil de cada formando.</p>
+          </div>
+        </div>
+        <div class="mdpp-feature">
+          <div class="mdpp-feat-icon"><i class="fas fa-file-lines"></i></div>
+          <div class="mdpp-feat-text">
+            <h4>Preparação para o Mercado</h4>
+            <p>Currículum vitae, entrevistas, LinkedIn e posicionamento profissional.</p>
+          </div>
+        </div>
+        <div class="mdpp-feature">
+          <div class="mdpp-feat-icon"><i class="fas fa-people-group"></i></div>
+          <div class="mdpp-feat-text">
+            <h4>Soft Skills e Liderança</h4>
+            <p>Comunicação, trabalho em equipa e gestão de tempo para o ambiente laboral.</p>
+          </div>
+        </div>
+        <div class="mdpp-feature">
+          <div class="mdpp-feat-icon"><i class="fas fa-handshake-angle"></i></div>
+          <div class="mdpp-feat-text">
+            <h4>Estágio Formativo</h4>
+            <p>Acesso a empresas parceiras para aplicação prática das competências adquiridas.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- VIDEO MDPP -->
+<div class="container">
+  <div class="video-section fade-up">
+    <div class="video-card">
+      <div class="video-header">
+        <i class="fas fa-play-circle"></i>
+        <div>
+          <h2>Boas-vindas ao MDPP</h2>
+          <p>Módulo de Desenvolvimento Pessoal e Profissional — vídeo introdutório</p>
+        </div>
+      </div>
+      <div class="video-wrapper">
+        <video controls preload="metadata">
+          <source src="imagens/mdpp_video.mkv" type="video/mp4">
+          <source src="imagens/mdpp_video.mkv" type="video/webm">
+          O seu browser não suporta a reprodução deste vídeo.
+        </video>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- BOLSA DE EMPREGO -->
+<div class="container">
+  <div class="bolsa-section fade-up">
+    <div class="bolsa-card">
+      <div class="bolsa-icon"><i class="fas fa-magnifying-glass-dollar"></i></div>
+      <div class="bolsa-text">
+        <h2><i class="fas fa-briefcase"></i> &nbsp;Bolsa de Emprego</h2>
+        <p>Desde o momento em que acede ao seu <strong>Campus Virtual</strong>, passará a ser informado, através da nossa <strong>Bolsa de Emprego</strong>, sobre oportunidades de trabalho na sua área, disponibilizadas pelas empresas que nos contactam — mais de <strong>1500 empresas parceiras</strong> à sua espera.</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+const observer = new IntersectionObserver((entries) => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting) entry.target.classList.add('visible');
+  });
+}, { threshold: 0.1 });
+
+document.querySelectorAll('.fade-up').forEach(el => observer.observe(el));
+</script>
+</body>
+</html>

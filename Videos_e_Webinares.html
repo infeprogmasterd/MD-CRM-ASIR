@@ -1,0 +1,917 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>MasterD – Vídeos e Webinares</title>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+<style>
+* { margin: 0; padding: 0; box-sizing: border-box; }
+
+:root {
+  --orange:      #e67e22;
+  --orange-dark: #d35400;
+  --blue:        #2980b9;
+  --blue-dark:   #1f618d;
+  --dark:        #2c3e50;
+  --darker:      #1a252f;
+  --text:        #444;
+  --text-light:  #666;
+  --white:       #ffffff;
+}
+
+html { scroll-behavior: smooth; }
+
+body {
+  background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+  font-family: 'Inter', sans-serif;
+  min-height: 100vh;
+  overflow-x: hidden;
+  color: var(--text);
+}
+
+/* ── HERO ─────────────────────────────────────────── */
+.hero {
+  background: linear-gradient(135deg, var(--orange) 0%, var(--orange-dark) 100%);
+  color: #fff;
+  padding: 80px 20px 110px;
+  text-align: center;
+  position: relative;
+  overflow: hidden;
+  box-shadow: 0 20px 60px rgba(230,126,34,0.3);
+}
+
+.hero::before {
+  content: '';
+  position: absolute;
+  top: -50%; right: -10%;
+  width: 600px; height: 600px;
+  background: radial-gradient(circle, rgba(255,255,255,0.1) 0%, transparent 70%);
+  border-radius: 50%;
+  animation: float 8s ease-in-out infinite;
+}
+
+.hero::after {
+  content: '';
+  position: absolute;
+  bottom: -2px; left: 0;
+  width: 100%; height: 65px;
+  background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+  clip-path: ellipse(55% 100% at 50% 100%);
+}
+
+@keyframes float {
+  0%,100% { transform: translateY(0); }
+  50%      { transform: translateY(20px); }
+}
+
+.hero-content {
+  position: relative;
+  z-index: 2;
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+.hero-badge {
+  display: inline-block;
+  background: rgba(255,255,255,0.2);
+  padding: 10px 22px;
+  border-radius: 50px;
+  font-size: 13px;
+  font-weight: 600;
+  margin-bottom: 22px;
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(255,255,255,0.3);
+  letter-spacing: 0.5px;
+}
+
+.hero h1 {
+  font-family: 'Poppins', sans-serif;
+  font-size: 3.4em;
+  font-weight: 800;
+  margin-bottom: 18px;
+  text-shadow: 2px 2px 8px rgba(0,0,0,0.2);
+  line-height: 1.2;
+}
+
+.hero p {
+  font-size: 1.2em;
+  opacity: 0.95;
+  font-weight: 300;
+  line-height: 1.7;
+  max-width: 600px;
+  margin: 0 auto;
+}
+
+/* ── CONTAINER ────────────────────────────────────── */
+.container {
+  max-width: 1000px;
+  margin: 0 auto;
+  padding: 0 20px;
+}
+
+/* ── INTRO ─────────────────────────────────────────── */
+.intro-section {
+  margin: 60px 0 50px;
+}
+
+.intro-card {
+  background: var(--white);
+  border-radius: 16px;
+  padding: 44px 48px;
+  box-shadow: 0 10px 40px rgba(0,0,0,0.08);
+  position: relative;
+  overflow: hidden;
+  text-align: center;
+}
+
+.intro-card::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  height: 5px;
+  background: linear-gradient(90deg, var(--orange), var(--orange-dark));
+  border-radius: 16px 16px 0 0;
+}
+
+.intro-icon {
+  width: 72px; height: 72px;
+  background: linear-gradient(135deg, var(--orange), var(--orange-dark));
+  border-radius: 50%;
+  display: flex;
+  flex-wrap: wrap; align-items: center; justify-content: center;
+  font-size: 28px;
+  color: #fff;
+  margin: 0 auto 24px;
+  box-shadow: 0 8px 28px rgba(230,126,34,0.35);
+}
+
+.intro-card p {
+  font-size: 16px;
+  line-height: 1.9;
+  color: var(--text);
+  max-width: 680px;
+  margin: 0 auto;
+}
+
+.intro-card strong { color: var(--orange); font-weight: 600; }
+
+/* ── FEATURE CARDS ───────────────────────────────── */
+.features-section {
+  margin: 20px 0 60px;
+}
+
+.features-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 24px;
+}
+
+.feature-card {
+  background: var(--white);
+  border-radius: 16px;
+  padding: 36px 28px;
+  box-shadow: 0 8px 28px rgba(0,0,0,0.07);
+  text-align: center;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  position: relative;
+  overflow: hidden;
+  opacity: 0;
+  transform: translateY(24px);
+  transition: opacity 0.6s ease, transform 0.6s ease, box-shadow 0.3s ease;
+}
+
+.feature-card.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.feature-card:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 18px 50px rgba(230,126,34,0.15);
+}
+
+.feature-card::after {
+  content: '';
+  position: absolute;
+  bottom: 0; left: 0;
+  width: 100%; height: 4px;
+  background: linear-gradient(90deg, var(--orange), var(--orange-dark));
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform 0.4s ease;
+}
+
+.feature-card:hover::after { transform: scaleX(1); }
+
+.feature-icon {
+  width: 64px; height: 64px;
+  border-radius: 50%;
+  display: flex;
+  flex-wrap: wrap; align-items: center; justify-content: center;
+  font-size: 26px;
+  margin: 0 auto 20px;
+  transition: all 0.3s ease;
+}
+
+.feature-card:hover .feature-icon {
+  transform: scale(1.1);
+}
+
+.icon-video {
+  background: linear-gradient(135deg, rgba(230,126,34,0.12), rgba(230,126,34,0.05));
+  color: var(--orange);
+}
+
+.icon-live {
+  background: linear-gradient(135deg, rgba(41,128,185,0.12), rgba(41,128,185,0.05));
+  color: var(--blue);
+}
+
+.icon-replay {
+  background: linear-gradient(135deg, rgba(39,174,96,0.12), rgba(39,174,96,0.05));
+  color: #27ae60;
+}
+
+.feature-card:hover .icon-video  { background: linear-gradient(135deg, var(--orange), var(--orange-dark)); color: #fff; }
+.feature-card:hover .icon-live   { background: linear-gradient(135deg, var(--blue), var(--blue-dark)); color: #fff; }
+.feature-card:hover .icon-replay { background: linear-gradient(135deg, #27ae60, #1e8449); color: #fff; }
+
+.feature-card h3 {
+  font-family: 'Poppins', sans-serif;
+  font-size: 1.05em;
+  font-weight: 700;
+  color: var(--dark);
+  margin-bottom: 12px;
+}
+
+.feature-card p {
+  font-size: 14px;
+  line-height: 1.75;
+  color: var(--text-light);
+}
+
+/* ── DEEP DIVE SECTION ───────────────────────────── */
+.deepdive-section {
+  margin: 0 0 60px;
+}
+
+.section-label {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 14px;
+  margin-bottom: 32px;
+}
+
+.section-label-icon {
+  width: 44px; height: 44px;
+  background: linear-gradient(135deg, var(--orange), var(--orange-dark));
+  border-radius: 12px;
+  display: flex;
+  flex-wrap: wrap; align-items: center; justify-content: center;
+  color: #fff;
+  font-size: 18px;
+  flex-shrink: 0;
+}
+
+.section-label span {
+  font-family: 'Poppins', sans-serif;
+  font-size: 1.55em;
+  font-weight: 700;
+  color: var(--dark);
+}
+
+.deepdive-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 28px;
+}
+
+/* ── SPLIT CARD ──────────────────────────────────── */
+.split-card {
+  border-radius: 16px;
+  overflow: hidden;
+  box-shadow: 0 8px 30px rgba(0,0,0,0.09);
+  opacity: 0;
+  transform: translateY(20px);
+  transition: opacity 0.6s ease, transform 0.6s ease;
+}
+
+.split-card.visible { opacity: 1; transform: translateY(0); }
+
+.split-card-header {
+  padding: 26px 32px;
+  color: #fff;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 14px;
+}
+
+.split-card-header i {
+  font-size: 22px;
+  opacity: 0.9;
+}
+
+.split-card-header h3 {
+  font-family: 'Poppins', sans-serif;
+  font-size: 1.1em;
+  font-weight: 700;
+}
+
+.header-orange { background: linear-gradient(135deg, var(--orange), var(--orange-dark)); }
+.header-blue   { background: linear-gradient(135deg, var(--blue), var(--blue-dark)); }
+
+.split-card-body {
+  background: var(--white);
+  padding: 28px 32px;
+}
+
+.split-card-body ul {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+.split-card-body ul li {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: flex-start;
+  gap: 12px;
+  font-size: 14.5px;
+  line-height: 1.7;
+  color: var(--text);
+}
+
+.li-dot {
+  flex-shrink: 0;
+  width: 22px; height: 22px;
+  border-radius: 50%;
+  display: flex;
+  flex-wrap: wrap; align-items: center; justify-content: center;
+  font-size: 10px;
+  color: #fff;
+  margin-top: 2px;
+}
+
+.dot-orange { background: linear-gradient(135deg, var(--orange), var(--orange-dark)); }
+.dot-blue   { background: linear-gradient(135deg, var(--blue), var(--blue-dark)); }
+
+.split-card-body strong { color: var(--orange); font-weight: 600; }
+.split-card-body .blue-strong { color: var(--blue) !important; }
+
+/* ── WEBINARES GRAVADOS ──────────────────────────── */
+.webinars-section {
+  margin: 0 0 50px;
+}
+
+.webinars-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 24px;
+}
+
+.webinar-card {
+  background: var(--white);
+  border-radius: 16px;
+  overflow: hidden;
+  box-shadow: 0 8px 30px rgba(0,0,0,0.09);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  opacity: 0;
+  transform: translateY(20px);
+  transition: opacity 0.6s ease, transform 0.6s ease;
+}
+
+.webinar-card.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.webinar-card:hover {
+  box-shadow: 0 18px 50px rgba(230,126,34,0.14);
+}
+
+.webinar-header {
+  background: linear-gradient(135deg, var(--orange), var(--orange-dark));
+  padding: 20px 26px;
+  color: #fff;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 14px;
+}
+
+.webinar-avatar {
+  width: 44px; height: 44px;
+  background: rgba(255,255,255,0.2);
+  border-radius: 50%;
+  display: flex;
+  flex-wrap: wrap; align-items: center; justify-content: center;
+  font-size: 18px;
+  flex-shrink: 0;
+  border: 2px solid rgba(255,255,255,0.35);
+}
+
+.webinar-info h3 {
+  font-family: 'Poppins', sans-serif;
+  font-size: 0.95em;
+  font-weight: 700;
+  line-height: 1.3;
+}
+
+.webinar-info p {
+  font-size: 12px;
+  opacity: 0.85;
+  margin-top: 3px;
+}
+
+.webinar-video-wrapper {
+  position: relative;
+  padding-bottom: 56.25%;
+  height: 0;
+  overflow: hidden;
+  background: #111;
+}
+
+.webinar-video-wrapper video {
+  position: absolute;
+  top: 0; left: 0;
+  width: 100%;
+  height: 100%;
+  display: block;
+}
+
+/* ── CAMPUS BANNER ───────────────────────────────── */
+.campus-section {
+  margin: 0 0 60px;
+}
+
+.campus-card {
+  background: linear-gradient(135deg, var(--dark) 0%, var(--darker) 100%);
+  border-radius: 16px;
+  padding: 50px 48px;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 40px;
+  box-shadow: 0 14px 50px rgba(0,0,0,0.15);
+  color: #fff;
+  position: relative;
+  overflow: hidden;
+  opacity: 0;
+  transform: translateY(20px);
+  transition: opacity 0.6s ease, transform 0.6s ease;
+}
+
+.campus-card.visible { opacity: 1; transform: translateY(0); }
+
+.campus-card::before {
+  content: '';
+  position: absolute;
+  right: -80px; top: -80px;
+  width: 300px; height: 300px;
+  background: radial-gradient(circle, rgba(230,126,34,0.15) 0%, transparent 70%);
+  border-radius: 50%;
+}
+
+.campus-icon {
+  flex-shrink: 0;
+  width: 90px; height: 90px;
+  background: linear-gradient(135deg, var(--orange), var(--orange-dark));
+  border-radius: 50%;
+  display: flex;
+  flex-wrap: wrap; align-items: center; justify-content: center;
+  font-size: 36px;
+  box-shadow: 0 8px 28px rgba(230,126,34,0.4);
+}
+
+.campus-text h2 {
+  font-family: 'Poppins', sans-serif;
+  font-size: 1.5em;
+  font-weight: 700;
+  margin-bottom: 12px;
+}
+
+.campus-text p {
+  font-size: 15px;
+  opacity: 0.85;
+  line-height: 1.75;
+  font-weight: 300;
+  max-width: 580px;
+}
+
+.campus-text strong { color: var(--orange); font-weight: 600; opacity: 1; }
+
+/* ── HIGHLIGHT ROW ───────────────────────────────── */
+.highlights-row {
+  display: flex;
+  gap: 20px;
+  margin-top: 28px;
+  flex-wrap: wrap;
+}
+
+.highlight-pill {
+  background: rgba(255,255,255,0.1);
+  border: 1px solid rgba(255,255,255,0.2);
+  backdrop-filter: blur(8px);
+  border-radius: 50px;
+  padding: 10px 20px;
+  font-size: 13px;
+  font-weight: 600;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 8px;
+  color: #fff;
+}
+
+
+
+/* ── DELAY HELPERS ───────────────────────────────── */
+.delay-1 { transition-delay: 0.1s !important; }
+.delay-2 { transition-delay: 0.2s !important; }
+.delay-3 { transition-delay: 0.3s !important; }
+
+/* ── RESPONSIVE ──────────────────────────────────── */
+@media (max-width: 768px) {
+  .hero { padding: 55px 20px 90px; }
+  .hero h1 { font-size: 2.1em; }
+  .hero p  { font-size: 1em; }
+
+  .intro-card { padding: 34px 24px; }
+
+  .features-grid { grid-template-columns: 1fr 1fr; gap: 18px; }
+
+  .deepdive-grid { grid-template-columns: 1fr; }
+
+  .webinars-grid { grid-template-columns: 1fr; }
+
+  .campus-card { flex-direction: column; padding: 36px 28px; text-align: center; }
+  .campus-icon { margin: 0 auto; }
+  .campus-text p { max-width: 100%; }
+  .highlights-row { justify-content: center; }
+}
+
+@media (max-width: 480px) {
+  .hero { padding: 40px 16px 80px; }
+  .hero h1 { font-size: 1.65em; }
+  .hero-badge { font-size: 11px; padding: 8px 16px; }
+
+  .intro-card { padding: 26px 18px; }
+  .intro-icon { width: 56px; height: 56px; font-size: 22px; }
+
+  .features-grid { grid-template-columns: 1fr; gap: 16px; }
+  .feature-card { padding: 28px 20px; }
+
+  .split-card-header { padding: 20px 22px; }
+  .split-card-body   { padding: 22px 22px; }
+
+  .webinar-header { padding: 16px 20px; }
+
+  .campus-card { padding: 28px 20px; }
+  .campus-icon { width: 68px; height: 68px; font-size: 26px; }
+  .campus-text h2 { font-size: 1.2em; }
+
+  .section-label span { font-size: 1.2em; }
+}
+
+/* ═══════════════════════════════════════════════════════════
+   RESPONSIVE GLOBAL PATCH — garante compatibilidade total
+   ═══════════════════════════════════════════════════════════ */
+
+/* Imagens e vídeos sempre fluidos */
+img, video, iframe {
+  max-width: 100%;
+  height: auto;
+}
+
+/* Todos os flex containers com wrap por defeito */
+[class*="card"]:not(.func-icon):not(.detail-icon):not(.stat-icon):not(.bottom-icon):not(.comptia-icon):not(.intro-icon):not(.section-label-icon):not(.format-header-icon):not(.modality-header-icon):not(.split-card-header),
+[class*="grid"]:not(.functions-grid):not(.functions-grid-bottom):not(.stats-grid):not(.detail-grid):not(.trust-grid):not(.footer-content) {
+  min-width: 0;
+}
+
+/* Breakpoint extra: tablet grande (769px – 1024px) */
+@media (max-width: 1024px) and (min-width: 769px) {
+  .container { padding: 0 28px; }
+  [class*="-grid"] { gap: 18px; }
+}
+
+/* ── TABLET (≤ 768px) — reforço global ── */
+@media (max-width: 768px) {
+  /* Grids: forçar 1 coluna ou 2 no máximo */
+  .functions-grid,
+  .detail-grid,
+  .trust-grid,
+  .footer-content,
+  .modulos-grid,
+  .main-grid,
+  .cert-layout,
+  .objectives-layout,
+  .social-grid,
+  .stats-grid,
+  [class$="-grid"] {
+    grid-template-columns: 1fr 1fr !important;
+    gap: 16px;
+  }
+
+  /* Flex containers: empilhar em coluna */
+  .intro-card,
+  .bottom-card,
+  .comptia-card,
+  .bolsa-card,
+  .access-card,
+  .cursos-card,
+  .commitment-card,
+  .iso-card,
+  .modality-body,
+  .format-body,
+  .split-card-body,
+  .campus-card,
+  .acesso-card {
+    flex-direction: column !important;
+    align-items: flex-start;
+  }
+
+  /* Ícones centralizados quando em coluna */
+  .intro-icon, .bottom-icon, .comptia-icon, .section-label-icon,
+  .intro-icon-wrap, .diploma-header-icon, .modality-header-icon,
+  .format-header-icon, .split-card-header {
+    margin: 0 auto;
+  }
+
+  /* Texto centrado nos banners */
+  .bottom-card, .comptia-card { text-align: center; }
+
+  /* Vídeos responsivos */
+  video { width: 100% !important; }
+}
+
+/* ── MOBILE (≤ 480px) — reforço global ── */
+@media (max-width: 480px) {
+  /* Todos os grids em 1 coluna */
+  .functions-grid,
+  .functions-grid-bottom,
+  .detail-grid,
+  .trust-grid,
+  .footer-content,
+  .modulos-grid,
+  .main-grid,
+  .cert-layout,
+  .objectives-layout,
+  .social-grid,
+  .stats-grid,
+  [class$="-grid"],
+  .certifications {
+    grid-template-columns: 1fr !important;
+    gap: 14px;
+  }
+
+  /* Stat cards em coluna */
+  .stat-card {
+    flex-direction: column;
+    text-align: center;
+    align-items: center;
+  }
+
+  /* Garantir que nenhum elemento transborde */
+  * { max-width: 100%; word-break: break-word; }
+
+  /* Padding seguro nos containers */
+  .container { padding: 0 14px; }
+
+  /* Tipografia escalada */
+  .hero h1 { font-size: clamp(1.4em, 6vw, 2em) !important; }
+  .stat-number { font-size: clamp(1.8em, 8vw, 2.8em) !important; }
+
+  /* Botões full-width em mobile */
+  .btn, .cta-btn, .hero-cta a, .hero-cta button {
+    width: 100%;
+    max-width: 320px;
+    display: block;
+    margin: 0 auto 10px;
+    text-align: center;
+  }
+
+  /* Hero CTA em coluna */
+  .hero-cta { flex-direction: column; align-items: center; }
+
+  /* Certificações em coluna */
+  .certifications { flex-direction: column; align-items: center; }
+  .cert-item { width: 100%; max-width: 280px; text-align: center; }
+
+  /* Vídeos */
+  video { width: 100% !important; height: auto !important; }
+
+  /* Cards de docentes */
+  .teacher-photo-wrap, .photo-ring { width: 120px !important; height: 120px !important; }
+}
+
+/* ── MOBILE PEQUENO (≤ 360px) ── */
+@media (max-width: 360px) {
+  .hero h1 { font-size: 1.3em !important; }
+  .hero-badge { font-size: 10px; padding: 6px 12px; }
+  .container { padding: 0 10px; }
+  .func-card, .detail-card, .stat-card { padding: 20px 14px; }
+  .stat-number { font-size: 1.6em !important; }
+}
+
+</style>
+</head>
+<body>
+
+<!-- HERO -->
+<div class="hero">
+  <div class="hero-content">
+    <div class="hero-badge"><i class="fas fa-play-circle"></i> &nbsp;Campus Virtual MasterD</div>
+    <h1><i class="fas fa-video"></i> Vídeos e Webinares</h1>
+    <p>Conteúdos teóricos em formato vídeo e sessões ao vivo com o seu e-Tutor — aprenda ao seu ritmo, em qualquer lugar.</p>
+  </div>
+</div>
+
+<!-- INTRO -->
+<div class="container">
+  <div class="intro-section">
+    <div class="intro-card">
+      <div class="intro-icon"><i class="fas fa-laptop-code"></i></div>
+      <p>No <strong>Campus Virtual</strong> poderá aceder a <strong>Vídeos</strong> e <strong>Webinares</strong>, nos quais o e-Tutor abordará conteúdos teóricos da sua formação — sempre disponíveis, sempre ao seu ritmo.</p>
+    </div>
+  </div>
+</div>
+
+<!-- FEATURE CARDS -->
+<div class="container">
+  <div class="features-section">
+    <div class="features-grid">
+
+      <div class="feature-card delay-1">
+        <div class="feature-icon icon-video"><i class="fas fa-film"></i></div>
+        <h3>Conteúdos em Vídeo</h3>
+        <p>Aceda a uma biblioteca de vídeos produzidos pelos seus e-Tutores com todos os conteúdos teóricos da formação.</p>
+      </div>
+
+      <div class="feature-card delay-2">
+        <div class="feature-icon icon-live"><i class="fas fa-broadcast-tower"></i></div>
+        <h3>Webinares em Direto</h3>
+        <p>Sessões ao vivo onde pode interagir, colocar dúvidas e aprender com o e-Tutor e os colegas em tempo real.</p>
+      </div>
+
+      <div class="feature-card delay-3">
+        <div class="feature-icon icon-replay"><i class="fas fa-history"></i></div>
+        <h3>Gravações Disponíveis</h3>
+        <p>Todos os webinares são gravados e ficam disponíveis no Campus Virtual para rever sempre que precisar.</p>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+<!-- DEEP DIVE -->
+<div class="container">
+  <div class="deepdive-section">
+    <div class="section-label">
+      <div class="section-label-icon"><i class="fas fa-info-circle"></i></div>
+      <span>Como Funciona</span>
+    </div>
+
+    <div class="deepdive-grid">
+
+      <!-- VÍDEOS -->
+      <div class="split-card delay-1">
+        <div class="split-card-header header-orange">
+          <i class="fas fa-play-circle"></i>
+          <h3>Vídeos</h3>
+        </div>
+        <div class="split-card-body">
+          <ul>
+            <li>
+              <span class="li-dot dot-orange"><i class="fas fa-check"></i></span>
+              <span>Conteúdos teóricos da formação apresentados pelo <strong>e-Tutor</strong></span>
+            </li>
+            <li>
+              <span class="li-dot dot-orange"><i class="fas fa-check"></i></span>
+              <span>Disponíveis <strong>a qualquer hora</strong>, no seu próprio ritmo</span>
+            </li>
+            <li>
+              <span class="li-dot dot-orange"><i class="fas fa-check"></i></span>
+              <span>Acessíveis em qualquer dispositivo através do <strong>Campus Virtual</strong></span>
+            </li>
+            <li>
+              <span class="li-dot dot-orange"><i class="fas fa-check"></i></span>
+              <span>Pode <strong>rever quantas vezes quiser</strong> para consolidar a aprendizagem</span>
+            </li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- WEBINARES -->
+      <div class="split-card delay-2">
+        <div class="split-card-header header-blue">
+          <i class="fas fa-users"></i>
+          <h3>Webinares</h3>
+        </div>
+        <div class="split-card-body">
+          <ul>
+            <li>
+              <span class="li-dot dot-blue"><i class="fas fa-check"></i></span>
+              <span>Sessões ao <strong>vivo com o e-Tutor</strong> e colegas de formação</span>
+            </li>
+            <li>
+              <span class="li-dot dot-blue"><i class="fas fa-check"></i></span>
+              <span>Coloque <strong>dúvidas em direto</strong> e obtenha respostas imediatas</span>
+            </li>
+            <li>
+              <span class="li-dot dot-blue"><i class="fas fa-check"></i></span>
+              <span>Interaja com os <strong>restantes colegas</strong> e enriqueça a aprendizagem</span>
+            </li>
+            <li>
+              <span class="li-dot dot-blue"><i class="fas fa-check"></i></span>
+              <span><strong>Gravados e disponíveis</strong> no Campus Virtual após cada sessão</span>
+            </li>
+          </ul>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+<!-- WEBINARES GRAVADOS -->
+<div class="container">
+  <div class="webinars-section">
+    <div class="section-label fade-up">
+      <div class="section-label-icon"><i class="fas fa-record-vinyl"></i></div>
+      <span>Webinares Gravados</span>
+    </div>
+
+    <div class="webinars-grid">
+
+      <div class="webinar-card">
+        <div class="webinar-header">
+          <div class="webinar-avatar"><i class="fas fa-network-wired"></i></div>
+          <div class="webinar-info">
+            <h3>Fundamentos de Redes de Computadores</h3>
+            <p>Webinar gravado — disponível no Campus Virtual</p>
+          </div>
+        </div>
+        <div class="webinar-video-wrapper">
+          <video controls preload="metadata">
+            <source src="imagens/webinar_redes.mkv" type="video/mp4">
+            <source src="imagens/webinar_redes.mkv" type="video/webm">
+          </video>
+        </div>
+      </div>
+
+      <div class="webinar-card">
+        <div class="webinar-header">
+          <div class="webinar-avatar"><i class="fas fa-microchip"></i></div>
+          <div class="webinar-info">
+            <h3>Processadores</h3>
+            <p>Webinar gravado — disponível no Campus Virtual</p>
+          </div>
+        </div>
+        <div class="webinar-video-wrapper">
+          <video controls preload="metadata">
+            <source src="imagens/webinar_processadores.mkv" type="video/mp4">
+            <source src="imagens/webinar_processadores.mkv" type="video/webm">
+          </video>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+<!-- CAMPUS VIRTUAL BANNER -->
+<div class="container">
+  <div class="campus-section">
+    <div class="campus-card">
+      <div class="campus-icon"><i class="fas fa-desktop"></i></div>
+      <div class="campus-text">
+        <h2>O Seu Campus Virtual — Sempre Consigo</h2>
+        <p>Todos os vídeos e webinares gravados estão centralizados no seu <strong>Campus Virtual</strong>. Aceda a qualquer momento, em qualquer dispositivo — computador, tablet ou telemóvel — e continue a sua formação sem interrupções.</p>
+        <div class="highlights-row">
+          <div class="highlight-pill"><i class="fas fa-clock"></i> 24h / 7 dias</div>
+          <div class="highlight-pill"><i class="fas fa-mobile-alt"></i> Qualquer dispositivo</div>
+          <div class="highlight-pill"><i class="fas fa-cloud"></i> Sempre disponível</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<script>
+const observer = new IntersectionObserver((entries) => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting) entry.target.classList.add('visible');
+  });
+}, { threshold: 0.12 });
+
+document.querySelectorAll('.feature-card, .split-card, .campus-card, .webinar-card').forEach(el => observer.observe(el));
+</script>
+</body>
+</html>

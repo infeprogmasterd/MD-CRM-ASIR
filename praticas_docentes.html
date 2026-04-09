@@ -1,0 +1,874 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+<style>
+* { margin: 0; padding: 0; box-sizing: border-box; }
+
+body {
+  background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+  font-family: 'Inter', sans-serif;
+  min-height: 100vh;
+  overflow-x: hidden;
+}
+
+.container {
+  max-width: 1000px;
+  margin: 0 auto;
+  padding: 0 20px;
+}
+
+/* ── HERO ─────────────────────────────────────────── */
+.hero {
+  background: linear-gradient(135deg, #e67e22 0%, #d35400 100%);
+  color: white;
+  padding: 80px 20px;
+  text-align: center;
+  position: relative;
+  overflow: hidden;
+  margin-bottom: 60px;
+  box-shadow: 0 20px 60px rgba(230,126,34,0.3);
+}
+
+.hero::before {
+  content: '';
+  position: absolute;
+  top: -50%; right: -10%;
+  width: 600px; height: 600px;
+  background: radial-gradient(circle, rgba(255,255,255,0.1) 0%, transparent 70%);
+  border-radius: 50%;
+  animation: float 8s ease-in-out infinite;
+}
+
+@keyframes float {
+  0%, 100% { transform: translateY(0px); }
+  50% { transform: translateY(20px); }
+}
+
+.hero-content {
+  position: relative;
+  z-index: 2;
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+.hero-badge {
+  display: inline-block;
+  background: rgba(255,255,255,0.2);
+  padding: 10px 22px;
+  border-radius: 50px;
+  font-size: 13px;
+  font-weight: 600;
+  margin-bottom: 22px;
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(255,255,255,0.3);
+  letter-spacing: 0.5px;
+}
+
+.hero h1 {
+  font-family: 'Poppins', sans-serif;
+  font-size: 3.5em;
+  font-weight: 800;
+  margin-bottom: 15px;
+  text-shadow: 2px 2px 8px rgba(0,0,0,0.2);
+  line-height: 1.2;
+}
+
+.hero p {
+  font-size: 1.3em;
+  opacity: 0.95;
+  font-weight: 300;
+  line-height: 1.6;
+}
+
+/* ── STATS ───────────────────────────────────────── */
+.stats {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 30px;
+  margin: 0 0 60px 0;
+}
+
+.stat {
+  background: white;
+  padding: 40px 30px;
+  border-radius: 15px;
+  text-align: center;
+  box-shadow: 0 10px 30px rgba(0,0,0,0.08);
+  transition: all 0.3s ease;
+  border-top: 4px solid #e67e22;
+}
+
+.stat:hover {
+  transform: translateY(-10px);
+  box-shadow: 0 20px 50px rgba(230,126,34,0.15);
+}
+
+.stat-icon { font-size: 2em; margin-bottom: 15px; color: #e67e22; }
+.stat-number { font-size: 2.5em; font-weight: 800; color: #e67e22; font-family: 'Poppins', sans-serif; margin-bottom: 8px; line-height: 1; }
+.stat-label { font-size: 14px; color: #555; font-weight: 500; line-height: 1.4; }
+
+/* ── INTRO CARD ──────────────────────────────────── */
+.intro-card {
+  background: white;
+  border-radius: 15px;
+  padding: 40px;
+  margin-bottom: 30px;
+  box-shadow: 0 10px 30px rgba(0,0,0,0.08);
+  border-left: 5px solid #e67e22;
+  position: relative;
+  overflow: hidden;
+}
+
+.intro-card::before {
+  content: '';
+  position: absolute;
+  top: -30px; right: -30px;
+  width: 120px; height: 120px;
+  background: radial-gradient(circle, rgba(230,126,34,0.08) 0%, transparent 70%);
+  border-radius: 50%;
+}
+
+.intro-label {
+  font-size: 11px; font-weight: 700; text-transform: uppercase;
+  letter-spacing: 1.2px; color: #e67e22; margin-bottom: 12px;
+  display: flex;
+  flex-wrap: wrap; align-items: center; gap: 8px;
+}
+
+.intro-text { font-size: 15px; line-height: 1.85; color: #444; }
+.intro-text strong { color: #2c3e50; font-weight: 700; }
+
+/* ── CONTROLS BAR ────────────────────────────────── */
+.controls-bar {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: flex-end;
+  margin-bottom: 14px;
+}
+
+.btn-toggle-all {
+  background: white;
+  border: 2px solid #e67e22;
+  color: #e67e22;
+  font-family: 'Poppins', sans-serif;
+  font-size: 13px;
+  font-weight: 600;
+  padding: 8px 18px;
+  border-radius: 8px;
+  cursor: pointer;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 7px;
+  transition: all 0.25s ease;
+}
+
+.btn-toggle-all:hover {
+  background: #e67e22;
+  color: white;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 14px rgba(230,126,34,0.3);
+}
+
+/* ── CONTENT CARDS ───────────────────────────────── */
+.content-section { margin-bottom: 10px; }
+
+.content-card {
+  background: white;
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0 8px 25px rgba(0,0,0,0.08);
+  margin-bottom: 12px;
+}
+
+.card-header {
+  background: linear-gradient(135deg, #e67e22 0%, #d35400 100%);
+  color: white;
+  padding: 22px 28px;
+  cursor: pointer;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  transition: all 0.25s ease;
+  position: relative;
+  overflow: hidden;
+}
+
+.card-header::before {
+  content: '';
+  position: absolute;
+  top: 0; left: -100%;
+  width: 100%; height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255,255,255,0.18), transparent);
+  transition: left 0.45s;
+}
+
+.card-header:hover::before { left: 100%; }
+
+.card-header:hover {
+  background: linear-gradient(135deg, #d35400 0%, #e67e22 100%);
+}
+
+.card-header.active {
+  background: linear-gradient(135deg, #d35400 0%, #e67e22 100%);
+  border-radius: 12px 12px 0 0;
+}
+
+.card-header-left {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0;
+  flex: 1;
+  min-width: 0;
+}
+
+.card-icon {
+  font-size: 20px;
+  margin-right: 14px;
+  width: 40px; height: 40px;
+  background: rgba(255,255,255,0.2);
+  border-radius: 50%;
+  display: flex;
+  flex-wrap: wrap; align-items: center; justify-content: center;
+  flex-shrink: 0;
+}
+
+.card-meta { display: flex; flex-direction: column; gap: 3px; }
+.card-meta-title { font-size: 17px; font-weight: 600; font-family: 'Poppins', sans-serif; }
+.card-meta-count { font-size: 12px; font-weight: 400; opacity: 0.85; font-family: 'Inter', sans-serif; }
+
+.card-right {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 10px;
+  flex-shrink: 0;
+}
+
+/* Badges on card header */
+.hbadge {
+  font-size: 11px; font-weight: 700;
+  padding: 3px 10px; border-radius: 20px; white-space: nowrap;
+}
+.hbadge-green {
+  background: rgba(39,174,96,0.22); color: #d5f5e3;
+  border: 1px solid rgba(39,174,96,0.4);
+}
+.hbadge-blue {
+  background: rgba(41,128,185,0.22); color: #aed6f1;
+  border: 1px solid rgba(41,128,185,0.4);
+}
+
+.card-toggle {
+  font-size: 16px;
+  transition: transform 0.3s ease;
+  flex-shrink: 0;
+  opacity: 0.85;
+}
+.card-header.active .card-toggle { transform: rotate(180deg); }
+
+/* ── CARD CONTENT — grid animation ──────────────── */
+.card-content {
+  display: grid;
+  grid-template-rows: 0fr;
+  transition: grid-template-rows 0.38s ease, opacity 0.3s ease;
+  opacity: 0;
+}
+.card-content.open {
+  grid-template-rows: 1fr;
+  opacity: 1;
+}
+.card-content-inner { overflow: hidden; }
+
+/* ── PRACTICE GRID ───────────────────────────────── */
+.practice-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+  gap: 14px;
+  padding: 25px;
+}
+
+.practice-item {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 14px;
+  padding: 14px 16px;
+  background: linear-gradient(135deg, #fafafa 0%, #f5f5f5 100%);
+  border-radius: 10px;
+  border: 1px solid rgba(230,126,34,0.1);
+  transition: all 0.25s ease;
+  cursor: default;
+}
+
+.practice-item:hover {
+  background: linear-gradient(135deg, rgba(230,126,34,0.06) 0%, rgba(230,126,34,0.02) 100%);
+  border-color: rgba(230,126,34,0.3);
+  transform: translateX(4px);
+}
+
+.practice-num {
+  min-width: 36px; height: 36px;
+  background: linear-gradient(135deg, #e67e22 0%, #d35400 100%);
+  border-radius: 8px;
+  display: flex;
+  flex-wrap: wrap; align-items: center; justify-content: center;
+  color: white; font-size: 12px; font-weight: 700;
+  font-family: 'Poppins', sans-serif;
+  flex-shrink: 0;
+  box-shadow: 0 2px 8px rgba(230,126,34,0.25);
+}
+
+.practice-text { font-size: 13.5px; color: #444; line-height: 1.5; font-weight: 500; }
+
+/* Caso Prático item */
+.caso-item {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 14px;
+  padding: 14px 18px;
+  background: linear-gradient(135deg, rgba(41,128,185,0.07) 0%, rgba(41,128,185,0.03) 100%);
+  border-radius: 10px;
+  border: 1px solid rgba(41,128,185,0.25);
+  border-left: 4px solid #2980b9;
+  margin: 0 25px 25px 25px;
+  font-size: 14px;
+  font-weight: 700;
+  color: #1a5276;
+  transition: all 0.25s ease;
+}
+
+.caso-item:hover {
+  background: linear-gradient(135deg, rgba(41,128,185,0.12) 0%, rgba(41,128,185,0.06) 100%);
+  transform: translateX(4px);
+}
+
+.caso-item::before { content: '📋 '; font-size: 16px; }
+
+/* ── HIGHLIGHT BOX ───────────────────────────────── */
+.highlight-box {
+  background: linear-gradient(135deg, rgba(230,126,34,0.06) 0%, rgba(230,126,34,0.02) 100%);
+  border-left: 4px solid #e67e22;
+  padding: 20px;
+  border-radius: 8px;
+  margin: 0 25px 25px 25px;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 15px;
+  align-items: flex-start;
+}
+
+.highlight-box::before { content: '🔬'; font-size: 22px; flex-shrink: 0; margin-top: 2px; }
+.highlight-text { color: #e67e22; font-weight: 600; display: block; margin-bottom: 5px; font-size: 14px; }
+.highlight-body { color: #555; font-size: 14px; line-height: 1.7; }
+.highlight-body strong { color: #2c3e50; }
+
+/* ── TRUST ───────────────────────────────────────── */
+.trust-section {
+  background: white;
+  padding: 60px 20px;
+  border-radius: 15px;
+  margin: 30px 0 80px 0;
+  box-shadow: 0 10px 30px rgba(0,0,0,0.08);
+}
+
+.section-title {
+  text-align: center;
+  font-size: 2em;
+  font-weight: 700;
+  color: #2c3e50;
+  margin-bottom: 50px;
+  font-family: 'Poppins', sans-serif;
+}
+
+.trust-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 40px; }
+.trust-item { text-align: center; padding: 30px 20px; }
+.trust-emoji { font-size: 2.5em; margin-bottom: 15px; display: block; }
+.trust-title-el { font-size: 17px; font-weight: 700; color: #2c3e50; margin-bottom: 8px; font-family: 'Poppins', sans-serif; }
+.trust-desc { font-size: 14px; color: #666; line-height: 1.6; }
+
+/* ── RESPONSIVE ──────────────────────────────────── */
+@media (max-width: 480px) {
+  .hero { padding: 40px 15px; margin-bottom: 30px; }
+  .hero h1 { font-size: 2em; line-height: 1.3; }
+  .hero p { font-size: 0.95em; }
+  .hero-badge { font-size: 11px; padding: 8px 16px; }
+  .stats { grid-template-columns: 1fr 1fr; gap: 15px; margin-bottom: 30px; }
+  .stat { padding: 25px 15px; }
+  .stat-number { font-size: 2em; }
+  .intro-card { padding: 25px 20px; }
+  .card-header { padding: 18px 15px; }
+  .card-meta-title { font-size: 14px; }
+  .card-icon { width: 32px; height: 32px; font-size: 15px; margin-right: 10px; }
+  .hbadge { display: none; }
+  .practice-grid { grid-template-columns: 1fr; padding: 15px; gap: 10px; }
+  .highlight-box { margin: 0 15px 20px 15px; }
+  .caso-item { margin: 0 15px 20px 15px; }
+  .trust-section { padding: 40px 15px; }
+  .section-title { font-size: 1.4em; margin-bottom: 30px; }
+  .trust-grid { grid-template-columns: 1fr; gap: 20px; }
+}
+
+@media (min-width: 481px) and (max-width: 768px) {
+  .hero { padding: 55px 20px; margin-bottom: 40px; }
+  .hero h1 { font-size: 2.3em; }
+  .stats { grid-template-columns: 1fr 1fr; gap: 20px; }
+  .practice-grid { grid-template-columns: 1fr 1fr; }
+  .trust-grid { grid-template-columns: 1fr; }
+}
+
+/* Print */
+@media print {
+  .card-content { display: block !important; opacity: 1 !important; }
+  .card-content-inner { overflow: visible !important; }
+  .controls-bar { display: none; }
+}
+
+/* ═══════════════════════════════════════════════════════════
+   RESPONSIVE GLOBAL PATCH — garante compatibilidade total
+   ═══════════════════════════════════════════════════════════ */
+
+/* Imagens e vídeos sempre fluidos */
+img, video, iframe {
+  max-width: 100%;
+  height: auto;
+}
+
+/* Todos os flex containers com wrap por defeito */
+[class*="card"]:not(.func-icon):not(.detail-icon):not(.stat-icon):not(.bottom-icon):not(.comptia-icon):not(.intro-icon):not(.section-label-icon):not(.format-header-icon):not(.modality-header-icon):not(.split-card-header),
+[class*="grid"]:not(.functions-grid):not(.functions-grid-bottom):not(.stats-grid):not(.detail-grid):not(.trust-grid):not(.footer-content) {
+  min-width: 0;
+}
+
+/* Breakpoint extra: tablet grande (769px – 1024px) */
+@media (max-width: 1024px) and (min-width: 769px) {
+  .container { padding: 0 28px; }
+  [class*="-grid"] { gap: 18px; }
+}
+
+/* ── TABLET (≤ 768px) — reforço global ── */
+@media (max-width: 768px) {
+  /* Grids: forçar 1 coluna ou 2 no máximo */
+  .functions-grid,
+  .detail-grid,
+  .trust-grid,
+  .footer-content,
+  .modulos-grid,
+  .main-grid,
+  .cert-layout,
+  .objectives-layout,
+  .social-grid,
+  .stats-grid,
+  [class$="-grid"] {
+    grid-template-columns: 1fr 1fr !important;
+    gap: 16px;
+  }
+
+  /* Flex containers: empilhar em coluna */
+  .intro-card,
+  .bottom-card,
+  .comptia-card,
+  .bolsa-card,
+  .access-card,
+  .cursos-card,
+  .commitment-card,
+  .iso-card,
+  .modality-body,
+  .format-body,
+  .split-card-body,
+  .campus-card,
+  .acesso-card {
+    flex-direction: column !important;
+    align-items: flex-start;
+  }
+
+  /* Ícones centralizados quando em coluna */
+  .intro-icon, .bottom-icon, .comptia-icon, .section-label-icon,
+  .intro-icon-wrap, .diploma-header-icon, .modality-header-icon,
+  .format-header-icon, .split-card-header {
+    margin: 0 auto;
+  }
+
+  /* Texto centrado nos banners */
+  .bottom-card, .comptia-card { text-align: center; }
+
+  /* Vídeos responsivos */
+  video { width: 100% !important; }
+}
+
+/* ── MOBILE (≤ 480px) — reforço global ── */
+@media (max-width: 480px) {
+  /* Todos os grids em 1 coluna */
+  .functions-grid,
+  .functions-grid-bottom,
+  .detail-grid,
+  .trust-grid,
+  .footer-content,
+  .modulos-grid,
+  .main-grid,
+  .cert-layout,
+  .objectives-layout,
+  .social-grid,
+  .stats-grid,
+  [class$="-grid"],
+  .certifications {
+    grid-template-columns: 1fr !important;
+    gap: 14px;
+  }
+
+  /* Stat cards em coluna */
+  .stat-card {
+    flex-direction: column;
+    text-align: center;
+    align-items: center;
+  }
+
+  /* Garantir que nenhum elemento transborde */
+  * { max-width: 100%; word-break: break-word; }
+
+  /* Padding seguro nos containers */
+  .container { padding: 0 14px; }
+
+  /* Tipografia escalada */
+  .hero h1 { font-size: clamp(1.4em, 6vw, 2em) !important; }
+  .stat-number { font-size: clamp(1.8em, 8vw, 2.8em) !important; }
+
+  /* Botões full-width em mobile */
+  .btn, .cta-btn, .hero-cta a, .hero-cta button {
+    width: 100%;
+    max-width: 320px;
+    display: block;
+    margin: 0 auto 10px;
+    text-align: center;
+  }
+
+  /* Hero CTA em coluna */
+  .hero-cta { flex-direction: column; align-items: center; }
+
+  /* Certificações em coluna */
+  .certifications { flex-direction: column; align-items: center; }
+  .cert-item { width: 100%; max-width: 280px; text-align: center; }
+
+  /* Vídeos */
+  video { width: 100% !important; height: auto !important; }
+
+  /* Cards de docentes */
+  .teacher-photo-wrap, .photo-ring { width: 120px !important; height: 120px !important; }
+}
+
+/* ── MOBILE PEQUENO (≤ 360px) ── */
+@media (max-width: 360px) {
+  .hero h1 { font-size: 1.3em !important; }
+  .hero-badge { font-size: 10px; padding: 6px 12px; }
+  .container { padding: 0 10px; }
+  .func-card, .detail-card, .stat-card { padding: 20px 14px; }
+  .stat-number { font-size: 1.6em !important; }
+}
+
+</style>
+</head>
+<body>
+
+<!-- HERO -->
+<div class="hero">
+  <div class="hero-content">
+    <div class="hero-badge"><i class="fas fa-flask"></i> &nbsp;ASIR – Formação Prática</div>
+    <h1>Práticas<br>Docentes</h1>
+    <p>Laboratórios técnicos onde a teoria se transforma<br>em competência real e aplicada.</p>
+  </div>
+</div>
+
+<div class="container">
+
+  <!-- STATS -->
+  <div class="stats">
+    <div class="stat">
+      <div class="stat-icon"><i class="fas fa-flask"></i></div>
+      <div class="stat-number">48</div>
+      <div class="stat-label">Sessões Práticas</div>
+    </div>
+    <div class="stat">
+      <div class="stat-icon"><i class="fas fa-laptop-code"></i></div>
+      <div class="stat-number">6</div>
+      <div class="stat-label">Áreas Temáticas</div>
+    </div>
+    <div class="stat">
+      <div class="stat-icon"><i class="fas fa-building"></i></div>
+      <div class="stat-number">54h</div>
+      <div class="stat-label">Em Laboratório</div>
+    </div>
+  </div>
+
+  <!-- INTRO -->
+  <div class="intro-card">
+    <div class="intro-label"><i class="fas fa-microscope"></i> Laboratórios Técnicos</div>
+    <p class="intro-text">
+      Sabemos como é importante colocar em prática os conhecimentos teóricos adquiridos. Por isso, disponibilizamos nos nossos <strong>Centros Formativos, Laboratórios Técnicos</strong> onde poderá realizar todas as sessões práticas da sua formação.
+    </p>
+  </div>
+
+  <!-- CONTROLS -->
+  <div class="controls-bar">
+    <button class="btn-toggle-all" id="btnToggleAll" onclick="toggleAll()">
+      <i class="fas fa-expand-alt" id="toggleIcon"></i>
+      <span id="toggleLabel">Expandir tudo</span>
+    </button>
+  </div>
+
+  <!-- CARD 1: Hardware -->
+  <div class="content-section">
+    <div class="content-card">
+      <div class="card-header" onclick="toggleCard(this)">
+        <div class="card-header-left">
+          <div class="card-icon"><i class="fas fa-microchip"></i></div>
+          <div class="card-meta">
+            <span class="card-meta-title">Hardware e Componentes</span>
+            <span class="card-meta-count">Práticas 1 – 13</span>
+          </div>
+        </div>
+        <div class="card-right">
+          <span class="hbadge hbadge-green">⚙️ 13 práticas</span>
+          <span class="card-toggle"><i class="fas fa-chevron-down"></i></span>
+        </div>
+      </div>
+      <div class="card-content">
+        <div class="card-content-inner">
+          <div class="practice-grid">
+            <div class="practice-item"><div class="practice-num">1</div><div class="practice-text">Conversões</div></div>
+            <div class="practice-item"><div class="practice-num">2</div><div class="practice-text">Identificação de componentes de hardware</div></div>
+            <div class="practice-item"><div class="practice-num">3</div><div class="practice-text">Elementos da placa principal — motherboard</div></div>
+            <div class="practice-item"><div class="practice-num">4</div><div class="practice-text">A BIOS</div></div>
+            <div class="practice-item"><div class="practice-num">5</div><div class="practice-text">Instalação de CPU e cooler</div></div>
+            <div class="practice-item"><div class="practice-num">6</div><div class="practice-text">Benchmark do CPU</div></div>
+            <div class="practice-item"><div class="practice-num">7</div><div class="practice-text">Benchmark da RAM</div></div>
+            <div class="practice-item"><div class="practice-num">8</div><div class="practice-text">Instalação e particionamento do disco</div></div>
+            <div class="practice-item"><div class="practice-num">9</div><div class="practice-text">Criação de um clone de um disco rígido</div></div>
+            <div class="practice-item"><div class="practice-num">10</div><div class="practice-text">Instalação da placa gráfica e placa de som</div></div>
+            <div class="practice-item"><div class="practice-num">11</div><div class="practice-text">Benchmark da placa gráfica</div></div>
+            <div class="practice-item"><div class="practice-num">12</div><div class="practice-text">Instalação e configuração de uma impressora</div></div>
+            <div class="practice-item"><div class="practice-num">13</div><div class="practice-text">Fonte de alimentação</div></div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- CARD 2: Virtualização -->
+    <div class="content-card">
+      <div class="card-header" onclick="toggleCard(this)">
+        <div class="card-header-left">
+          <div class="card-icon"><i class="fas fa-cloud"></i></div>
+          <div class="card-meta">
+            <span class="card-meta-title">Virtualização e Sistemas Operativos</span>
+            <span class="card-meta-count">Práticas 14 – 20</span>
+          </div>
+        </div>
+        <div class="card-right">
+          <span class="hbadge hbadge-green">⚙️ 7 práticas</span>
+          <span class="card-toggle"><i class="fas fa-chevron-down"></i></span>
+        </div>
+      </div>
+      <div class="card-content">
+        <div class="card-content-inner">
+          <div class="practice-grid">
+            <div class="practice-item"><div class="practice-num">14</div><div class="practice-text">Criação e configuração de uma máquina em ambiente VirtualBox</div></div>
+            <div class="practice-item"><div class="practice-num">15</div><div class="practice-text">Criação e configuração de uma máquina em ambiente VMware</div></div>
+            <div class="practice-item"><div class="practice-num">16</div><div class="practice-text">Criação de uma pen de arranque em Windows</div></div>
+            <div class="practice-item"><div class="practice-num">17</div><div class="practice-text">Instalação do Windows 8 e drivers</div></div>
+            <div class="practice-item"><div class="practice-num">18</div><div class="practice-text">Instalação do Windows 10 e drivers</div></div>
+            <div class="practice-item"><div class="practice-num">19</div><div class="practice-text">Instalação do Linux Ubuntu</div></div>
+            <div class="practice-item"><div class="practice-num">20</div><div class="practice-text">Montagem de um computador</div></div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- CARD 3: Manutenção e Segurança -->
+    <div class="content-card">
+      <div class="card-header" onclick="toggleCard(this)">
+        <div class="card-header-left">
+          <div class="card-icon"><i class="fas fa-shield-alt"></i></div>
+          <div class="card-meta">
+            <span class="card-meta-title">Manutenção e Segurança</span>
+            <span class="card-meta-count">Práticas 21 – 30</span>
+          </div>
+        </div>
+        <div class="card-right">
+          <span class="hbadge hbadge-green">⚙️ 10 práticas</span>
+          <span class="card-toggle"><i class="fas fa-chevron-down"></i></span>
+        </div>
+      </div>
+      <div class="card-content">
+        <div class="card-content-inner">
+          <div class="practice-grid">
+            <div class="practice-item"><div class="practice-num">21</div><div class="practice-text">Instalação do software de segurança</div></div>
+            <div class="practice-item"><div class="practice-num">22</div><div class="practice-text">Manutenção do software</div></div>
+            <div class="practice-item"><div class="practice-num">23</div><div class="practice-text">Manutenção do hardware</div></div>
+            <div class="practice-item"><div class="practice-num">24</div><div class="practice-text">Recuperação de ficheiros</div></div>
+            <div class="practice-item"><div class="practice-num">25</div><div class="practice-text">Partições</div></div>
+            <div class="practice-item"><div class="practice-num">26</div><div class="practice-text">Máquina virtual Windows e partições</div></div>
+            <div class="practice-item"><div class="practice-num">27</div><div class="practice-text">Hyper-V</div></div>
+            <div class="practice-item"><div class="practice-num">28</div><div class="practice-text">Comandos Windows</div></div>
+            <div class="practice-item"><div class="practice-num">29</div><div class="practice-text">Painel de controlo</div></div>
+            <div class="practice-item"><div class="practice-num">30</div><div class="practice-text">Ferramentas Administrativas</div></div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- CARD 4: Diagnóstico e Avançado -->
+    <div class="content-card">
+      <div class="card-header" onclick="toggleCard(this)">
+        <div class="card-header-left">
+          <div class="card-icon"><i class="fas fa-stethoscope"></i></div>
+          <div class="card-meta">
+            <span class="card-meta-title">Diagnóstico e Configurações Avançadas</span>
+            <span class="card-meta-count">Práticas 31 – 39</span>
+          </div>
+        </div>
+        <div class="card-right">
+          <span class="hbadge hbadge-green">⚙️ 9 práticas</span>
+          <span class="card-toggle"><i class="fas fa-chevron-down"></i></span>
+        </div>
+      </div>
+      <div class="card-content">
+        <div class="card-content-inner">
+          <div class="practice-grid">
+            <div class="practice-item"><div class="practice-num">31</div><div class="practice-text">Máquina virtual Windows 10 em VirtualBox — Host-only Interfaces</div></div>
+            <div class="practice-item"><div class="practice-num">32</div><div class="practice-text">Identificação de portas e componentes de um portátil</div></div>
+            <div class="practice-item"><div class="practice-num">33</div><div class="practice-text">Diagnosticar disco rígido</div></div>
+            <div class="practice-item"><div class="practice-num">34</div><div class="practice-text">Diagnosticar memória RAM</div></div>
+            <div class="practice-item"><div class="practice-num">35</div><div class="practice-text">RAID e instalação do Windows 10</div></div>
+            <div class="practice-item"><div class="practice-num">36</div><div class="practice-text">Revisão — Montagem e instalação de um computador</div></div>
+            <div class="practice-item"><div class="practice-num">37</div><div class="practice-text">Criação de um Batch Script</div></div>
+            <div class="practice-item"><div class="practice-num">38</div><div class="practice-text">Instalação de um Sistema Operativo Linux numa pen</div></div>
+            <div class="practice-item"><div class="practice-num">39</div><div class="practice-text">Simulação de avarias</div></div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- CARD 5: Redes -->
+    <div class="content-card">
+      <div class="card-header" onclick="toggleCard(this)">
+        <div class="card-header-left">
+          <div class="card-icon"><i class="fas fa-network-wired"></i></div>
+          <div class="card-meta">
+            <span class="card-meta-title">Redes e Conectividade</span>
+            <span class="card-meta-count">Práticas 40 – 48</span>
+          </div>
+        </div>
+        <div class="card-right">
+          <span class="hbadge hbadge-green">⚙️ 9 práticas</span>
+          <span class="card-toggle"><i class="fas fa-chevron-down"></i></span>
+        </div>
+      </div>
+      <div class="card-content">
+        <div class="card-content-inner">
+          <div class="practice-grid">
+            <div class="practice-item"><div class="practice-num">40</div><div class="practice-text">Criação e teste do cabo UTP</div></div>
+            <div class="practice-item"><div class="practice-num">41</div><div class="practice-text">Montagem e configuração de uma rede em estrela</div></div>
+            <div class="practice-item"><div class="practice-num">42</div><div class="practice-text">Administração remota de equipamentos</div></div>
+            <div class="practice-item"><div class="practice-num">43</div><div class="practice-text">Configuração do router</div></div>
+            <div class="practice-item"><div class="practice-num">44</div><div class="practice-text">Criação de um clone de máquina virtual — comandos de rede</div></div>
+            <div class="practice-item"><div class="practice-num">45</div><div class="practice-text">Criação de uma máquina virtual e instalação de Windows Server</div></div>
+            <div class="practice-item"><div class="practice-num">46</div><div class="practice-text">DHCP</div></div>
+            <div class="practice-item"><div class="practice-num">47</div><div class="practice-text">DNS</div></div>
+            <div class="practice-item"><div class="practice-num">48</div><div class="practice-text">Atendimento ao cliente</div></div>
+          </div>
+          <div class="highlight-box">
+            <div>
+              <span class="highlight-text">Formação 100% prática e aplicada</span>
+              <span class="highlight-body">Todas as <strong>48 sessões práticas</strong> são realizadas em laboratório equipado, garantindo que sai da formação com experiência real e mãos na massa.</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div><!-- /content-section -->
+
+  <!-- TRUST -->
+  <div class="trust-section">
+    <div class="section-title">Aprendizagem em Laboratório</div>
+    <div class="trust-grid">
+      <div class="trust-item">
+        <span class="trust-emoji">🖥️</span>
+        <div class="trust-title-el">Hardware Real</div>
+        <div class="trust-desc">Trabalhe com componentes físicos reais — processadores, memórias, discos e placas — em ambiente controlado e seguro.</div>
+      </div>
+      <div class="trust-item">
+        <span class="trust-emoji">⚙️</span>
+        <div class="trust-title-el">Do Zero ao Avançado</div>
+        <div class="trust-desc">Das conversões básicas à administração de servidores Windows, a progressão é gradual e estruturada.</div>
+      </div>
+      <div class="trust-item">
+        <span class="trust-emoji">🔬</span>
+        <div class="trust-title-el">Laboratórios Equipados</div>
+        <div class="trust-desc">Centros Formativos com infraestrutura técnica completa para simular ambientes profissionais reais.</div>
+      </div>
+    </div>
+  </div>
+
+</div><!-- /container -->
+
+<script>
+  function toggleCard(header) {
+    header.classList.toggle('active');
+    var content = header.parentElement.querySelector('.card-content');
+    var isOpen = content.classList.contains('open');
+    content.classList.toggle('open');
+
+    // Smooth scroll so the card header stays visible when opening
+    if (!isOpen) {
+      setTimeout(function() {
+        var top = header.getBoundingClientRect().top + window.scrollY - 14;
+        window.scrollTo({ top: top, behavior: 'smooth' });
+      }, 60);
+    }
+  }
+
+  var allExpanded = false;
+  function toggleAll() {
+    allExpanded = !allExpanded;
+    document.querySelectorAll('.card-header').forEach(function(h) {
+      allExpanded ? h.classList.add('active') : h.classList.remove('active');
+    });
+    document.querySelectorAll('.card-content').forEach(function(c) {
+      allExpanded ? c.classList.add('open') : c.classList.remove('open');
+    });
+    document.getElementById('toggleIcon').className = allExpanded ? 'fas fa-compress-alt' : 'fas fa-expand-alt';
+    document.getElementById('toggleLabel').textContent = allExpanded ? 'Recolher tudo' : 'Expandir tudo';
+  }
+
+  // Auto-open first card on load
+  window.addEventListener('load', function() {
+    var first = document.querySelector('.card-header');
+    if (first) toggleCard(first);
+  });
+
+  // Stats & trust fade-in on scroll (NOT practice-items — they may be in closed cards)
+  var observer = new IntersectionObserver(function(entries) {
+    entries.forEach(function(entry) {
+      if (entry.isIntersecting) {
+        entry.target.style.opacity = '1';
+        entry.target.style.transform = 'translateY(0)';
+        observer.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.1 });
+
+  document.querySelectorAll('.stat, .trust-item').forEach(function(el) {
+    el.style.opacity = '0';
+    el.style.transform = 'translateY(15px)';
+    el.style.transition = 'opacity 0.5s ease, transform 0.5s ease';
+    observer.observe(el);
+  });
+</script>
+</body>
+</html>

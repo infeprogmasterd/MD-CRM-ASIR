@@ -1,0 +1,660 @@
+<!DOCTYPE html>
+<html lang="pt-pt">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>MasterD – Equipa Docente</title>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+<style>
+* { margin: 0; padding: 0; box-sizing: border-box; }
+
+body {
+  background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+  font-family: 'Inter', sans-serif;
+  min-height: 100vh;
+  overflow-x: hidden;
+}
+
+/* ── HERO ─────────────────────────────────────────── */
+.hero {
+  background: linear-gradient(135deg, #e67e22 0%, #d35400 100%);
+  color: #fff;
+  padding: 70px 20px 100px;
+  text-align: center;
+  position: relative;
+  overflow: hidden;
+  box-shadow: 0 20px 60px rgba(230,126,34,0.3);
+}
+
+.hero::before {
+  content: '';
+  position: absolute;
+  top: -50%; right: -10%;
+  width: 600px; height: 600px;
+  background: radial-gradient(circle, rgba(255,255,255,0.1) 0%, transparent 70%);
+  border-radius: 50%;
+  animation: float 8s ease-in-out infinite;
+}
+
+.hero::after {
+  content: '';
+  position: absolute;
+  bottom: -2px; left: 0;
+  width: 100%; height: 60px;
+  background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+  clip-path: ellipse(55% 100% at 50% 100%);
+}
+
+@keyframes float {
+  0%,100% { transform: translateY(0); }
+  50%      { transform: translateY(20px); }
+}
+
+.hero-content { position: relative; z-index: 2; max-width: 700px; margin: 0 auto; }
+
+.hero-badge {
+  display: inline-block;
+  background: rgba(255,255,255,0.2);
+  padding: 9px 20px;
+  border-radius: 50px;
+  font-size: 13px;
+  font-weight: 600;
+  margin-bottom: 20px;
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(255,255,255,0.3);
+}
+
+.hero h1 {
+  font-family: 'Poppins', sans-serif;
+  font-size: 3em;
+  font-weight: 800;
+  margin-bottom: 14px;
+  text-shadow: 2px 2px 8px rgba(0,0,0,0.2);
+  line-height: 1.2;
+}
+
+.hero p {
+  font-size: 1.15em;
+  opacity: 0.93;
+  font-weight: 300;
+  line-height: 1.65;
+}
+
+/* ── CONTAINER ────────────────────────────────────── */
+.container {
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 0 24px;
+}
+
+/* ── SECTION ─────────────────────────────────────── */
+.section { margin: 56px 0; }
+
+.section-header {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 14px;
+  margin-bottom: 32px;
+  padding-bottom: 16px;
+  border-bottom: 2px solid rgba(230,126,34,0.2);
+}
+
+.section-icon {
+  width: 46px; height: 46px;
+  background: linear-gradient(135deg, #e67e22, #d35400);
+  border-radius: 12px;
+  display: flex;
+  flex-wrap: wrap; align-items: center; justify-content: center;
+  font-size: 18px;
+  color: #fff;
+  flex-shrink: 0;
+  box-shadow: 0 4px 14px rgba(230,126,34,0.35);
+}
+
+.section-title {
+  font-family: 'Poppins', sans-serif;
+  font-size: 1.5em;
+  font-weight: 700;
+  color: #2c3e50;
+}
+
+/* subsection for city groups */
+.subsection { margin-bottom: 40px; }
+
+.subsection-title {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 10px;
+  font-family: 'Poppins', sans-serif;
+  font-size: 1em;
+  font-weight: 600;
+  color: #555;
+  margin-bottom: 20px;
+  text-transform: uppercase;
+  letter-spacing: 0.6px;
+  font-size: 12px;
+}
+
+.subsection-title::before {
+  content: '';
+  width: 28px; height: 3px;
+  background: #e67e22;
+  border-radius: 2px;
+  flex-shrink: 0;
+}
+
+/* ── CARDS GRID ──────────────────────────────────── */
+.cartoes {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 22px;
+}
+
+/* ── CARD ────────────────────────────────────────── */
+.card {
+  position: relative;
+  width: 220px;
+  height: 320px;
+  overflow: hidden;
+  border-radius: 18px;
+  background: #fff;
+  box-shadow: 0 10px 28px rgba(0,0,0,0.14);
+  cursor: pointer;
+  flex-shrink: 0;
+}
+
+/* touch/click support */
+.card:hover, .card.ativo {
+  box-shadow: 0 18px 40px rgba(0,0,0,0.22);
+}
+
+.card img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: top center;
+  border-radius: 18px;
+  filter: grayscale(100%);
+  transition: filter 0.5s ease, transform 0.5s ease;
+}
+
+.card:hover img, .card.ativo img {
+  filter: grayscale(0%);
+  transform: scale(1.04);
+}
+
+/* gradient overlay bottom */
+.card::before {
+  content: '';
+  position: absolute;
+  bottom: 0; left: 0; right: 0;
+  height: 55%;
+  background: linear-gradient(to top, rgba(0,0,0,0.72) 0%, transparent 100%);
+  border-radius: 0 0 18px 18px;
+  z-index: 1;
+  transition: opacity 0.35s ease;
+}
+
+.card:hover::before, .card.ativo::before { opacity: 0; }
+
+/* role tag */
+.role-tag {
+  position: absolute;
+  top: 12px;
+  left: 12px;
+  background: #e67e22;
+  color: #fff;
+  font-size: 10px;
+  font-weight: 700;
+  font-family: 'Poppins', sans-serif;
+  text-transform: uppercase;
+  letter-spacing: 0.6px;
+  padding: 4px 10px;
+  border-radius: 20px;
+  z-index: 4;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.2);
+}
+
+/* name on bottom */
+.name-bar {
+  position: absolute;
+  bottom: 0; left: 0; right: 0;
+  padding: 14px 14px 16px;
+  z-index: 2;
+  transition: opacity 0.35s ease, transform 0.35s ease;
+}
+
+.name-bar h3 {
+  font-family: 'Poppins', sans-serif;
+  font-size: 14px;
+  font-weight: 700;
+  color: #fff;
+  line-height: 1.3;
+  text-shadow: 0 1px 4px rgba(0,0,0,0.5);
+}
+
+.card:hover .name-bar, .card.ativo .name-bar {
+  opacity: 0;
+  transform: translateY(6px);
+}
+
+/* hover info panel */
+.hover-info {
+  position: absolute;
+  bottom: 0; left: 0; right: 0;
+  background: rgba(255,255,255,0.96);
+  backdrop-filter: blur(6px);
+  padding: 16px;
+  z-index: 3;
+  border-radius: 0 0 18px 18px;
+  transform: translateY(100%);
+  transition: transform 0.38s cubic-bezier(0.4,0,0.2,1);
+  max-height: 160px;
+  overflow-y: auto;
+}
+
+.card:hover .hover-info, .card.ativo .hover-info {
+  transform: translateY(0);
+}
+
+.hover-info h4 {
+  font-family: 'Poppins', sans-serif;
+  font-size: 13px;
+  font-weight: 700;
+  color: #2c3e50;
+  margin-bottom: 6px;
+  line-height: 1.3;
+}
+
+.hover-info p {
+  font-size: 12.5px;
+  color: #555;
+  line-height: 1.6;
+}
+
+/* ── FADE IN ─────────────────────────────────────── */
+.fade-up {
+  opacity: 0;
+  transform: translateY(20px);
+  transition: opacity 0.55s ease, transform 0.55s ease;
+}
+.fade-up.visible { opacity: 1; transform: translateY(0); }
+
+/* ── RESPONSIVE ──────────────────────────────────── */
+@media (max-width: 768px) {
+  .hero { padding: 50px 20px 80px; }
+  .hero h1 { font-size: 2.1em; }
+  .card { width: 180px; height: 270px; }
+}
+
+@media (max-width: 480px) {
+  .hero { padding: 40px 16px 70px; }
+  .hero h1 { font-size: 1.7em; }
+  .hero-badge { font-size: 11px; }
+  .cartoes { gap: 16px; }
+  .card { width: calc(50% - 8px); height: 240px; }
+  .section-title { font-size: 1.2em; }
+}
+
+/* ═══════════════════════════════════════════════════════════
+   RESPONSIVE GLOBAL PATCH — garante compatibilidade total
+   ═══════════════════════════════════════════════════════════ */
+
+/* Imagens e vídeos sempre fluidos */
+img, video, iframe {
+  max-width: 100%;
+  height: auto;
+}
+
+/* Todos os flex containers com wrap por defeito */
+[class*="card"]:not(.func-icon):not(.detail-icon):not(.stat-icon):not(.bottom-icon):not(.comptia-icon):not(.intro-icon):not(.section-label-icon):not(.format-header-icon):not(.modality-header-icon):not(.split-card-header),
+[class*="grid"]:not(.functions-grid):not(.functions-grid-bottom):not(.stats-grid):not(.detail-grid):not(.trust-grid):not(.footer-content) {
+  min-width: 0;
+}
+
+/* Breakpoint extra: tablet grande (769px – 1024px) */
+@media (max-width: 1024px) and (min-width: 769px) {
+  .container { padding: 0 28px; }
+  [class*="-grid"] { gap: 18px; }
+}
+
+/* ── TABLET (≤ 768px) — reforço global ── */
+@media (max-width: 768px) {
+  /* Grids: forçar 1 coluna ou 2 no máximo */
+  .functions-grid,
+  .detail-grid,
+  .trust-grid,
+  .footer-content,
+  .modulos-grid,
+  .main-grid,
+  .cert-layout,
+  .objectives-layout,
+  .social-grid,
+  .stats-grid,
+  [class$="-grid"] {
+    grid-template-columns: 1fr 1fr !important;
+    gap: 16px;
+  }
+
+  /* Flex containers: empilhar em coluna */
+  .intro-card,
+  .bottom-card,
+  .comptia-card,
+  .bolsa-card,
+  .access-card,
+  .cursos-card,
+  .commitment-card,
+  .iso-card,
+  .modality-body,
+  .format-body,
+  .split-card-body,
+  .campus-card,
+  .acesso-card {
+    flex-direction: column !important;
+    align-items: flex-start;
+  }
+
+  /* Ícones centralizados quando em coluna */
+  .intro-icon, .bottom-icon, .comptia-icon, .section-label-icon,
+  .intro-icon-wrap, .diploma-header-icon, .modality-header-icon,
+  .format-header-icon, .split-card-header {
+    margin: 0 auto;
+  }
+
+  /* Texto centrado nos banners */
+  .bottom-card, .comptia-card { text-align: center; }
+
+  /* Vídeos responsivos */
+  video { width: 100% !important; }
+}
+
+/* ── MOBILE (≤ 480px) — reforço global ── */
+@media (max-width: 480px) {
+  /* Todos os grids em 1 coluna */
+  .functions-grid,
+  .functions-grid-bottom,
+  .detail-grid,
+  .trust-grid,
+  .footer-content,
+  .modulos-grid,
+  .main-grid,
+  .cert-layout,
+  .objectives-layout,
+  .social-grid,
+  .stats-grid,
+  [class$="-grid"],
+  .certifications {
+    grid-template-columns: 1fr !important;
+    gap: 14px;
+  }
+
+  /* Stat cards em coluna */
+  .stat-card {
+    flex-direction: column;
+    text-align: center;
+    align-items: center;
+  }
+
+  /* Garantir que nenhum elemento transborde */
+  * { max-width: 100%; word-break: break-word; }
+
+  /* Padding seguro nos containers */
+  .container { padding: 0 14px; }
+
+  /* Tipografia escalada */
+  .hero h1 { font-size: clamp(1.4em, 6vw, 2em) !important; }
+  .stat-number { font-size: clamp(1.8em, 8vw, 2.8em) !important; }
+
+  /* Botões full-width em mobile */
+  .btn, .cta-btn, .hero-cta a, .hero-cta button {
+    width: 100%;
+    max-width: 320px;
+    display: block;
+    margin: 0 auto 10px;
+    text-align: center;
+  }
+
+  /* Hero CTA em coluna */
+  .hero-cta { flex-direction: column; align-items: center; }
+
+  /* Certificações em coluna */
+  .certifications { flex-direction: column; align-items: center; }
+  .cert-item { width: 100%; max-width: 280px; text-align: center; }
+
+  /* Vídeos */
+  video { width: 100% !important; height: auto !important; }
+
+  /* Cards de docentes */
+  .teacher-photo-wrap, .photo-ring { width: 120px !important; height: 120px !important; }
+}
+
+/* ── MOBILE PEQUENO (≤ 360px) ── */
+@media (max-width: 360px) {
+  .hero h1 { font-size: 1.3em !important; }
+  .hero-badge { font-size: 10px; padding: 6px 12px; }
+  .container { padding: 0 10px; }
+  .func-card, .detail-card, .stat-card { padding: 20px 14px; }
+  .stat-number { font-size: 1.6em !important; }
+}
+
+</style>
+</head>
+<body>
+
+<!-- HERO -->
+<div class="hero">
+  <div class="hero-content">
+    <div class="hero-badge"><i class="fas fa-chalkboard-teacher"></i> &nbsp;ASIR – Administração de Sistemas Informáticos e Redes</div>
+    <h1><i class="fas fa-users"></i> Equipa Docente</h1>
+    <p>Conheça os profissionais que vão acompanhar a sua formação — passe o cursor sobre cada cartão para saber mais.</p>
+  </div>
+</div>
+
+<div class="container">
+
+  <!-- E-TUTORES -->
+  <div class="section fade-up">
+    <div class="section-header">
+      <div class="section-icon"><i class="fas fa-user-graduate"></i></div>
+      <div class="section-title">e-Tutores</div>
+    </div>
+    <div class="cartoes">
+
+      <div class="card">
+        <img src="imagens/Pedro_Bernardino.jpg" alt="Pedro Ferreira Bernardino">
+        <div class="role-tag">e-Tutor</div>
+        <div class="name-bar"><h3>Pedro Ferreira Bernardino</h3></div>
+        <div class="hover-info">
+          <h4>Pedro Ferreira Bernardino</h4>
+          <p>Formação na área de Gestão de Equipamentos Informáticos, com experiência em consultoria, implementação e manutenção de redes e parques informáticos, bem como em suporte técnico remoto e presencial e na implementação de políticas de segurança.</p>
+        </div>
+      </div>
+
+      <div class="card">
+        <img src="imagens/Francisco_Costa_Lima.jpg" alt="Francisco Costa Lima">
+        <div class="role-tag">e-Tutor</div>
+        <div class="name-bar"><h3>Francisco Costa Lima</h3></div>
+        <div class="hover-info">
+          <h4>Francisco Costa Lima</h4>
+          <p>Docente com formação pedagógica e curso avançado de informática. Experiência no ensino e acompanhamento de alunos na área das tecnologias de informação, promovendo a aprendizagem de competências informáticas essenciais em contexto académico e profissional.</p>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- PREPARADORES -->
+  <div class="section fade-up">
+    <div class="section-header">
+      <div class="section-icon"><i class="fas fa-tools"></i></div>
+      <div class="section-title">Preparadores</div>
+    </div>
+
+    <!-- Lisboa -->
+    <div class="subsection">
+      <div class="subsection-title"><i class="fas fa-map-marker-alt" style="color:#e67e22"></i> Centro Formativo de Lisboa</div>
+      <div class="cartoes">
+        <div class="card">
+          <img src="imagens/Tiago_Costa.jpg" alt="Tiago Costa">
+          <div class="role-tag">Preparador</div>
+          <div class="name-bar"><h3>Tiago Costa</h3></div>
+          <div class="hover-info">
+            <h4>Tiago Costa</h4>
+            <p>Preparador Técnico do Centro Formativo de Lisboa.</p>
+          </div>
+        </div>
+        <div class="card">
+          <img src="imagens/Ismael_Amaro.jpg" alt="Ismael Amaro">
+          <div class="role-tag">Preparador</div>
+          <div class="name-bar"><h3>Ismael Amaro</h3></div>
+          <div class="hover-info">
+            <h4>Ismael Amaro</h4>
+            <p>Preparador Técnico do Centro Formativo de Lisboa.</p>
+          </div>
+        </div>
+        <div class="card">
+          <img src="imagens/Paulo_Carvalho_V1.jpg" alt="Paulo Carvalho">
+          <div class="role-tag">Preparador</div>
+          <div class="name-bar"><h3>Paulo Carvalho</h3></div>
+          <div class="hover-info">
+            <h4>Paulo Carvalho</h4>
+            <p>Preparador Técnico do Centro Formativo de Lisboa.</p>
+          </div>
+        </div>
+        <div class="card">
+          <img src="imagens/Mónica_Belchior.jpg" alt="Mónica Belchior">
+          <div class="role-tag">Preparadora</div>
+          <div class="name-bar"><h3>Mónica Belchior</h3></div>
+          <div class="hover-info">
+            <h4>Mónica Belchior</h4>
+            <p>Preparadora Técnica do Centro Formativo de Lisboa.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Porto -->
+    <div class="subsection">
+      <div class="subsection-title"><i class="fas fa-map-marker-alt" style="color:#e67e22"></i> Centro Formativo do Porto</div>
+      <div class="cartoes">
+        <div class="card">
+          <img src="imagens/André_Correia.jpg" alt="André Ricardo">
+          <div class="role-tag">Preparador</div>
+          <div class="name-bar"><h3>André Ricardo</h3></div>
+          <div class="hover-info">
+            <h4>André Ricardo</h4>
+            <p>Preparador Técnico do Centro Formativo do Porto.</p>
+          </div>
+        </div>
+        <div class="card">
+          <img src="imagens/André_Cunha.jpg" alt="André Cunha">
+          <div class="role-tag">Preparador</div>
+          <div class="name-bar"><h3>André Cunha</h3></div>
+          <div class="hover-info">
+            <h4>André Cunha</h4>
+            <p>Preparador Técnico do Centro Formativo do Porto.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Braga -->
+    <div class="subsection">
+      <div class="subsection-title"><i class="fas fa-map-marker-alt" style="color:#e67e22"></i> Centro Formativo de Braga</div>
+      <div class="cartoes">
+        <div class="card">
+          <img src="imagens/Leonardo_Costa.jpg" alt="Leonardo Costa">
+          <div class="role-tag">Preparador</div>
+          <div class="name-bar"><h3>Leonardo Costa</h3></div>
+          <div class="hover-info">
+            <h4>Leonardo Costa</h4>
+            <p>Preparador Técnico do Centro Formativo de Braga.</p>
+          </div>
+        </div>
+        <div class="card">
+          <img src="imagens/Pedro_Ferreira.jpg" alt="Pedro Ferreira">
+          <div class="role-tag">Preparador</div>
+          <div class="name-bar"><h3>Pedro Ferreira</h3></div>
+          <div class="hover-info">
+            <h4>Pedro Ferreira</h4>
+            <p>Preparador Técnico do Centro Formativo de Braga.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Coimbra -->
+    <div class="subsection">
+      <div class="subsection-title"><i class="fas fa-map-marker-alt" style="color:#e67e22"></i> Centro Formativo de Coimbra</div>
+      <div class="cartoes">
+        <div class="card">
+          <img src="imagens/Paulo_Cipriano.jpg" alt="Paulo Cipriano">
+          <div class="role-tag">Preparador</div>
+          <div class="name-bar"><h3>Paulo Cipriano</h3></div>
+          <div class="hover-info">
+            <h4>Paulo Cipriano</h4>
+            <p>Preparador Técnico do Centro Formativo de Coimbra.</p>
+          </div>
+        </div>
+        <div class="card">
+          <img src="imagens/Jorge_Branco.jpeg" alt="Jorge Branco">
+          <div class="role-tag">Preparador</div>
+          <div class="name-bar"><h3>Jorge Branco</h3></div>
+          <div class="hover-info">
+            <h4>Jorge Branco</h4>
+            <p>Preparador Técnico do Centro Formativo de Coimbra.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Faro -->
+    <div class="subsection">
+      <div class="subsection-title"><i class="fas fa-map-marker-alt" style="color:#e67e22"></i> Centro Formativo de Faro</div>
+      <div class="cartoes">
+        <div class="card">
+          <img src="imagens/Nuno_Alves_Martins.jpg" alt="Nuno Martins">
+          <div class="role-tag">Preparador</div>
+          <div class="name-bar"><h3>Nuno Martins</h3></div>
+          <div class="hover-info">
+            <h4>Nuno Martins</h4>
+            <p>Preparador Técnico do Centro Formativo de Faro.</p>
+          </div>
+        </div>
+        <div class="card">
+          <img src="imagens/Frederic.png" alt="Frederic Fernandes">
+          <div class="role-tag">Preparador</div>
+          <div class="name-bar"><h3>Frederic Fernandes</h3></div>
+          <div class="hover-info">
+            <h4>Frederic Fernandes</h4>
+            <p>Preparador Técnico do Centro Formativo de Faro.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div><!-- /section preparadores -->
+
+</div><!-- /container -->
+
+<script>
+  // Scroll animation
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
+  }, { threshold: 0.08 });
+  document.querySelectorAll('.fade-up').forEach(el => observer.observe(el));
+
+  // Touch support — toggle active on tap
+  document.querySelectorAll('.card').forEach(card => {
+    card.addEventListener('click', () => {
+      const isActive = card.classList.contains('ativo');
+      document.querySelectorAll('.card').forEach(c => c.classList.remove('ativo'));
+      if (!isActive) card.classList.add('ativo');
+    });
+  });
+</script>
+</body>
+</html>
