@@ -1149,6 +1149,48 @@ img, video, iframe {
   .stat-number { font-size: 1.6em !important; }
 }
 
+
+/* EXPAND ALL BUTTON */
+.expand-all-wrap {
+  display: flex;
+  justify-content: flex-end;
+  margin-bottom: 16px;
+  padding: 0 20px;
+}
+
+.expand-all-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background: white;
+  color: #e67e22;
+  border: 2px solid #e67e22;
+  padding: 10px 22px;
+  border-radius: 8px;
+  font-size: 14px;
+  font-weight: 600;
+  font-family: 'Poppins', sans-serif;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 12px rgba(230,126,34,0.15);
+}
+
+.expand-all-btn:hover {
+  background: #e67e22;
+  color: white;
+  transform: translateY(-2px);
+  box-shadow: 0 8px 24px rgba(230,126,34,0.3);
+}
+
+.expand-all-btn i {
+  transition: transform 0.3s ease;
+}
+
+@media (max-width: 480px) {
+  .expand-all-wrap { justify-content: center; }
+  .expand-all-btn { width: 100%; max-width: 280px; justify-content: center; }
+}
+
 </style>
 </head>
 <body>
@@ -1189,6 +1231,17 @@ img, video, iframe {
       <div class="stat-number">1000+</div>
       <div class="stat-label">Parceiros de Emprego</div>
     </div>
+  </div>
+</div>
+
+
+<!-- EXPAND ALL BUTTON -->
+<div class="container">
+  <div class="expand-all-wrap">
+    <button class="expand-all-btn" id="expandAllBtn" onclick="toggleAllCards()">
+      <i class="fas fa-expand-alt" id="expandAllIcon"></i>
+      <span id="expandAllText">Expandir Tudo</span>
+    </button>
   </div>
 </div>
 
@@ -1365,6 +1418,43 @@ img, video, iframe {
 
 <script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script>
 <script>
+
+// Toggle ALL cards
+function toggleAllCards() {
+  const allContents = document.querySelectorAll('.card-content');
+  const allHeaders = document.querySelectorAll('.card-header');
+  const btn = document.getElementById('expandAllBtn');
+  const icon = document.getElementById('expandAllIcon');
+  const text = document.getElementById('expandAllText');
+
+  // Check if any card is currently closed
+  const anyCollapsed = Array.from(allContents).some(c =>
+    !c.style.maxHeight || c.style.maxHeight === '0px' || c.style.maxHeight === ''
+  );
+
+  if (anyCollapsed) {
+    // Expand all
+    allContents.forEach(content => {
+      content.style.padding = '30px';
+      requestAnimationFrame(() => {
+        content.style.maxHeight = content.scrollHeight + 'px';
+      });
+    });
+    allHeaders.forEach(h => h.classList.add('active'));
+    icon.className = 'fas fa-compress-alt';
+    text.textContent = 'Recolher Tudo';
+  } else {
+    // Collapse all
+    allContents.forEach(content => {
+      content.style.maxHeight = '0px';
+      content.style.padding = '0';
+    });
+    allHeaders.forEach(h => h.classList.remove('active'));
+    icon.className = 'fas fa-expand-alt';
+    text.textContent = 'Expandir Tudo';
+  }
+}
+
 // Toggle accordion cards
 function toggleCard(header) {
   header.classList.toggle('active');
