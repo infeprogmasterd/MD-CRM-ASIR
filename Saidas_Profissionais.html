@@ -24,7 +24,6 @@ html { scroll-behavior: smooth; }
 body {
   background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
   font-family: 'Inter', sans-serif;
-  min-height: 100vh;
   overflow-x: hidden;
   color: var(--text);
 }
@@ -604,8 +603,8 @@ img, video, iframe {
         <div class="stat-label">Saídas Profissionais disponíveis</div>
       </div>
       <div class="stat-card fade-up delay-2">
-        <div class="stat-number">92%</div>
-        <div class="stat-label">Taxa de empregabilidade nos primeiros 6 meses</div>
+        <div class="stat-number">91%</div>
+        <div class="stat-label">Índice geral de satisfação dos formandos</div>
       </div>
       <div class="stat-card fade-up delay-3">
         <div class="stat-number">1000+</div>
@@ -764,6 +763,15 @@ const observer = new IntersectionObserver((entries) => {
 }, { threshold: 0.1 });
 
 document.querySelectorAll('.fade-up').forEach(el => observer.observe(el));
+</script>
+<script>
+function sendHeight() {
+  var h = Math.max(document.body.scrollHeight, document.body.offsetHeight, document.documentElement.scrollHeight, document.documentElement.offsetHeight);
+  window.parent.postMessage({ iframeHeight: h }, '*');
+}
+window.addEventListener('load', sendHeight);
+window.addEventListener('resize', sendHeight);
+new MutationObserver(function() { setTimeout(sendHeight, 100); }).observe(document.body, { childList: true, subtree: true, attributes: true });
 </script>
 </body>
 </html>
