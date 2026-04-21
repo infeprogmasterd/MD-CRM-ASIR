@@ -690,12 +690,21 @@ img, video, iframe {
 
 <script>
   function getHeight(panel) {
+    // Temporarily make panel visible to measure real height
+    panel.style.position = 'absolute';
+    panel.style.visibility = 'hidden';
+    panel.style.maxHeight = 'none';
+    panel.style.overflow = 'visible';
     var inner = panel.querySelector('.panel-inner');
-    inner.style.overflow = 'visible';
     inner.style.padding = '22px 25px';
-    var h = inner.scrollHeight + 44;
-    inner.style.overflow = '';
+    inner.style.overflow = 'visible';
+    var h = panel.offsetHeight + 20;
+    panel.style.position = '';
+    panel.style.visibility = '';
+    panel.style.maxHeight = '';
+    panel.style.overflow = '';
     inner.style.padding = '';
+    inner.style.overflow = '';
     return h;
   }
 
