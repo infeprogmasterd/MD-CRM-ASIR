@@ -241,43 +241,22 @@ body {
 
 /* ── PANEL — grid animation, fast ───────────────── */
 .panel {
-  background: linear-gradient(135deg, #ffffff 0%, #f8f9fa 100%);
-  border-radius: 0 0 8px 8px;
-  border-left: 0px solid transparent;
-  border-right: 0px solid transparent;
-  border-bottom: 0px solid transparent;
-  box-shadow: none;
-  opacity: 0;
   overflow: hidden;
   max-height: 0;
-  transition: max-height 0.45s cubic-bezier(0,1,0,1), opacity 0.35s ease;
-}
-.panel.open {
-  opacity: 1;
-  max-height: 99999px;
-  border-left: 4px solid #e67e22;
-  border-right: 1px solid rgba(230,126,34,0.1);
-  border-bottom: 1px solid rgba(230,126,34,0.1);
-  box-shadow: 0 6px 16px rgba(0,0,0,0.07);
-}
-.panel_REMOVE {
-  display: grid;
-  grid-template-rows: 0fr;
-  transition: grid-template-rows 0.38s ease, opacity 0.3s ease;
+  opacity: 0;
+  transition: max-height 0.5s ease-in-out, opacity 0.35s ease;
   background: linear-gradient(135deg, #ffffff 0%, #f8f9fa 100%);
   border-radius: 0 0 8px 8px;
+}
+.panel.open {
+  opacity: 1;
   border-left: 4px solid #e67e22;
   border-right: 1px solid rgba(230,126,34,0.1);
   border-bottom: 1px solid rgba(230,126,34,0.1);
   box-shadow: 0 6px 16px rgba(0,0,0,0.07);
-  opacity: 0;
-}
-.panel.open {
-  grid-template-rows: 1fr;
-  opacity: 1;
 }
 .panel-inner {
-  overflow: visible;
+  overflow: hidden;
   padding: 0 25px;
   transition: padding 0.38s ease;
 }
@@ -710,57 +689,75 @@ img, video, iframe {
 </div><!-- /container -->
 
 <script>
+  function getHeight(panel) {
+    var inner = panel.querySelector('.panel-inner');
+    inner.style.overflow = 'visible';
+    inner.style.padding = '22px 25px';
+    var h = inner.scrollHeight + 44;
+    inner.style.overflow = '';
+    inner.style.padding = '';
+    return h;
+  }
+
   function togglePanel(btn) {
     var panel = btn.nextElementSibling;
     var isOpen = panel.classList.contains('open');
-
     btn.classList.toggle('active');
-    panel.classList.toggle('open');
-
-    // Smooth scroll to keep module header visible when opening
     if (!isOpen) {
-      setTimeout(function() {
-        var top = btn.getBoundingClientRect().top + window.scrollY - 14;
-        window.scrollTo({ top: top, behavior: 'smooth' });
-      }, 60);
+      var h = getHeight(panel);
+      panel.classList.add('open');
+      panel.style.maxHeight = h + 'px';
+      panel.querySelector('.panel-inner').style.padding = '22px 25px';
+    } else {
+      panel.style.maxHeight = '0px';
+      panel.classList.remove('open');
+      panel.querySelector('.panel-inner').style.padding = '0 25px';
     }
+    setTimeout(sendHeight, 600);
   }
 
   var allExpanded = false;
-
   function toggleAll() {
     allExpanded = !allExpanded;
     document.querySelectorAll('.accordion').forEach(function(acc) {
       allExpanded ? acc.classList.add('active') : acc.classList.remove('active');
     });
     document.querySelectorAll('.panel').forEach(function(p) {
-      allExpanded ? p.classList.add('open') : p.classList.remove('open');
+      if (allExpanded) {
+        var h = getHeight(p);
+        p.classList.add('open');
+        p.style.maxHeight = h + 'px';
+        p.querySelector('.panel-inner').style.padding = '22px 25px';
+      } else {
+        p.style.maxHeight = '0px';
+        p.classList.remove('open');
+        p.querySelector('.panel-inner').style.padding = '0 25px';
+      }
     });
     document.getElementById('toggleIcon').className = allExpanded ? 'fas fa-compress-alt' : 'fas fa-expand-alt';
     document.getElementById('toggleLabel').textContent = allExpanded ? 'Recolher tudo' : 'Expandir tudo';
+    setTimeout(sendHeight, 600);
   }
 
-  // Auto-open first module on load
   window.addEventListener('load', function() {
     var first = document.querySelector('.accordion');
     if (first) togglePanel(first);
   });
-</script>
-<script>
-function sendHeight() {
-  var h = Math.max(
-    document.body.scrollHeight,
-    document.body.offsetHeight,
-    document.documentElement.scrollHeight,
-    document.documentElement.offsetHeight
-  );
-  window.parent.postMessage({ iframeHeight: h }, '*');
-}
-window.addEventListener('load', sendHeight);
-window.addEventListener('resize', sendHeight);
-new MutationObserver(function() {
-  setTimeout(sendHeight, 500);
-}).observe(document.body, { childList: true, subtree: true, attributes: true, characterData: true });
+
+  function sendHeight() {
+    var h = Math.max(
+      document.body.scrollHeight,
+      document.body.offsetHeight,
+      document.documentElement.scrollHeight,
+      document.documentElement.offsetHeight
+    );
+    window.parent.postMessage({ iframeHeight: h }, '*');
+  }
+  window.addEventListener('load', sendHeight);
+  window.addEventListener('resize', sendHeight);
+  new MutationObserver(function() {
+    setTimeout(sendHeight, 600);
+  }).observe(document.body, { childList: true, subtree: true, attributes: true });
 </script>
 </body>
 </html>
