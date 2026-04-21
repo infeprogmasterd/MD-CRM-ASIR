@@ -11,11 +11,11 @@ body {
   background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
   font-family: 'Inter', sans-serif;
   min-height: 100vh;
-  padding: 20px;
+  padding: 0;
   overflow-y: scroll;
 }
 
-.container { max-width: 900px; margin: 0 auto; }
+.container { max-width: 900px; margin: 0 auto; padding: 0 20px; }
 
 /* ── HEADER ─────────────────────────────────────── */
 .header {
@@ -149,7 +149,7 @@ body {
 }
 
 /* ── ACCORDION ───────────────────────────────────── */
-.module-wrapper { margin-bottom: 10px; }
+.module-wrapper { margin-bottom: 2px; }
 
 .accordion {
   background: linear-gradient(135deg, #e67e22 0%, #d35400 100%);
@@ -241,6 +241,26 @@ body {
 
 /* ── PANEL — grid animation, fast ───────────────── */
 .panel {
+  background: linear-gradient(135deg, #ffffff 0%, #f8f9fa 100%);
+  border-radius: 0 0 8px 8px;
+  border-left: 0px solid transparent;
+  border-right: 0px solid transparent;
+  border-bottom: 0px solid transparent;
+  box-shadow: none;
+  opacity: 0;
+  overflow: hidden;
+  max-height: 0;
+  transition: max-height 0.45s ease, opacity 0.35s ease, padding 0.35s ease;
+}
+.panel.open {
+  opacity: 1;
+  max-height: 2000px;
+  border-left: 4px solid #e67e22;
+  border-right: 1px solid rgba(230,126,34,0.1);
+  border-bottom: 1px solid rgba(230,126,34,0.1);
+  box-shadow: 0 6px 16px rgba(0,0,0,0.07);
+}
+.panel_REMOVE {
   display: grid;
   grid-template-rows: 0fr;
   transition: grid-template-rows 0.38s ease, opacity 0.3s ease;
@@ -257,7 +277,7 @@ body {
   opacity: 1;
 }
 .panel-inner {
-  overflow: hidden;
+  overflow: visible;
   padding: 0 25px;
   transition: padding 0.38s ease;
 }
@@ -725,6 +745,14 @@ img, video, iframe {
     var first = document.querySelector('.accordion');
     if (first) togglePanel(first);
   });
+</script>
+<script>
+function sendHeight() {
+  window.parent.postMessage({ iframeHeight: document.body.scrollHeight }, '*');
+}
+window.addEventListener('load', sendHeight);
+window.addEventListener('resize', sendHeight);
+new MutationObserver(sendHeight).observe(document.body, { childList: true, subtree: true, attributes: true });
 </script>
 </body>
 </html>
