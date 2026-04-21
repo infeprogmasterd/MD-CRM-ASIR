@@ -828,5 +828,14 @@ const observer = new IntersectionObserver((entries) => {
 
 document.querySelectorAll('.fade-up, .step-card').forEach(el => observer.observe(el));
 </script>
+<script>
+function sendHeight() {
+  var h = Math.max(document.body.scrollHeight, document.body.offsetHeight, document.documentElement.scrollHeight, document.documentElement.offsetHeight);
+  window.parent.postMessage({ iframeHeight: h }, '*');
+}
+window.addEventListener("load", sendHeight);
+window.addEventListener("resize", sendHeight);
+new MutationObserver(function() { setTimeout(sendHeight, 100); }).observe(document.body, { childList: true, subtree: true, attributes: true });
+</script>
 </body>
 </html>
