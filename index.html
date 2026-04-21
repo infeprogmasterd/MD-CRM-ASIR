@@ -1445,9 +1445,7 @@ function toggleAllCards() {
     // Expand all
     allContents.forEach(content => {
       content.style.padding = '30px';
-      requestAnimationFrame(() => {
-        content.style.maxHeight = content.scrollHeight + 'px';
-      });
+      content.style.maxHeight = '5000px';
     });
     allHeaders.forEach(h => h.classList.add('active'));
     icon.className = 'fas fa-compress-alt';
@@ -1475,21 +1473,11 @@ function toggleCard(header) {
     content.style.padding = '0';
   } else {
     content.style.padding = '30px';
-    requestAnimationFrame(() => {
-      content.style.maxHeight = content.scrollHeight + 'px';
-    });
+    content.style.maxHeight = '5000px';
   }
 }
 
-// Recalculate max-height of open cards when window resizes
-const resizeObserver = new ResizeObserver(() => {
-  document.querySelectorAll('.card-content').forEach(content => {
-    if (content.style.maxHeight && content.style.maxHeight !== '0px') {
-      content.style.maxHeight = (content.scrollHeight + 60) + 'px';
-    }
-  });
-});
-resizeObserver.observe(document.body);
+// Resize observer removed - using fixed max-height
 
 // Auto-open first card
 window.addEventListener('load', function() {
@@ -1499,9 +1487,7 @@ window.addEventListener('load', function() {
     const card = firstHeader.parentElement;
     const content = card.querySelector('.card-content');
     content.style.padding = '30px';
-    requestAnimationFrame(() => {
-      content.style.maxHeight = content.scrollHeight + 'px';
-    });
+    content.style.maxHeight = '5000px';
   }
 });
 
