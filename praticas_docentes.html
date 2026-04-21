@@ -274,16 +274,12 @@ body {
 
 /* ── CARD CONTENT — grid animation ──────────────── */
 .card-content {
-  display: grid;
-  grid-template-rows: 0fr;
-  transition: grid-template-rows 0.38s ease, opacity 0.3s ease;
-  opacity: 0;
+  display: none;
 }
 .card-content.open {
-  grid-template-rows: 1fr;
-  opacity: 1;
+  display: block;
 }
-.card-content-inner { overflow: hidden; }
+.card-content-inner { overflow: visible; }
 
 /* ── PRACTICE GRID ───────────────────────────────── */
 .practice-grid {
@@ -875,6 +871,22 @@ img, video, iframe {
     el.style.transition = 'opacity 0.5s ease, transform 0.5s ease';
     observer.observe(el);
   });
+</script>
+<script>
+function sendHeight() {
+  var h = Math.max(
+    document.body.scrollHeight,
+    document.body.offsetHeight,
+    document.documentElement.scrollHeight,
+    document.documentElement.offsetHeight
+  );
+  window.parent.postMessage({ iframeHeight: h }, '*');
+}
+window.addEventListener('load', sendHeight);
+window.addEventListener('resize', sendHeight);
+new MutationObserver(function() {
+  setTimeout(sendHeight, 100);
+}).observe(document.body, { childList: true, subtree: true, attributes: true });
 </script>
 </body>
 </html>
