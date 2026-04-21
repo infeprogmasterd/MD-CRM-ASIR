@@ -1537,5 +1537,17 @@ document.querySelectorAll('.stat, .trust-item').forEach(el => {
   observer.observe(el);
 });
 </script>
+<script>
+// Comunica altura real ao iframe pai
+function sendHeight() {
+  const height = document.body.scrollHeight;
+  window.parent.postMessage({ iframeHeight: height }, '*');
+}
+// Envia altura ao carregar e sempre que o conteúdo mudar
+window.addEventListener('load', sendHeight);
+const heightObserver = new MutationObserver(sendHeight);
+heightObserver.observe(document.body, { childList: true, subtree: true, attributes: true });
+window.addEventListener('resize', sendHeight);
+</script>
 </body>
 </html>
