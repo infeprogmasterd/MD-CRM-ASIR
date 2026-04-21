@@ -26,7 +26,6 @@ html { scroll-behavior: smooth; }
 body {
   background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
   font-family: 'Inter', sans-serif;
-  min-height: 100vh;
   overflow-x: hidden;
   color: var(--text);
 }
@@ -921,6 +920,15 @@ const observer = new IntersectionObserver((entries) => {
 }, { threshold: 0.08 });
 
 document.querySelectorAll('.fade-up').forEach(el => observer.observe(el));
+</script>
+<script>
+function sendHeight() {
+  var h = Math.max(document.body.scrollHeight, document.body.offsetHeight, document.documentElement.scrollHeight, document.documentElement.offsetHeight);
+  window.parent.postMessage({ iframeHeight: h }, '*');
+}
+window.addEventListener('load', sendHeight);
+window.addEventListener('resize', sendHeight);
+new MutationObserver(function() { setTimeout(sendHeight, 100); }).observe(document.body, { childList: true, subtree: true, attributes: true });
 </script>
 </body>
 </html>
