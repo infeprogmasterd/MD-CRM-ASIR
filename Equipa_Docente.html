@@ -10,8 +10,9 @@
 * { margin: 0; padding: 0; box-sizing: border-box; }
 
 body {
-  background: linear-gradient(135deg, #f5f7fa 0%, #ededed 100%);
+  background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
   font-family: 'Inter', sans-serif;
+  min-height: 100vh;
   overflow-x: hidden;
 }
 
@@ -41,7 +42,7 @@ body {
   position: absolute;
   bottom: -2px; left: 0;
   width: 100%; height: 60px;
-  background: linear-gradient(135deg, #f5f7fa 0%, #ededed 100%);
+  background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
   clip-path: ellipse(55% 100% at 50% 100%);
 }
 
@@ -478,7 +479,7 @@ img, video, iframe {
         <div class="name-bar"><h3>Francisco Costa Lima</h3></div>
         <div class="hover-info">
           <h4>Francisco Costa Lima</h4>
-          <p>Docente com formação pedagógica e curso avançado de informática. Experiência no ensino e acompanhamento de formandos na área das tecnologias de informação, promovendo a aprendizagem de competências informáticas essenciais em contexto académico e profissional.</p>
+          <p>Docente com formação pedagógica e curso avançado de informática. Experiência no ensino e acompanhamento de alunos na área das tecnologias de informação, promovendo a aprendizagem de competências informáticas essenciais em contexto académico e profissional.</p>
         </div>
       </div>
 
@@ -655,15 +656,5 @@ img, video, iframe {
     });
   });
 </script>
-<script>
-function sendHeight() {
-  var h = Math.max(document.body.scrollHeight, document.body.offsetHeight, document.documentElement.scrollHeight, document.documentElement.offsetHeight);
-  window.parent.postMessage({ iframeHeight: h }, '*');
-}
-window.addEventListener('load', sendHeight);
-window.addEventListener('resize', sendHeight);
-new MutationObserver(function() { setTimeout(sendHeight, 100); }).observe(document.body, { childList: true, subtree: true, attributes: true });
-</script>
-<div style="height:1px;background-color:#ededed;margin:0;padding:0;"></div>
 </body>
 </html>

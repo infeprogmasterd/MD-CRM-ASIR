@@ -12,8 +12,9 @@
 }
 
 body {
-  background: linear-gradient(135deg, #f5f7fa 0%, #ededed 100%);
+  background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
   font-family: 'Inter', sans-serif;
+  min-height: 100vh;
   overflow-x: hidden;
 }
 
@@ -1534,6 +1535,5 @@ const heightObserver = new MutationObserver(sendHeight);
 heightObserver.observe(document.body, { childList: true, subtree: true, attributes: true });
 window.addEventListener('resize', sendHeight);
 </script>
-<div style="height:1px;background-color:#ededed;margin:0;padding:0;"></div>
 </body>
 </html>

@@ -8,8 +8,9 @@
 * { margin: 0; padding: 0; box-sizing: border-box; }
 
 body {
-  background: linear-gradient(135deg, #f5f7fa 0%, #ededed 100%);
+  background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
   font-family: 'Inter', sans-serif;
+  min-height: 100vh;
   padding: 0;
   overflow-y: scroll;
 }
@@ -729,6 +730,5 @@ img, video, iframe {
     setTimeout(sendHeight, 100);
   }).observe(document.body, { childList: true, subtree: true, attributes: true });
 </script>
-<div style="height:1px;background-color:#ededed;margin:0;padding:0;"></div>
 </body>
 </html>
